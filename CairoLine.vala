@@ -3,7 +3,7 @@ using Cairo;
 
 public class CairoLine{
 
-  public int[] DATA = {1,2,3,4,5,6,7,8,9,10,4,3,2,7,8,3,6,4,5,6,1,2,3,4};
+  int[] DATA = {1,2,3,4,5,6,7,8,9,10,4,3,2,7,8,3,6,4,5,6,1,2,3,4};
   int width = 300;
   int height = 200;
   double lineThicknessTicks = 0.5;
@@ -162,6 +162,7 @@ public class CairoLine{
     ctx.save ();
     ctx.new_path ();
     ctx.translate (1, 0);
+    //drawing the line with the data
     drawLine (ctx);
     ctx.stroke ();
     ctx.restore();
@@ -190,7 +191,7 @@ public class CairoLine{
       ctx.line_to (25, this.height+15-(spreadFinal*i));
 
       ctx.move_to (0, this.height+15-(20*i));
-      ctx.show_text("$".concat(i.to_string()));
+      ctx.show_text(this.dataTypeY.concat(i.to_string()));
 
     }
 
@@ -206,7 +207,7 @@ public class CairoLine{
       ctx.line_to (15+spreadFinal*i, this.height+5);
 
       ctx.move_to (11+spreadFinal*i, this.height+30);
-      ctx.show_text(i.to_string());
+      ctx.show_text(this.dataTypeX.concat(i.to_string()));
 
     }
 
