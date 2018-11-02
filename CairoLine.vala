@@ -113,6 +113,12 @@ public class CairoLine{
 
   }
 
+  public void setData(int[] DATA){
+
+    this.DATA = DATA;
+
+  }
+
   public DrawingArea createGraph () {
 
     var drawingArea = new DrawingArea ();
