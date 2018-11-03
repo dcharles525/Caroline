@@ -2,126 +2,24 @@ using Gtk;
 using Cairo;
 using Gee;
 
-public class CairoLine{
+public class CairoLine : Gtk.Window{
 
-  public double[] DATA;
-  public int width = 300;
-  public double height = 200;
-  public double lineThicknessTicks = 0.5;
-  public double lineThicknessPlane = 1;
-  public double lineThicknessData = 2;
-  public double spreadY = 10;
-  public string dataTypeY = "";
-  public string dataTypeX = "";
+  public double[] DATA { get; set; }
+  public int width { get; set; }
+  public double height { get; set; }
+  public double lineThicknessTicks { get; set; }
+  public double lineThicknessPlane { get; set; }
+  public double lineThicknessData { get; set; }
+  public double spreadY { get; set; }
+  public string dataTypeY{ get; set; }
+  public string dataTypeX { get; set; }
   public ArrayList<string> labelList = new ArrayList<string>();
-  public double gap;
-  public double max;
-  public double min;
+  public double gap { get; set; }
+  public double max { get; set; }
+  public double min { get; set; }
   
   public CairoLine(){
 
-  }
-
-  public int getWidth(){
-  
-    return this.width;
-  
-  }
-
-  public void setWidth(int width){
-  
-    this.width = width;
-
-  } 
-
-  public double getHeight(){
-    
-    return this.height;
-
-  }
-
-  public void setHeight(double height){
-
-    this.height = height;
-
-  } 
-
-  public double getLineThicknessTicks(){
-    
-    return this.lineThicknessTicks;
-
-  }
-
-  public void setLineThicknessTicks(double lineThicknessTicks){
-  
-    this.lineThicknessTicks = lineThicknessTicks;
-
-  }
-
-  public double getLineThicknessPlane(){
-    
-    return this.lineThicknessPlane;
-
-  }
-
-  public void setLineThicknessPlane(double lineThicknessPlane){
-    
-    this.lineThicknessPlane = lineThicknessPlane;
-
-  } 
-
-  public double getLineThicknessData(){
-  
-    return this.lineThicknessData;
-
-  }
-
-  public void setLineThicknessData(double lineThicknessData){
-
-    this.lineThicknessData = lineThicknessData;
-
-  }
-
-  public double getSpreadY(){
-    
-    return spreadY;
-
-  }
-
-  public void setSpreadY(double spreadY){
-
-    this.spreadY = spreadY;
-
-  }
-
-  public string getDataTypeY(){
-    
-    return this.dataTypeY;
-
-  }
-
-  public void setDataTypeY(string dataTypeY){
-    
-    this.dataTypeY = dataTypeY;
-
-  }
-
-  public string getDataTypeX(){
-
-    return this.dataTypeX;
-  
-  }
-
-  public void setDataTypeX(string dataTypeX){
-    
-    this.dataTypeX = dataTypeX;
-
-  }
-
-  public void setData(double[] DATA){
-    
-    this.DATA = DATA;
-  
   }
 
   public void calculations(){
@@ -138,7 +36,17 @@ public class CairoLine{
     this.gap = difference / this.spreadY;
     label = this.min;
 
-    for (int i = 0; i < this.spreadY+1; i++){
+    if (label.to_string().length >= 8){
+        
+      this.labelList.add(label.to_string().slice (0, 8));
+
+    }else{
+
+      this.labelList.add(label.to_string());
+
+    } 
+
+    for (int i = 1; i < this.spreadY+1; i++){
       
       label = label+gap;
 
@@ -185,7 +93,7 @@ public class CairoLine{
   }
 
   public DrawingArea createGraph () {
-
+    
     var drawingArea = new DrawingArea ();
     drawingArea.draw.connect (onDraw);
     
@@ -198,7 +106,6 @@ public class CairoLine{
   public bool onDraw (Widget da, Context ctx) {
     
     //Line thickness for the plane (along with tolerance and color)
-    ctx.set_line_width (this.lineThicknessPlane);
     ctx.set_tolerance (0.1);
     ctx.set_source_rgba (255, 255, 255,0.2);
 
@@ -208,9 +115,16 @@ public class CairoLine{
 
     //draw plane
     drawPlane (ctx);
+    
+    ctx.stroke ();
+    ctx.restore();
 
     //line thickness for ticks is set here
     ctx.set_line_width (this.lineThicknessTicks);
+    
+    ctx.save ();
+    ctx.new_path ();
+    ctx.translate (1, 0);
 
     //draw ticks
     drawTicksY (ctx);
@@ -263,7 +177,7 @@ public class CairoLine{
   }
 
   public void drawTicksX(Context ctx){
-  
+
     double spreadFinal = this.width/this.DATA.length;
 
     for (int i = 0; i < this.DATA.length+1; i++){
@@ -275,7 +189,6 @@ public class CairoLine{
       ctx.show_text(this.dataTypeX.concat(i.to_string()));
 
     }
-
   }
 
   public void drawLine(Context ctx){
@@ -284,12 +197,12 @@ public class CairoLine{
     double spreadFinalY = this.height/this.spreadY;
 
     double scaler = (this.DATA[0] - this.min) / (this.max - this.min);
-    scaler = scaler * 10;
-    double startingHeight = (this.height+15)-((spreadFinalY*scaler)-20);
+    scaler = scaler * this.spreadY;
+    double startingHeight = (this.height+15)-((spreadFinalY*scaler));
     ctx.move_to (15,startingHeight);
 
     for (int i = 1; i < this.DATA.length; i++){
-
+      
       scaler = (this.DATA[i] - this.min) / (this.max - this.min);
       scaler = scaler * this.spreadY;
 
