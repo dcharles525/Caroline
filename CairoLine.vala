@@ -291,7 +291,7 @@ public class CairoLine{
     for (int i = 1; i < this.DATA.length; i++){
       
       scaler = (this.DATA[i] - this.min) / (this.max - this.min);
-      scaler = scaler * 10;
+      scaler = scaler * this.spreadY;
 
       ctx.line_to ((15+spreadFinalX*(i+1)),((this.height+15)-((spreadFinalY*scaler)))+20);
 
