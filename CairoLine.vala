@@ -4,19 +4,19 @@ using Gee;
 
 public class CairoLine{
 
-  double[] DATA;
-  int width = 300;
-  double height = 200;
-  double lineThicknessTicks = 0.5;
-  double lineThicknessPlane = 1;
-  double lineThicknessData = 2;
-  double spreadY = 10;
-  string dataTypeY = "";
-  string dataTypeX = "";
-  ArrayList<string> labelList = new ArrayList<string>();
-  double gap;
-  double max;
-  double min;
+  public double[] DATA;
+  public int width = 300;
+  public double height = 200;
+  public double lineThicknessTicks = 0.5;
+  public double lineThicknessPlane = 1;
+  public double lineThicknessData = 2;
+  public double spreadY = 10;
+  public string dataTypeY = "";
+  public string dataTypeX = "";
+  public ArrayList<string> labelList = new ArrayList<string>();
+  public double gap;
+  public double max;
+  public double min;
   
   public CairoLine(){
 
@@ -119,9 +119,9 @@ public class CairoLine{
   }
 
   public void setData(double[] DATA){
-
+    
     this.DATA = DATA;
-
+  
   }
 
   public void calculations(){
@@ -150,7 +150,7 @@ public class CairoLine{
 
         this.labelList.add(label.to_string());
 
-      }      
+      } 
 
     }
 
@@ -251,11 +251,11 @@ public class CairoLine{
     double spreadFinal = this.height/this.spreadY;
 
     for (int i = 0; i < this.spreadY+1; i++){
-  
+
       ctx.move_to (-10, this.height+15-(spreadFinal*i));
       ctx.line_to (25, this.height+15-(spreadFinal*i));
 
-      ctx.move_to (0, this.height+15-(20*i));
+      ctx.move_to (0, this.height+15-(spreadFinal*i));
       ctx.show_text(this.dataTypeY.concat(this.labelList.get(i)));
 
     }
@@ -263,11 +263,11 @@ public class CairoLine{
   }
 
   public void drawTicksX(Context ctx){
-    
+  
     double spreadFinal = this.width/this.DATA.length;
 
     for (int i = 0; i < this.DATA.length+1; i++){
-  
+      
       ctx.move_to (15+spreadFinal*i, this.height+20);
       ctx.line_to (15+spreadFinal*i, this.height+5);
 
@@ -289,7 +289,7 @@ public class CairoLine{
     ctx.move_to (15,startingHeight);
 
     for (int i = 1; i < this.DATA.length; i++){
-      
+
       scaler = (this.DATA[i] - this.min) / (this.max - this.min);
       scaler = scaler * this.spreadY;
 
