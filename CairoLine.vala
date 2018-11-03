@@ -1,17 +1,22 @@
 using Gtk;
 using Cairo;
+using Gee;
 
 public class CairoLine{
 
-  int[] DATA = {1,2,3,4,5,6,7,8,9,10,4,3,2,7,8,3,6,4,5,6,1,2,3,4};
+  double[] DATA;
   int width = 300;
-  int height = 200;
+  double height = 200;
   double lineThicknessTicks = 0.5;
   double lineThicknessPlane = 1;
   double lineThicknessData = 2;
-  int spreadY = 10;
+  double spreadY = 10;
   string dataTypeY = "";
   string dataTypeX = "";
+  ArrayList<string> labelList = new ArrayList<string>();
+  double gap;
+  double max;
+  double min;
   
   public CairoLine(){
 
@@ -29,13 +34,13 @@ public class CairoLine{
 
   } 
 
-  public int getHeight(){
+  public double getHeight(){
     
     return this.height;
 
   }
 
-  public void setHeight(int height){
+  public void setHeight(double height){
 
     this.height = height;
 
@@ -77,13 +82,13 @@ public class CairoLine{
 
   }
 
-  public int getSpreadY(){
+  public double getSpreadY(){
     
     return spreadY;
 
   }
 
-  public void setSpreadY(int spreadY){
+  public void setSpreadY(double spreadY){
 
     this.spreadY = spreadY;
 
@@ -113,9 +118,69 @@ public class CairoLine{
 
   }
 
-  public void setData(int[] DATA){
+  public void setData(double[] DATA){
 
     this.DATA = DATA;
+
+  }
+
+  public void calculations(){
+    
+    double[] tempDATA = this.DATA;
+    tempDATA = arraySortInt(tempDATA);
+    double label;
+    
+    double temp = tempDATA[tempDATA.length-1];
+    this.max = temp + 1;
+    temp = tempDATA[0];
+    this.min = temp - 1;
+    double difference = this.max - this.min;
+    this.gap = difference / this.spreadY;
+    label = this.min;
+
+    for (int i = 0; i < this.spreadY+1; i++){
+      
+      label = label+gap;
+
+      if (label.to_string().length >= 8){
+        
+        this.labelList.add(label.to_string().slice (0, 8));
+
+      }else{
+
+        this.labelList.add(label.to_string());
+
+      }      
+
+    }
+
+  }
+
+  public double[] arraySortInt(double[] array){
+
+    bool swapped = true;
+    int j = 0;
+    double tmp;
+
+    while (swapped) {
+
+      swapped = false;
+      j++;
+
+      for (int i = 0; i < array.length - j; i++) {
+
+        if (array[i] > array[i + 1]) {
+          tmp = array[i];
+          array[i] = array[i + 1];
+          array[i + 1] = tmp;
+          swapped = true;
+        }
+
+      }
+
+    }
+
+    return array;
 
   }
 
@@ -183,7 +248,7 @@ public class CairoLine{
 
   public void drawTicksY(Context ctx){
     
-    int spreadFinal = this.height/this.spreadY;
+    double spreadFinal = this.height/this.spreadY;
 
     for (int i = 0; i < this.spreadY+1; i++){
   
@@ -191,7 +256,7 @@ public class CairoLine{
       ctx.line_to (25, this.height+15-(spreadFinal*i));
 
       ctx.move_to (0, this.height+15-(20*i));
-      ctx.show_text(this.dataTypeY.concat(i.to_string()));
+      ctx.show_text(this.dataTypeY.concat(this.labelList.get(i)));
 
     }
 
@@ -199,7 +264,7 @@ public class CairoLine{
 
   public void drawTicksX(Context ctx){
     
-    int spreadFinal = this.width/this.DATA.length;
+    double spreadFinal = this.width/this.DATA.length;
 
     for (int i = 0; i < this.DATA.length+1; i++){
   
@@ -216,12 +281,19 @@ public class CairoLine{
   public void drawLine(Context ctx){
     
     int spreadFinalX = this.width/this.DATA.length;
-    int spreadFinalY = this.height/this.spreadY;
-    ctx.move_to (15,this.height+15);
+    double spreadFinalY = this.height/this.spreadY;
 
-    for (int i = 0; i < this.DATA.length; i++){
-  
-      ctx.line_to ((15+spreadFinalX*(i+1)),this.height+15-(spreadFinalY*(this.DATA[i])));
+    double scaler = (this.DATA[0] - this.min) / (this.max - this.min);
+    scaler = scaler * 10;
+    double startingHeight = (this.height+15)-((spreadFinalY*scaler)-20);
+    ctx.move_to (15,startingHeight);
+
+    for (int i = 1; i < this.DATA.length; i++){
+      
+      scaler = (this.DATA[i] - this.min) / (this.max - this.min);
+      scaler = scaler * 10;
+
+      ctx.line_to ((15+spreadFinalX*(i+1)),((this.height+15)-((spreadFinalY*scaler)))+20);
 
     }
 
