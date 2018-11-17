@@ -1,8 +1,10 @@
 # Caroline
-A simple Cairo Chart Library for GTK and Vala (Lines only right now)
+A simple Cairo Chart Library for GTK and Vala (Lines and Bars)
 
 <img src="Screenshot from 2018-11-02 17.08.37.png">
+<img src="Screenshot from 2018-11-16 15.47.29.png">
+<img src="Screenshot from 2018-11-16 20.35.08.png">
       
 
-How do I use this?
-Add the class to your poject (make sure you have Cairo), then use it like any other object. Look at the getter and setters if you want to customize anything.
+###Documentation 
+

@@ -5,7 +5,7 @@ using Gee;
 public class CairoLine : Gtk.Window{
 
   public double[] DATA { get; set; }
-  public int width { get; set; }
+  public double width { get; set; }
   public double height { get; set; }
   public double lineThicknessTicks { get; set; }
   public double lineThicknessPlane { get; set; }
@@ -193,7 +193,7 @@ public class CairoLine : Gtk.Window{
 
   public void drawLine(Context ctx){
     
-    int spreadFinalX = this.width/this.DATA.length;
+    double spreadFinalX = this.width/this.DATA.length;
     double spreadFinalY = this.height/this.spreadY;
 
     double scaler = (this.DATA[0] - this.min) / (this.max - this.min);
@@ -208,6 +208,27 @@ public class CairoLine : Gtk.Window{
 
       ctx.line_to ((15+spreadFinalX*(i+1)),((this.height+15)-((spreadFinalY*scaler))));
 
+    }
+
+  }
+
+  public void drawRectangles(Context ctx){
+    
+    double spreadFinalX = this.width/this.DATA.length;
+    double spreadFinalY = this.height/this.spreadY;
+
+    double scaler = (this.DATA[0] - this.min) / (this.max - this.min);
+    scaler = scaler * this.spreadY;
+
+    for (int i = 0; i < this.DATA.length; i++){
+
+      scaler = (this.DATA[i] - this.min) / (this.max - this.min);
+      scaler = scaler * this.spreadY;
+
+      ctx.rectangle ((17.5+spreadFinalX*(i+1))-7.5, this.height+15, 10, -((this.height)-((spreadFinalY*scaler))));
+
+      ctx.stroke  ();
+    
     }
 
   }
