@@ -1,10 +1,34 @@
+//============================================================+
+// File name   : Caroline.vala
+// Last Update : 2019-12-05
+//
+// Description : This is an extension of a GTK Drawing Area. Its purpose is to make it easy for any level
+// of developer to use charts in their application. More in depth documentation is found in below and in the
+// README, if you have any critiques or questions, go ahead and open an issue in this repo.
+//
+// Author: David Johnson
+//============================================================+
+
+//Importing Gtk, Cairo, and Gee; These are needed to support our Gtk.DrawingArea
 using Gtk;
 using Cairo;
 using Gee;
 
+//Extending the Gtk.DrawingArea Class
 public class Caroline : Gtk.DrawingArea {
 
+  /*
+  *
+  * Items that are used internally and are not exposed to the developer
+  *
+  */
+
+  /*A Pango.Layout is used to store the font map, font description, and base direction
+  for drawing text for the widget. We can use this to display text items on our chart.
+  For more info on this start here: https://valadoc.org/gtk+-3.0/Gtk.Widget.create_pango_layout.html*/
   private Pango.Layout layout;
+
+  //Guard
   private bool drawLabel { get; set; }
   private double labelPositionX { get; set; }
   private double labelPositionY { get; set;}
@@ -30,20 +54,43 @@ public class Caroline : Gtk.DrawingArea {
   public DrawingArea drawingArea = new DrawingArea();
 
   construct{
+
+    //Initializes the text layout widget
     this.layout = create_pango_layout ("");
     this.drawLabel = false;
   }
 
   public Caroline(){
 
-    add_events (Gdk.EventMask.BUTTON_PRESS_MASK | Gdk.EventMask.BUTTON_RELEASE_MASK | Gdk.EventMask.POINTER_MOTION_MASK);
-    set_size_request (this.width, this.height);
+    /*Since our widget will already be "realized" we want to use add_events, this
+    function allows us to set the window event bit flags, which I document directly below.
+    For more info on this start here: https://valadoc.org/gtk+-3.0/Gtk.Widget.add_events.html*/
+    add_events(
+      /*Gdk.EventMast are a set of bit flags used to decide which events a window is to recieve.
+      In our case we want to be able to track press, release, and motion. Eventually as this
+      "library" grows we will take advantage of all of these.*/
+      Gdk.EventMask.BUTTON_PRESS_MASK |
+      Gdk.EventMask.BUTTON_RELEASE_MASK |
+      Gdk.EventMask.POINTER_MOTION_MASK
+    );
+
+    /*We want to allow the developer to set a minimum size of the widget so their parent
+    application knows approx what the size will be.
+    For more info on this start here: https://valadoc.org/gtk+-3.0/Gtk.Widget.set_size_request.html*/
+
+    set_size_request(
+      this.width,
+      this.height
+    );
 
   }
 
+  //Maybe should be private
   public void calculations(){
 
+    //use glib array?
     double[] tempDATA = this.DATA;
+    //maybe use array.sort? needs glib, worth the trade off?
     tempDATA = arraySortInt(tempDATA);
     double label;
 
@@ -83,6 +130,7 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
+  //Maybe should be private
   public double[] arraySortInt(double[] array){
 
     bool swapped = true;
