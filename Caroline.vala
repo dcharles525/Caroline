@@ -32,7 +32,7 @@ public class Caroline : Gtk.DrawingArea {
   private double labelPositionY { get; set;}
 
   public double[] DATA { get; set; }
-  
+
   public int width { get; set; }
   public int height { get; set; }
   public int widthPadding { get; set; }
@@ -121,7 +121,7 @@ public class Caroline : Gtk.DrawingArea {
   * @param none
   * @return return void
   */
-  public void calculations(){
+  private void calculations(){
 
     /*This next sector of arithmetic is to find the max value of the data array*/
     this.max = this.DATA[0];
@@ -172,6 +172,8 @@ public class Caroline : Gtk.DrawingArea {
   * @return return type
   */
   public override bool draw (Cairo.Context cr) {
+
+    this.calculations();
 
     /*Here we are grabbing the width and height assocaited with 'this'.
     We then subtract a settable padding around the entirety of the widget. We can also
