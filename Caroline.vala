@@ -36,19 +36,27 @@ public class Caroline : Gtk.DrawingArea {
   public double[] DATA { get; set; }
   public double[] HIGH { get; set; }
   public double[] LOW { get; set; }
+
   public int width { get; set; }
   public int height { get; set; }
+  public int widthPadding { get; set; }
+  public int heightPadding { get; set; }
+
   public double lineThicknessTicks { get; set; }
   public double lineThicknessPlane { get; set; }
   public double lineThicknessData { get; set; }
+
   public double spreadY { get; set; }
   public string dataTypeY{ get; set; }
   public string dataTypeX { get; set; }
+
   public ArrayList<string> labelYList = new ArrayList<string>();
   public ArrayList<string> labelXList = new ArrayList<string>();
+
   public double gap { get; set; }
   public double max { get; set; }
   public double min { get; set; }
+
   public string chartType;
   public Context ctx;
   public DrawingArea drawingArea = new DrawingArea();
@@ -58,6 +66,11 @@ public class Caroline : Gtk.DrawingArea {
     //Initializes the text layout widget
     this.layout = create_pango_layout ("");
     this.drawLabel = false;
+
+    //Initializing default values
+    this.widthPadding = 50;
+    this.heightPadding = 50;
+
   }
 
   public Caroline(){
@@ -77,7 +90,6 @@ public class Caroline : Gtk.DrawingArea {
     /*We want to allow the developer to set a minimum size of the widget so their parent
     application knows approx what the size will be.
     For more info on this start here: https://valadoc.org/gtk+-3.0/Gtk.Widget.set_size_request.html*/
-
     set_size_request(
       this.width,
       this.height
@@ -85,168 +97,158 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
-  //Maybe should be private
+  /**
+  * Finds the correct positioning for the x & y labels.
+  *
+  * Below we first attempt to find the max and min values of the data array. After
+  * that we use those values to calculate the gap between each of the labels. This
+  * gap value will also be used elsewhere for the chart lines. Finally we dynamically
+  * write the y labels to our list to be used in the drawing stage, this allows us to
+  * not have to manually input values for the y axis.
+  *
+  * @param none
+  * @return return void
+  */
   public void calculations(){
 
-    //use glib array?
-    double[] tempDATA = this.DATA;
-    //maybe use array.sort? needs glib, worth the trade off?
-    tempDATA = arraySortInt(tempDATA);
-    double label;
+    /*This next sector of arithmetic is to find the max value of the data array*/
+    this.max = this.DATA[0];
 
-    double temp = tempDATA[tempDATA.length-1];
-    this.max = temp + 1;
-    temp = tempDATA[0];
-    this.min = temp - 1;
-    double difference = this.max - this.min;
-    this.gap = difference / this.spreadY;
-    label = this.min;
+    //Loop and compare each value to our initial value to see if it becomes the max
+    for (int i = 0; i < this.DATA.length; i++)
+      if (this.DATA[i] > this.max)
+        this.max = this.DATA[i];
 
-    if (label.to_string().length >= 8){
+    stdout.printf("MAX: %f\n",this.max);
 
-      this.labelList.add(label.to_string().slice (0, 8));
+    /*This next sector of arithmetic is to find the min value of the data array*/
+    this.min = 0;
 
-    }else{
+    //Loop and compare each value to our initial value to see if it becomes the min
+    for (int i = 0; i < this.DATA.length; i++)
+      if (this.DATA[i] < this.min)
+        this.min = this.DATA[i];
 
-      this.labelList.add(label.to_string());
+    /*Finds the gap between each y axis label to be displayed. spreadY is set on the
+    developers side, it is meant to tell Caroline how many y axis ticks needed.*/
+    this.gap = (this.max - this.min) / this.spreadY;
 
-    }
-
-    for (int i = 1; i < this.spreadY+1; i++){
-
-      label = label+gap;
-
-      if (label.to_string().length >= 8){
-
-        this.labelList.add(label.to_string().slice (0, 8));
-
-      }else{
-
-        this.labelList.add(label.to_string());
-
-      }
-
-    }
-
-  }
-
-  //Maybe should be private
-  public double[] arraySortInt(double[] array){
-
-    bool swapped = true;
-    int j = 0;
-    double tmp;
-
-    while (swapped) {
-
-      swapped = false;
-      j++;
-
-      for (int i = 0; i < array.length - j; i++) {
-
-        if (array[i] > array[i + 1]) {
-          tmp = array[i];
-          array[i] = array[i + 1];
-          array[i + 1] = tmp;
-          swapped = true;
-        }
-
-      }
-
-    }
-
-    return array;
-
-  }
-
-  public override bool draw (Cairo.Context cr) {
-
-    int width = get_allocated_width () - 50;
-    int height = get_allocated_height () - 50;
-
-    cr.set_line_width (this.lineThicknessTicks);
-    cr.set_source_rgba (255, 255, 255,0.2);
-    cr.move_to (15, 15);
-    cr.line_to (15, height + 15);
-
-    cr.move_to (width + 15, height + 15);
-    cr.line_to (15, height + 15);
-    cr.stroke ();
-
-    cr.new_path ();
-    cr.set_line_width (this.lineThicknessTicks);
-
-    double spreadFinal = height/this.spreadY;
+    //Initial y axis value
+    double yLabel = this.min;
 
     for (int i = 0; i < this.spreadY + 1; i++){
 
-      cr.move_to (-10, height+15-(spreadFinal*i));
-      cr.line_to (25, height+15-(spreadFinal*i));
+      if (i > 0)
+        yLabel = yLabel + gap;
 
-      cr.move_to (0, height+15-(spreadFinal*i));
+      //Depending on double length we clean it up a bit for display if its over 8 digits
+      if (yLabel.to_string().length >= 8)
+        this.labelYList.add(yLabel.to_string().slice (0, 8));
+      else
+        this.labelYList.add(yLabel.to_string());
+
+    }
+
+  }
+
+  /**
+  * Draws the
+  *
+  * Undocumented function long description
+  *
+  * @param type var Description
+  * @return return type
+  */
+  public override bool draw (Cairo.Context cr) {
+
+    /*Here we are grabbing the width and height assocaited with 'this'.
+    We then subtract a settable padding around the entirety of the widget. We can also
+    observe that 'this' should have the width and height we requested in the set_size_request
+    function.*/
+    int width = get_allocated_width() - this.widthPadding;
+    int height = get_allocated_height() - this.heightPadding;
+
+    //As the function illudes too, this sets the width of the lines for the x & y ticks.
+    cr.set_line_width(this.lineThicknessTicks);
+
+    //As the function illudes too, this sets the color of the lines.
+    cr.set_source_rgba(255, 255, 255, 0.2);
+
+    cr.move_to(15, 15);
+    cr.line_to(15, height + 15);
+
+    cr.move_to(width + 15, height + 15);
+    cr.line_to(15, height + 15);
+
+    /*Drawing operator that strokes the current path using the current settings that were
+    implemented eariler in this file.*/
+    cr.stroke();
+
+    //Reset the path so when we execute move_to again we are starting from 0,0 on the cario canvas
+    cr.new_path();
+    cr.set_line_width(this.lineThicknessTicks);
+
+    //Figure out the spread of each of the y coordinates.
+    double spreadFinalY = height/this.spreadY;
+
+    /*We loop through all of the y labels and actually draw thes lines and add the actual text for
+    each tick mark.*/
+    for (int i = 0; i < this.spreadY + 1; i++){
+
+      //line drawing
+      cr.move_to(-10, height + 15 - (spreadFinalY*i));
+      cr.line_to(25, height + 15 - (spreadFinalY*i));
+
+      //moves the current drawing area so the text will display properly
+      cr.move_to(0, height+15-(spreadFinalY*i));
       cr.show_text(this.dataTypeY.concat(this.labelYList.get(i)));
 
     };
 
-    spreadFinal = width/this.DATA.length;
+    /*Figure out the spread of each of the x coordinates, notice this is differnt from the y
+    plane, we want to display each data point on the x axis here.*/
+    double spreadFinalX = width/this.DATA.length;
 
+    /*We loop through all of the x labels and actually draw thes lines and add the actual text for
+    each tick mark.*/
     for (int i = 1; i < this.DATA.length+1; i++){
 
-      cr.move_to (15+spreadFinal*i, height+20);
-      cr.line_to (15+spreadFinal*i, height+5);
+      //line drawing
+      cr.move_to(15 + spreadFinalX * i, height + 20);
+      cr.line_to(15 + spreadFinalX * i, height + 5);
 
-      cr.move_to (11+spreadFinal*i, height+30);
+      //moves the current drawing area back and lists the x axis value below the x tick
+      cr.move_to(11 + spreadFinalX * i, height + 30);
       cr.show_text(this.labelXList.get(i));
 
     }
 
-    cr.stroke ();
-    cr.restore ();
+    /*Drawing operator that strokes the current path using the current settings that were
+    implemented eariler in this file.*/
+    cr.stroke();
+
+    /*Sets the drawing area and its attributes back to their defaults, which are set on
+    previous save() or the initial value*/
+    cr.restore();
+
+    //Saves the drawing area context and the attributes set before this save
     cr.save();
 
+    /*The next two sectors of code are for either line or bar charts. The developer can
+    decide which chart they want. Eventually more chart types will be added...*/
+
+    //Code for line charts
     if (this.chartType == "line"){
 
-      double spreadFinalX = width/this.DATA.length;
-      double spreadFinalY = height/this.spreadY;
-      cr.set_line_width (this.lineThicknessData);
-      cr.set_source_rgba (0, 174, 174,0.8);
+      lineChart(cr);
 
-      double scaler = (this.DATA[0] - this.min) / (this.max - this.min);
-      scaler = scaler * this.spreadY;
-      double startingHeight = (height+15)-((spreadFinalY*scaler));
-      cr.move_to (15,startingHeight);
+    }else if(this.chartType == "bar"){
 
-      for (int i = 1; i < this.DATA.length; i++){
+      barChart(cr);
 
-        scaler = (this.DATA[i] - this.min) / (this.max - this.min);
-        scaler = scaler * this.spreadY;
+    }else{
 
-        cr.line_to ((15+spreadFinalX*(i+1)),((height+15)-((spreadFinalY*scaler))));
-
-      }
-
-      cr.stroke ();
-
-    }
-
-    if (this.chartType == "bar"){
-
-      double spreadFinalX = this.width/this.DATA.length;
-      double spreadFinalY = this.height/this.spreadY;
-
-      double scaler = (this.DATA[0] - this.min) / (this.max - this.min);
-      scaler = scaler * this.spreadY;
-
-      for (int i = 0; i < this.DATA.length; i++){
-
-        scaler = (this.DATA[i] - this.min) / (this.max - this.min);
-        scaler = scaler * this.spreadY;
-
-        ctx.rectangle ((17.5+spreadFinalX*(i+1))-7.5, this.height+15, 10, -((this.height)-((spreadFinalY*scaler))));
-
-        ctx.stroke  ();
-
-      }
+      lineChart(cr);
 
     }
 
@@ -254,11 +256,60 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
+  public void lineChart(Cairo.Context cr){
+
+    cr.set_line_width(this.lineThicknessData);
+    cr.set_source_rgba(0, 174, 174,0.8);
+
+    double scaler = (this.DATA[0] - this.min) / (this.max - this.min);
+    scaler = scaler * this.spreadY;
+
+    double startingHeight = (height+15)-((spreadFinalY*scaler));
+    cr.move_to(15,startingHeight);
+
+    for (int i = 1; i < this.DATA.length; i++){
+
+      scaler = (this.DATA[i] - this.min) / (this.max - this.min);
+      scaler = scaler * this.spreadY;
+
+      cr.line_to((15+spreadFinalX*(i+1)),((height+15)-((spreadFinalY*scaler))));
+
+    }
+
+    cr.stroke();
+
+  }
+
+  public void barChart(Cairo.Context cr){
+
+    cr.set_source_rgba(0, 174, 174,0.8);
+
+    double scaler = (this.DATA[0] - this.min) / (this.max - this.min);
+    scaler = scaler * this.spreadY;
+
+    for (int i = 0; i < this.DATA.length; i++){
+
+      scaler = (this.DATA[i] - this.min) / (this.max - this.min);
+      scaler = scaler * this.spreadY;
+
+      cr.rectangle(
+        (17.5 + spreadFinalX * (i + 1)) - 7.5,
+        height+15,
+        10,
+        -(((spreadFinalY * scaler)))
+      );
+
+    }
+
+    cr.stroke();
+
+  }
+
   public override void size_allocate (Gtk.Allocation allocation) {
 
     this.drawLabel = false;
-    this.layout = create_pango_layout ("");
-    base.size_allocate (allocation);
+    this.layout = create_pango_layout("");
+    base.size_allocate(allocation);
 
   }
 
