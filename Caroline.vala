@@ -28,15 +28,11 @@ public class Caroline : Gtk.DrawingArea {
   For more info on this start here: https://valadoc.org/gtk+-3.0/Gtk.Widget.create_pango_layout.html*/
   private Pango.Layout layout;
 
-  //Guard
-  private bool drawLabel { get; set; }
   private double labelPositionX { get; set; }
   private double labelPositionY { get; set;}
 
   public double[] DATA { get; set; }
-  public double[] HIGH { get; set; }
-  public double[] LOW { get; set; }
-
+  
   public int width { get; set; }
   public int height { get; set; }
   public int widthPadding { get; set; }
@@ -61,15 +57,31 @@ public class Caroline : Gtk.DrawingArea {
   public Context ctx;
   public DrawingArea drawingArea = new DrawingArea();
 
+  private double spreadFinalY { get; set; }
+  private double spreadFinalX { get; set; }
+
   construct{
 
     //Initializes the text layout widget
     this.layout = create_pango_layout ("");
-    this.drawLabel = false;
 
     //Initializing default values
     this.widthPadding = 50;
     this.heightPadding = 50;
+
+    this.width = 500;
+    this.height = 500;
+    this.spreadY = 10;
+    this.lineThicknessTicks = 0.5;
+    this.lineThicknessData = 1;
+    this.lineThicknessTicks = 2;
+    this.dataTypeY = "";
+    this.dataTypeX = "";
+    this.gap = 0;
+    this.min = 0;
+    this.max = 0;
+    this.DATA = {1,2,3,4,5,6,7,8,10};
+    this.chartType = "line";
 
   }
 
@@ -119,8 +131,6 @@ public class Caroline : Gtk.DrawingArea {
       if (this.DATA[i] > this.max)
         this.max = this.DATA[i];
 
-    stdout.printf("MAX: %f\n",this.max);
-
     /*This next sector of arithmetic is to find the min value of the data array*/
     this.min = 0;
 
@@ -152,9 +162,11 @@ public class Caroline : Gtk.DrawingArea {
   }
 
   /**
-  * Draws the
+  * Draws the tick marks and calls sub chart type functions
   *
-  * Undocumented function long description
+  * Within draw we do several things, first we confirm our height/width. Then we move our
+  * pointer on the canvas and draw the x & y axis. After we draw all the ticks on each axis.
+  * Lastly we point to the proper chart type function which will draw the chart itself.
   *
   * @param type var Description
   * @return return type
@@ -165,8 +177,8 @@ public class Caroline : Gtk.DrawingArea {
     We then subtract a settable padding around the entirety of the widget. We can also
     observe that 'this' should have the width and height we requested in the set_size_request
     function.*/
-    int width = get_allocated_width() - this.widthPadding;
-    int height = get_allocated_height() - this.heightPadding;
+    this.width = get_allocated_width() - this.widthPadding;
+    this.height = get_allocated_height() - this.heightPadding;
 
     //As the function illudes too, this sets the width of the lines for the x & y ticks.
     cr.set_line_width(this.lineThicknessTicks);
@@ -174,11 +186,16 @@ public class Caroline : Gtk.DrawingArea {
     //As the function illudes too, this sets the color of the lines.
     cr.set_source_rgba(255, 255, 255, 0.2);
 
+    /*We want to move the pointer on the canvas to where we want the axis's to be, to
+    learn more about move_to: https://valadoc.org/cairo/Cairo.Context.move_to.html*/
     cr.move_to(15, 15);
-    cr.line_to(15, height + 15);
 
+    //We draw a line from x axis 15 to the height plus 15
+    cr.line_to(15, this.height + 15);
+
+    //Now we draw the x axis using the same methodolgy as the y axis directly above.
     cr.move_to(width + 15, height + 15);
-    cr.line_to(15, height + 15);
+    cr.line_to(15, this.height + 15);
 
     /*Drawing operator that strokes the current path using the current settings that were
     implemented eariler in this file.*/
@@ -189,36 +206,36 @@ public class Caroline : Gtk.DrawingArea {
     cr.set_line_width(this.lineThicknessTicks);
 
     //Figure out the spread of each of the y coordinates.
-    double spreadFinalY = height/this.spreadY;
+    this.spreadFinalY = height/this.spreadY;
 
     /*We loop through all of the y labels and actually draw thes lines and add the actual text for
     each tick mark.*/
     for (int i = 0; i < this.spreadY + 1; i++){
 
       //line drawing
-      cr.move_to(-10, height + 15 - (spreadFinalY*i));
-      cr.line_to(25, height + 15 - (spreadFinalY*i));
+      cr.move_to(-10, height + 15 - (this.spreadFinalY*i));
+      cr.line_to(25, height + 15 - (this.spreadFinalY*i));
 
       //moves the current drawing area so the text will display properly
-      cr.move_to(0, height+15-(spreadFinalY*i));
+      cr.move_to(0, height+15-(this.spreadFinalY*i));
       cr.show_text(this.dataTypeY.concat(this.labelYList.get(i)));
 
     };
 
     /*Figure out the spread of each of the x coordinates, notice this is differnt from the y
     plane, we want to display each data point on the x axis here.*/
-    double spreadFinalX = width/this.DATA.length;
+    this.spreadFinalX = width/this.DATA.length;
 
     /*We loop through all of the x labels and actually draw thes lines and add the actual text for
     each tick mark.*/
-    for (int i = 1; i < this.DATA.length+1; i++){
+    for (int i = 0; i < this.DATA.length+1; i++){
 
       //line drawing
-      cr.move_to(15 + spreadFinalX * i, height + 20);
-      cr.line_to(15 + spreadFinalX * i, height + 5);
+      cr.move_to(15 + this.spreadFinalX * i, height + 20);
+      cr.line_to(15 + this.spreadFinalX * i, height + 5);
 
       //moves the current drawing area back and lists the x axis value below the x tick
-      cr.move_to(11 + spreadFinalX * i, height + 30);
+      cr.move_to(11 + this.spreadFinalX * i, height + 30);
       cr.show_text(this.labelXList.get(i));
 
     }
@@ -237,15 +254,17 @@ public class Caroline : Gtk.DrawingArea {
     /*The next two sectors of code are for either line or bar charts. The developer can
     decide which chart they want. Eventually more chart types will be added...*/
 
-    //Code for line charts
+    //If the developer picked the line chart
     if (this.chartType == "line"){
 
       lineChart(cr);
 
+    //If the developer picked the bar chart
     }else if(this.chartType == "bar"){
 
       barChart(cr);
 
+    //If the devloper didn't pick a valid we default to line chart
     }else{
 
       lineChart(cr);
@@ -256,60 +275,108 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
-  public void lineChart(Cairo.Context cr){
+  /**
+  * Draws a line base on this.DATA
+  *
+  * Uses the Cairo.Context to draw the line chart via the .move_to function
+  * which allows you to move the current point to the necessary area and
+  * line_to() which goes from one point to another while leaving a line behind.
+  *
+  * Notice that we use some simple scaling algorithms to ensure the line is in the right
+  * area regardless of the min and max sizes, reference the "paper(s)" I wrote in the README if
+  * you want ot know more.
+  *
+  * @param type cr | Cairo.Context
+  * @return return void
+  */
+  private void lineChart(Cairo.Context cr){
 
+    //Setting thickness of the line using set_line_width which can take any double.
     cr.set_line_width(this.lineThicknessData);
+
+    //Set the color of the line (this default color is blue)
     cr.set_source_rgba(0, 174, 174,0.8);
 
-    double scaler = (this.DATA[0] - this.min) / (this.max - this.min);
-    scaler = scaler * this.spreadY;
+    //Getting a scaler, which will help put the line in the right spot
+    double scaler = ((this.DATA[0] - this.min) / (this.max - this.min)) * this.spreadY;
 
-    double startingHeight = (height+15)-((spreadFinalY*scaler));
-    cr.move_to(15,startingHeight);
+    //We want to move the pointer on the canvas to where we want the line graph to start.
+    cr.move_to(
+      //x axis set to "0", as 15 is the buffer in the widget
+      15,
+      /*y axis using our scaler value multiplied by how many y axis values we have,
+      then subtracted from the height*/
+      (this.height+15)-((this.spreadFinalY*scaler))
+    );
 
     for (int i = 1; i < this.DATA.length; i++){
 
-      scaler = (this.DATA[i] - this.min) / (this.max - this.min);
-      scaler = scaler * this.spreadY;
+      //Recalculating the scaler to our current value
+      scaler = ((this.DATA[i] - this.min) / (this.max - this.min)) * this.spreadY;
 
-      cr.line_to((15+spreadFinalX*(i+1)),((height+15)-((spreadFinalY*scaler))));
-
-    }
-
-    cr.stroke();
-
-  }
-
-  public void barChart(Cairo.Context cr){
-
-    cr.set_source_rgba(0, 174, 174,0.8);
-
-    double scaler = (this.DATA[0] - this.min) / (this.max - this.min);
-    scaler = scaler * this.spreadY;
-
-    for (int i = 0; i < this.DATA.length; i++){
-
-      scaler = (this.DATA[i] - this.min) / (this.max - this.min);
-      scaler = scaler * this.spreadY;
-
-      cr.rectangle(
-        (17.5 + spreadFinalX * (i + 1)) - 7.5,
-        height+15,
-        10,
-        -(((spreadFinalY * scaler)))
+      /*line_to (https://valadoc.org/cairo/Cairo.Context.line_to.html) is a simple
+      cario function that allows us to draw a line from the previous canvas pointer.*/
+      cr.line_to(
+        /*axis, similar to move_to above, we just move the the line to the
+        next x axis tick.*/
+        (15+this.spreadFinalX*(i+1)),
+        /*y axis using our scaler value multiplied by how many y axis values we have,
+        then subtracted from the height*/
+        ((this.height+15)-((this.spreadFinalY*scaler)))
       );
 
     }
 
+    /*Drawing operator that strokes the current path using the current settings that were
+    implemented eariler in this file.*/
     cr.stroke();
 
   }
 
-  public override void size_allocate (Gtk.Allocation allocation) {
+  /**
+  * Draws a set of rectangles base on this.DATA
+  *
+  * Uses the Cairo.Context to draw a set of rectanges that will be positioned in a bar
+  * chart format. The most important function used is rectangle, which allows us to quickly
+  * form objects without having to use line_to.
+  *
+  * Notice that we use some simple scaling algorithms to ensure the line is in the right
+  * area regardless of the min and max sizes, reference the paper I wrote in the README if
+  * you want ot know more.
+  *
+  * @param type cr | Cairo.Context
+  * @return return void
+  */
+  private void barChart(Cairo.Context cr){
 
-    this.drawLabel = false;
-    this.layout = create_pango_layout("");
-    base.size_allocate(allocation);
+    //Set the color of the line (this default color is blue)
+    cr.set_source_rgba(0, 174, 174,0.8);
+
+    //Getting a scaler, which will help put the line in the right spot
+    double scaler = ((this.DATA[0] - this.min) / (this.max - this.min)) * this.spreadY;
+
+    for (int i = 0; i < this.DATA.length; i++){
+
+      //Recalculating the scaler to our current value
+      scaler = ((this.DATA[i] - this.min) / (this.max - this.min)) * this.spreadY;
+
+      /*Rectangle takes x,y,width,height as doubles, which will position the rectangle
+      at the pointer on the canvas*/
+      cr.rectangle(
+        //We have a bit of a smaller buffer since the rectangles lines take up width/height
+        (10 + this.spreadFinalX * (i + 1)),
+        this.height+15,
+        10,
+        /*We want to draw our height "upwards" on the 2d plane, since 0,0 on this canvas is in the
+        top left corner of the widget, hence the negative number.*/
+        -(((this.spreadFinalY * scaler)))
+      );
+
+    }
+
+    /*Drawing operator that strokes the current path using the current settings that were
+    implemented eariler in this file.*/
+    cr.stroke();
 
   }
 
