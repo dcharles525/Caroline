@@ -110,58 +110,6 @@ public class Caroline : Gtk.DrawingArea {
   }
 
   /**
-  * Finds the correct positioning for the x & y labels.
-  *
-  * Below we first attempt to find the max and min values of the data array. After
-  * that we use those values to calculate the gap between each of the labels. This
-  * gap value will also be used elsewhere for the chart lines. Finally we dynamically
-  * write the y labels to our list to be used in the drawing stage, this allows us to
-  * not have to manually input values for the y axis.
-  *
-  * @param none
-  * @return return void
-  */
-  private void calculations(){
-
-    /*This next sector of arithmetic is to find the max value of the data array*/
-    this.max = this.DATA[0];
-
-    //Loop and compare each value to our initial value to see if it becomes the max
-    for (int i = 0; i < this.DATA.length; i++)
-      if (this.DATA[i] > this.max)
-        this.max = this.DATA[i];
-
-    /*This next sector of arithmetic is to find the min value of the data array*/
-    this.min = 0;
-
-    //Loop and compare each value to our initial value to see if it becomes the min
-    for (int i = 0; i < this.DATA.length; i++)
-      if (this.DATA[i] < this.min)
-        this.min = this.DATA[i];
-
-    /*Finds the gap between each y axis label to be displayed. spreadY is set on the
-    developers side, it is meant to tell Caroline how many y axis ticks needed.*/
-    this.gap = (this.max - this.min) / this.spreadY;
-
-    //Initial y axis value
-    double yLabel = this.min;
-
-    for (int i = 0; i < this.spreadY + 1; i++){
-
-      if (i > 0)
-        yLabel = yLabel + gap;
-
-      //Depending on double length we clean it up a bit for display if its over 8 digits
-      if (yLabel.to_string().length >= 8)
-        this.labelYList.add(yLabel.to_string().slice (0, 8));
-      else
-        this.labelYList.add(yLabel.to_string());
-
-    }
-
-  }
-
-  /**
   * Draws the tick marks and calls sub chart type functions
   *
   * Within draw we do several things, first we confirm our height/width. Then we move our
@@ -274,6 +222,58 @@ public class Caroline : Gtk.DrawingArea {
     }
 
     return true;
+
+  }
+
+  /**
+  * Finds the correct positioning for the x & y labels.
+  *
+  * Below we first attempt to find the max and min values of the data array. After
+  * that we use those values to calculate the gap between each of the labels. This
+  * gap value will also be used elsewhere for the chart lines. Finally we dynamically
+  * write the y labels to our list to be used in the drawing stage, this allows us to
+  * not have to manually input values for the y axis.
+  *
+  * @param none
+  * @return return void
+  */
+  private void calculations(){
+
+    /*This next sector of arithmetic is to find the max value of the data array*/
+    this.max = this.DATA[0];
+
+    //Loop and compare each value to our initial value to see if it becomes the max
+    for (int i = 0; i < this.DATA.length; i++)
+      if (this.DATA[i] > this.max)
+        this.max = this.DATA[i];
+
+    /*This next sector of arithmetic is to find the min value of the data array*/
+    this.min = 0;
+
+    //Loop and compare each value to our initial value to see if it becomes the min
+    for (int i = 0; i < this.DATA.length; i++)
+      if (this.DATA[i] < this.min)
+        this.min = this.DATA[i];
+
+    /*Finds the gap between each y axis label to be displayed. spreadY is set on the
+    developers side, it is meant to tell Caroline how many y axis ticks needed.*/
+    this.gap = (this.max - this.min) / this.spreadY;
+
+    //Initial y axis value
+    double yLabel = this.min;
+
+    for (int i = 0; i < this.spreadY + 1; i++){
+
+      if (i > 0)
+        yLabel = yLabel + gap;
+
+      //Depending on double length we clean it up a bit for display if its over 8 digits
+      if (yLabel.to_string().length >= 8)
+        this.labelYList.add(yLabel.to_string().slice (0, 8));
+      else
+        this.labelYList.add(yLabel.to_string());
+
+    }
 
   }
 
