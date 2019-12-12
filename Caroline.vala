@@ -31,14 +31,8 @@ public class Caroline : Gtk.DrawingArea {
   private double labelPositionX { get; set; }
   private double labelPositionY { get; set;}
 
-  public double[] DATA { get; set; }
-
-  public int width { get; set; }
-  public int height { get; set; }
-  public int widthPadding { get; set; }
-  public int heightPadding { get; set; }
-
-  public int chartPadding { get; set; }
+  private double spreadFinalY { get; set; }
+  private double spreadFinalX { get; set; }
 
   private int yTickStart { get; set; }
   private int yTickEnd { get; set; }
@@ -49,29 +43,40 @@ public class Caroline : Gtk.DrawingArea {
   private int xTextStart { get; set; }
   private int xTextEnd { get; set; }
 
+  private int widthPadding { get; set; }
+  private int heightPadding { get; set; }
+
+  private double gap { get; set; }
+  private double max { get; set; }
+  private double min { get; set; }
+
+  private int rectangleXOffset { get; set; }
+
+  private ArrayList<string> labelYList = new ArrayList<string>();
+
+  /*
+  *
+  *
+  *
+  */
+
+  public double[] DATA { get; set; }
+
+  public int width { get; set; }
+  public int height { get; set; }
+
+  public int chartPadding { get; set; }
+
   public double lineThicknessTicks { get; set; }
   public double lineThicknessPlane { get; set; }
   public double lineThicknessData { get; set; }
-
   public double spreadY { get; set; }
-  public string dataTypeY{ get; set; }
+
+  public string dataTypeY { get; set; }
   public string dataTypeX { get; set; }
+  public string chartType { get; set; }
 
-  public ArrayList<string> labelYList = new ArrayList<string>();
   public ArrayList<string> labelXList = new ArrayList<string>();
-
-  public double gap { get; set; }
-  public double max { get; set; }
-  public double min { get; set; }
-
-  public string chartType;
-  public Context ctx;
-  public DrawingArea drawingArea = new DrawingArea();
-
-  private double spreadFinalY { get; set; }
-  private double spreadFinalX { get; set; }
-
-  private int rectangleXOffset { get; set; }
 
   construct{
 
@@ -82,10 +87,10 @@ public class Caroline : Gtk.DrawingArea {
     this.widthPadding = 50;
     this.heightPadding = 50;
 
-    this.chartPadding = 15;
+    this.chartPadding = 14;
 
-    this.yTickStart = -10;
-    this.yTickEnd = 25;
+    this.yTickStart = 20;
+    this.yTickEnd = 45;
     this.yTextStart = 0;
 
     this.xTickStart = 20;
@@ -165,23 +170,23 @@ public class Caroline : Gtk.DrawingArea {
     /*We want to move the pointer on the canvas to where we want the axis's to be, to
     learn more about move_to: https://valadoc.org/cairo/Cairo.Context.move_to.html*/
     cr.move_to(
-      this.chartPadding,
+      this.chartPadding + (this.widthPadding / 3),
       this.chartPadding
     );
 
     //We draw a line from x axis 15 to the height plus 15
     cr.line_to(
-      this.chartPadding,
+      this.chartPadding + (this.widthPadding / 3),
       this.height + this.chartPadding
     );
 
     //Now we draw the x axis using the same methodolgy as the y axis directly above.
     cr.move_to(
-      width + this.chartPadding,
+      width + this.chartPadding + (this.widthPadding / 3),
       height + this.chartPadding
     );
     cr.line_to(
-      this.chartPadding,
+      this.chartPadding + (this.widthPadding / 3),
       this.height + this.chartPadding
     );
 
@@ -212,7 +217,7 @@ public class Caroline : Gtk.DrawingArea {
 
       //moves the current drawing area so the text will display properly
       cr.move_to(
-        this.yTextStart,
+        this.yTextStart + (this.widthPadding / 3),
         height + this.chartPadding - (this.spreadFinalY * i)
       );
       cr.show_text(this.dataTypeY.concat(this.labelYList.get(i)));
@@ -229,17 +234,17 @@ public class Caroline : Gtk.DrawingArea {
 
       //line drawing
       cr.move_to(
-        this.chartPadding + this.spreadFinalX * i,
+        this.chartPadding + this.spreadFinalX * i + (this.widthPadding / 3),
         height + this.xTickStart
       );
       cr.line_to(
-        this.chartPadding + this.spreadFinalX * i,
+        this.chartPadding + this.spreadFinalX * i + (this.widthPadding / 3),
         height + this.xTickEnd
       );
 
       //moves the current drawing area back and lists the x axis value below the x tick
       cr.move_to(
-        xTextStart + this.spreadFinalX * i,
+        xTextStart + this.spreadFinalX * i  + (this.widthPadding / 3),
         height + this.xTextEnd
       );
       cr.show_text(this.labelXList.get(i));
@@ -361,7 +366,7 @@ public class Caroline : Gtk.DrawingArea {
     //We want to move the pointer on the canvas to where we want the line graph to start.
     cr.move_to(
       //x axis set to "0", as 15 is the buffer in the widget
-      this.chartPadding,
+      this.chartPadding + (this.widthPadding / 3),
       /*y axis using our scaler value multiplied by how many y axis values we have,
       then subtracted from the height*/
       (this.height + this.chartPadding) - ((this.spreadFinalY * scaler))
@@ -377,7 +382,7 @@ public class Caroline : Gtk.DrawingArea {
       cr.line_to(
         /*axis, similar to move_to above, we just move the the line to the
         next x axis tick.*/
-        (this.chartPadding + this.spreadFinalX * (i+1)),
+        (this.chartPadding + this.spreadFinalX * (i+1)) + (this.widthPadding / 3),
         /*y axis using our scaler value multiplied by how many y axis values we have,
         then subtracted from the height*/
         ((this.height + this.chartPadding) - ((this.spreadFinalY * scaler)))
@@ -422,7 +427,7 @@ public class Caroline : Gtk.DrawingArea {
       at the pointer on the canvas*/
       cr.rectangle(
         //We have a bit of a smaller buffer (10) since the rectangles should be centered on tick marks
-        (this.rectangleXOffset + this.spreadFinalX * (i + 1)),
+        (this.rectangleXOffset + this.spreadFinalX * (i + 1)) + (this.widthPadding / 3.35),
         this.height+this.chartPadding,
         this.rectangleXOffset,
         /*We want to draw our height "upwards" on the 2d plane, since 0,0 on this canvas is in the
