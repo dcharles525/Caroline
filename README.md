@@ -33,8 +33,8 @@ This is how we generate a simple line chart. See the full sample application to 
 
 #### Caroline Attributes
 
-Here we have all the attributes that will be changed regularly by the developer, I will go
-in depth here on which one means and how it works.
+Here we have all the attributes that will be changed regularly by the developer and not be changed
+regularly, I will go in depth here on which one means and how it works.
 
 ##### Public Attributes
 
@@ -75,51 +75,80 @@ function will displays all of the DATA values over 10 ticks.
 **dataTypeY DEFAULT: "" (string)**
 If you want your data to units or types on the y axis you can put a string value in such as m for meters.
 
-**dataTypeX (string)**
+**dataTypeX DEFAULT: "" (string)**
 If you want your data to units or types on the x axis you can put a string value in such as m for meters.
 
-**labelXList (ArrayList<string>)**
+**chartType DEFAULT: "line" (string)**
+The two options for charts at the moment are line or bar. This list will be expanded soon.
+`widget.chartType = "bar";`
+
+**labelXList DEFAULT: "" (ArrayList<string>)**
 This list is meant to label the x ticks. This originally was a private attribute, but I wanted the
 developer to be able to only put customized numbers rather then dynamically generated ones. In the
 future this will be an option.
 
 ##### Private Attributes
 
-**gap (double)**
+**spreadFinalY DEFAULT: 0 (double)**
+This attribute is used to tell our class how many pixels between each tick on the y axis there
+should be. This is calculated internally within the draw() function.
 
-**max (double)**
+**spreadFinalX DEFAULT: 0 (double)**
+This attribute is used to tell our class how many pixels between each tick on the x axis there
+should be. This is calculated internally within the draw() function.
 
-**min (double)**
+**yTickStart DEFAULT: 20 (int)**
+This attribute is used to figure out where the system wants to start plotting the y axis ticks.
 
-**widthPadding (int)**
+**yTickEnd DEFAULT: 45 (int)**
+This attribute is used to figure out where the system wants to end plotting the y axis ticks.
+
+**yTextStart DEFAULT: 0 (int)**
+This attribute is used to figure out where the system wants to start writing the data and unit text
+on the y axis.
+
+**xTickStart DEFAULT: 20 (int)**
+This attribute is used to figure out where the system wants to start plotting the x axis ticks.
+
+**xTickEnd DEFAULT: 5 (int)**
+This attribute is used to figure out where the system wants to end plotting the x axis ticks.
+
+**xTextStart DEFAULT: 11 (int)**
+This attribute is used to figure out where the system wants to start writing the data and unit text
+on the x axis.
+
+**xTextEnd DEFAULT: 30 (int)**
+This attribute is used to figure out where the system wants to stop writing the data and unit text
+on the x axis.
+
+**widthPadding DEFAULT: 50 (int)**
 This attribute allows you to have some padding around the widget and the width limit. This will make
-your
+your chart look a bit better in tighter spots. Warning when changing this, it could have unforeseen
+consequences for the positioning of things on the x axis.
 
-**heightPadding (int)**
+**heightPadding DEFAULT: 11 (int)**
+This attribute allows you to have some padding around the widget and the height limit. This will make
+your chart look a bit better in tighter spots. Warning when changing this, it could have unforeseen
+consequences for the positioning of things on the y axis.
 
-**labelYList (ArrayList<string>)**
+**gap DEFAULT: 0 (double)**
+The gap is a temporary attribute between the y axis ticks. This is calculated internally and will be over
+written when the calculations() function is run.
+
+**max DEFAULT: 0 (double)**
+The max value within the DATA array which is found within the calculations() function.
+
+**min DEFAULT: 0 (double)**
+The min value within the DATA array which is found within the calculations() function.
+
+**rectangleXOffset DEFAULT: 10 (int)**
+Depending on the rectangle width it will need to be offset to be center on the x axis tick. This should
+stay the same unless the width of the rectangles on the bar chart are changed.
+
+**labelYList DEFAULT: "" (ArrayList<string>)**
 The y axis labels for the tick marks are generated dynamically via the calculations() function
 they should not be manually set!
 
 #### Caroline Functions
 
-#### Ramblings
-
-All attributes must be set for the graph to work!
-
-| Attribute        | Description         
-| ------------- |:-------------:|
-| double[] DATA | Will be the data used in the chart |
-| double width  | Is the width of the chart |
-| double height | Is the height of the chart |  
-| double lineThicknessTicks | thickness of the line for ticks |  
-| double lineThicknessPlane | thickness for the x & y graph line |  
-| double lineThicknessData | thickness for the line or bar |  
-| double spreadY | How many ticks do you want on the y axis? |  
-| string dataTypeY | What kinda of data type is the y label (Ex. $,%...) |  
-| string dataTypeX | What kinda of data type is the x label (Ex. $,%...) |  
-| ArrayList<string> labelList | The labels for the x axis |  
-| double gap | Just set this to 0, my code should take care of setting this. (modify if you know what you are doing) |
-| double max | Just set this to 0, my code should take care of setting this. (modify if you know what you are doing) |
-| double min | Just set this to 0, my code should take care of setting this. (modify if you know what you are doing) |
-| string chartType | Is it "line" or "bar" chart? |
+Coming soon!

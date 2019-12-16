@@ -19,17 +19,9 @@ public class Caroline : Gtk.DrawingArea {
 
   /*
   *
-  * Items that are used internally and are not exposed to the developer
+  * Items that are used internally and are not exposed to the developer.
   *
   */
-
-  /*A Pango.Layout is used to store the font map, font description, and base direction
-  for drawing text for the widget. We can use this to display text items on our chart.
-  For more info on this start here: https://valadoc.org/gtk+-3.0/Gtk.Widget.create_pango_layout.html*/
-  private Pango.Layout layout;
-
-  private double labelPositionX { get; set; }
-  private double labelPositionY { get; set;}
 
   private double spreadFinalY { get; set; }
   private double spreadFinalX { get; set; }
@@ -56,7 +48,7 @@ public class Caroline : Gtk.DrawingArea {
 
   /*
   *
-  *
+  * Items that can be changed without a recompile by the developer.
   *
   */
 
@@ -79,9 +71,6 @@ public class Caroline : Gtk.DrawingArea {
   public ArrayList<string> labelXList = new ArrayList<string>();
 
   construct{
-
-    //Initializes the text layout widget
-    this.layout = create_pango_layout ("");
 
     //Initializing default values
     this.widthPadding = 50;
