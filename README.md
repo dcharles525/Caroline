@@ -5,9 +5,9 @@ Caroline is a simple and light interface into Cairo allowing a developer to crea
 code! Below is some screenshots of what you can do with it currently. Also below is a road map, documentation, and
 some ramblings about the development process and inner-workings of Cairo and Caroline!
 
-<img src="Screenshot from 2018-11-02 17.08.37.png">
-<img src="Screenshot from 2018-11-16 15.47.29.png">
-
+<img src="1.png">
+<img src="2.png">
+<img src="3.png">
 
 ### Documentation
 
@@ -151,4 +151,20 @@ they should not be manually set!
 
 #### Caroline Functions
 
-Coming soon!
+**draw(Cairo.Context cr)**
+In the draw function several things are occurring. Firstly we are running the calculations() function.
+Secondly We are drawing the lines and ticks for the chart. Then depending on the 'chartType' attribute
+calling a sub function lineChart() or barChart().
+
+**calculations**
+In this function we find the max, min, gap, and label values for the y axis. This sub function is meant to run
+before any of the drawing occurs since these values are depended on throughout the code base. As this funciton
+continues to grow it will be split into more sub functions.
+
+**lineChart()**
+This draws the line chart using some of the values mentioned earlier in the calculations function and uses
+the Cairo.Context to finish drawing the entire line chart.
+
+**barChart()**
+This draws the bar chart using some of the values mentioned earlier in the calculations function and uses
+the Cairo.Context to finish drawing the entire bar chart.

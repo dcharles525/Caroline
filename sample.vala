@@ -2,7 +2,7 @@ using Gtk;
 using Gee;
 using Cairo;
 
-//
+//To run this program: valac --pkg gtk+-3.0 --pkg gee-0.8 Caroline.vala sample.vala -o demo
 
 public void main (string[] args) {
 
@@ -21,6 +21,7 @@ public void main (string[] args) {
 
   //Give some data to Caroline
   widget.DATA = {59,78,43,42,71,41,12,55,26,40,18,57,32,42,85,19,83,100,89,3};
+  widget.chartType = "bar";
 
   for (int i = 0; i < widget.DATA.length+1; i++){
 
