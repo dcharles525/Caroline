@@ -20,8 +20,8 @@ public void main (string[] args) {
   var widget = new Caroline ();
 
   //Give some data to Caroline
-  widget.DATA = {59,78,43,42,71,41,12,55,26,40,18,57,32,42,85,19,83,100,89,3};
-  widget.chartType = "bar";
+  widget.DATA = {59,78,43,42,71,41,12};
+  widget.chartType = "pie";
 
   for (int i = 0; i < widget.DATA.length+1; i++){
 
