@@ -19,15 +19,11 @@ The documentation is broken up into several sections: Getting Started, Caroline 
 A sample application called "sample.vala" is included in this repo, it contains a simple application to show off how Caroline works. Below is a bare-bones example of how to interface with Caroline.
 ```
 var widget = new Caroline ();
-widget.DATA = {59,78,43,42,71,41,12,55,26,40,18,57,32,42,85,19,83,100,89,3};
-
-widget.labelXList.add(0.to_string().concat(widget.dataTypeX));
-
-for (int i = 1; i < widget.DATA.length+1; i++){
-
-  widget.labelXList.add(i.to_string().concat(widget.dataTypeX));
-
-}
+var widget = new Caroline (
+  {59,78,43,42,71,41,12}, //data
+  "pie", //chart type
+  true //yes or no for generateColors function (needed in the case of the pie chart)
+);
 ```
 
 This is how we generate a simple line chart. See the full sample application to learn more.
