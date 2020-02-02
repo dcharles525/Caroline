@@ -18,7 +18,6 @@ The documentation is broken up into several sections: Getting Started, Caroline 
 
 A sample application called "sample.vala" is included in this repo, it contains a simple application to show off how Caroline works. Below is a bare-bones example of how to interface with Caroline.
 ```
-var widget = new Caroline ();
 var widget = new Caroline (
   {59,78,43,42,71,41,12}, //data
   "pie", //chart type
