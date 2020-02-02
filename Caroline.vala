@@ -1,6 +1,6 @@
 //============================================================+
 // File name   : Caroline.vala
-// Last Update : 2020-1-25
+// Last Update : 2020-2-2
 //
 // Description : This is an extension of a GTK Drawing Area. Its purpose is to make it easy for any level
 // of developer to use charts in their application. More in depth documentation is found in below and in the
@@ -22,8 +22,6 @@ public class Caroline : Gtk.DrawingArea {
   * Items that are used internally and are not exposed to the developer.
   *
   */
-
-  private int init = 0;
 
   private double spreadFinalY { get; set; }
   private double spreadFinalX { get; set; }
@@ -56,6 +54,13 @@ public class Caroline : Gtk.DrawingArea {
   *
   */
 
+  //Used to store colors
+  public struct ChartColor {
+    public double r;
+    public double g;
+    public double b;
+  }
+
   public double[] DATA { get; set; }
 
   public int width { get; set; }
@@ -82,6 +87,8 @@ public class Caroline : Gtk.DrawingArea {
   public int pieChartLabelBSize { get; set; }
   public int pieChartLabelOffsetX { get; set; }
   public int pieChartLabelOffsetY { get; set; }
+
+  public ArrayList<ChartColor?> chartColorArray = new ArrayList<ChartColor?>();
 
   construct{
 
@@ -128,7 +135,12 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
-  public Caroline(){
+  /**
+  * data - the actual data for that charts
+  * chartType - this can either be line, bar, or pie
+  * generateColors - array for ChartColor structs
+  */
+  public Caroline(double[] data, string chartType, bool generateColors){
 
     /*Since our widget will already be "realized" we want to use add_events, this
     function allows us to set the window event bit flags, which I document directly below.
@@ -149,6 +161,15 @@ public class Caroline : Gtk.DrawingArea {
       this.width,
       this.height
     );
+
+    this.DATA = data;
+    this.chartType = chartType;
+
+    if (generateColors)
+      this.generateColors();
+
+    for (int i = 0; i < this.DATA.length+1; i++)
+      this.labelXList.add(i.to_string().concat(this.dataTypeX));
 
   }
 
@@ -366,10 +387,6 @@ public class Caroline : Gtk.DrawingArea {
   * which allows you to move the current point to the necessary area and
   * line_to() which goes from one point to another while leaving a line behind.
   *
-  * Notice that we use some simple scaling algorithms to ensure the line is in the right
-  * area regardless of the min and max sizes, reference the "paper(s)" I wrote in the README if
-  * you want ot know more.
-  *
   * @param type cr | Cairo.Context
   * @return return void
   */
@@ -424,10 +441,6 @@ public class Caroline : Gtk.DrawingArea {
   * chart format. The most important function used is rectangle, which allows us to quickly
   * form objects without having to use line_to.
   *
-  * Notice that we use some simple scaling algorithms to ensure the line is in the right
-  * area regardless of the min and max sizes, reference the paper I wrote in the README if
-  * you want ot know more.
-  *
   * @param type cr | Cairo.Context
   * @return return void
   */
@@ -468,7 +481,7 @@ public class Caroline : Gtk.DrawingArea {
   * Draws a pie chart based on this.DATA
   *
   * Uses the Cairo.Context to draw the pie chart by first, figuring out the radians for each piece
-  * of data. First you can see that we need to find the total of the set of data. Then we loop over it
+  * of data. You can see that we need to find the total of the set of data. Then we loop over it
   * creating the arc, lines, fill, and labels all in one swoop.
   *
   * @param type cr | Cairo.Context
@@ -476,10 +489,8 @@ public class Caroline : Gtk.DrawingArea {
   */
   private void pieChart(Cairo.Context cr){
 
-    double x,y;
     double total = 0;
     double startAngle = 0;
-    Gee.ArrayList<double?> degreeArray = new Gee.ArrayList<double?> ();
 
     /*This for loop gets the total of all the data so we can scale the pie
     chart later on.*/
@@ -488,7 +499,14 @@ public class Caroline : Gtk.DrawingArea {
 
     for (int i = 0; i < this.DATA.length; i++){
 
+      //Uses the chart color arrya with the structs within it to set the color
+      cr.set_source_rgb(
+        this.chartColorArray.get(i).r,
+        this.chartColorArray.get(i).g,
+        this.chartColorArray.get(i).b
+      );
 
+      //Draws an arc based on the angle that is calculated.
       cr.arc (
         this.pieChartXStart,
         this.pieChartYStart,
@@ -496,21 +514,15 @@ public class Caroline : Gtk.DrawingArea {
         startAngle,
         startAngle + (this.DATA[i] / total) * this.PIX
       );
+
+      /*Adds angle to startAngle to keep track of where to draw the next arc and then the code
+      draws the straight lines to the middle of the circle, then fills the colors in, using
+      cr.fill()*/
       startAngle += (this.DATA[i] / total) * this.PIX;
-
-      cr.get_current_point(out x, out y);
       cr.line_to(this.pieChartXStart, this.pieChartYStart);
-
-
-
-        cr.set_source_rgb(
-          Random.double_range(0,1),
-          Random.double_range(0,1),
-          Random.double_range(0,1)
-        );
-
       cr.fill();
 
+      //Draws the rectangles for the labels
       int yOffset = this.pieChartYLabelBStart + (this.pieChartYLabelBSpacing * i);
       cr.move_to(this.width - this.pieChartYLabelBStart, yOffset);
       cr.rectangle(
@@ -520,13 +532,43 @@ public class Caroline : Gtk.DrawingArea {
         this.pieChartLabelBSize
       );
 
+      //fill the rectangles
       cr.fill();
 
+      //set the color back to white for the text and write the amount next to the label
       cr.set_source_rgb(1, 1, 1);
       cr.move_to(this.width - this.pieChartLabelOffsetX, yOffset + this.pieChartLabelOffsetY);
       cr.show_text(this.DATA[i].to_string());
 
+      /*Drawing operator that strokes the current path using the current settings that were
+      implemented eariler in this file.*/
       cr.stroke();
+
+    }
+
+  }
+
+  /**
+  * Generates random colors for any of the charts
+  *
+  * In this function function we use the ChartColor struct to add a random double form 0-1 for a simple
+  * rgb color.then it is added to an array to be access else where.
+  *
+  * @param type none
+  * @return return void
+  */
+  private void generateColors(){
+
+    for (int i = 0; i < this.DATA.length; i++){
+
+      //Create color struct
+      ChartColor chartColor = {
+        Random.double_range(0,1),
+        Random.double_range(0,1),
+        Random.double_range(0,1)
+      };
+
+      this.chartColorArray.insert(i,chartColor);
 
     }
 
