@@ -18,9 +18,9 @@ public void main (string[] args) {
 
   //Simply set Caroline to a variable
   var widget = new Caroline (
-    {59,78,43,42,71,41,12},
-    "pie",
-    true
+    {59,78,43,42,71,41,12}, //data
+    "pie", //chart type
+    true //yes or no for generateColors function (needed in the case of the pie chart)
   );
 
   //Add the Caroline widget tp the grid

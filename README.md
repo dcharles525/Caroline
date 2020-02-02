@@ -5,15 +5,16 @@ Caroline is a simple and light interface into Cairo allowing a developer to crea
 code! Below is some screenshots of what you can do with it currently. Also below is a road map, documentation, and
 some ramblings about the development process and inner-workings of Cairo and Caroline!
 
+<img src="screenshots/4.png">
 <img src="screenshots/1.png">
 <img src="screenshots/2.png">
 <img src="screenshots/3.png">
 
-### Documentation
+## Documentation
 
 The documentation is broken up into several sections: Getting Started, Caroline Attributes, Caroline Functions, and Ramblings.
 
-#### Getting Started
+####Getting Started
 
 A sample application called "sample.vala" is included in this repo, it contains a simple application to show off how Caroline works. Below is a bare-bones example of how to interface with Caroline.
 ```
@@ -31,14 +32,15 @@ for (int i = 1; i < widget.DATA.length+1; i++){
 
 This is how we generate a simple line chart. See the full sample application to learn more.
 
-#### Caroline Attributes
+### Caroline Attributes
 
 Here we have all the attributes that will be changed regularly by the developer and not be changed
 regularly, I will go in depth here on which one means and how it works.
 
-##### Public Attributes
+#### Public Attributes
 
 **DATA**
+
 An array of data that is used to graph any of the chart types. You should put information into
 it as an array of the double type. A simple example is right here:
 `widget.DATA = {1,2,3,4,5,6,7,8,9,10};`
@@ -98,7 +100,46 @@ This list is meant to label the x ticks. This originally was a private attribute
 developer to be able to only put customized numbers rather then dynamically generated ones. In the
 future this will be an option.
 
-##### Private Attributes
+**pieChartXStart DEFAULT: 175**
+
+This is the starting point on the x axis for the pie chart.
+
+**pieChartYStart DEFAULT: 175**
+
+This is the starting point on the y axis for the pie chart.
+
+**pieChartRadius DEFAULT: 150**
+
+This is the radius of the the pie chart, so its half the size you want the
+chart to be.
+
+**pieChartYLabelBStart DEFAULT: 50**
+
+This is the starting point on the y axis for the label color box for the pie chart only.
+
+**pieChartYLabelBSpacing DEFAULT: 25**
+
+This is the spacing between the other label color boxes on the y axis for the pie chart only.
+
+**pieChartLabelBSize DEFAULT: 15**
+
+This is the actual size of the label box, we only need one variable for this since we use squares
+for the color box label.
+
+**pieChartLabelOffsetX DEFAULT: 20**
+
+This is used to offset the text next to the color box label for the x axis.
+
+**pieChartLabelOffsetY DEFAULT: 10**
+
+This is used to offset the text next to the color box label for the y axis.
+
+**chartColorArray DEFAULT: "" ArrayList<ChartColor?>**
+
+This is an array of ChartColor structs that are used to color parts of the charts (mainly for pie chart)
+this array is populated upon creation of the widget.
+
+#### Private Attributes
 
 **spreadFinalY DEFAULT: 0 (double)**
 
@@ -176,6 +217,11 @@ stay the same unless the width of the rectangles on the bar chart are changed.
 The y axis labels for the tick marks are generated dynamically via the calculations() function
 they should not be manually set!
 
+**PIX**
+
+This is pie multiplied by do and is private since it should never be changed. This variable is used
+to draw the pie chart by aiding calculations.
+
 #### Caroline Functions
 
 **draw(Cairo.Context cr)**
@@ -187,15 +233,24 @@ calling a sub function lineChart() or barChart().
 **calculations**
 
 In this function we find the max, min, gap, and label values for the y axis. This sub function is meant to run
-before any of the drawing occurs since these values are depended on throughout the code base. As this funciton
+before any of the drawing occurs since these values are depended on throughout the code base. As this function
 continues to grow it will be split into more sub functions.
 
-**lineChart()**
+**lineChart(Cairo.Context cr)**
 
 This draws the line chart using some of the values mentioned earlier in the calculations function and uses
 the Cairo.Context to finish drawing the entire line chart.
 
-**barChart()**
+**barChart(Cairo.Context cr)**
 
 This draws the bar chart using some of the values mentioned earlier in the calculations function and uses
 the Cairo.Context to finish drawing the entire bar chart.
+
+**pieChart(Cairo.Context cr)**
+
+This draws the pie chart using some of the values mentioned earlier in the calculations function and uses
+Cairo.Context to finish drawing the pie chart.
+
+**generateColors**
+
+This function uses an array of structs to store color codes for all types of charts.
