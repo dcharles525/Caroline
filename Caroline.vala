@@ -29,6 +29,7 @@ public class Caroline : Gtk.DrawingArea {
   private int yTickStart { get; set; }
   private int yTickEnd { get; set; }
   private int yTextStart { get; set; }
+  private int yTextStop { get; set; }
 
   private int xTickStart { get; set; }
   private int xTickEnd { get; set; }
