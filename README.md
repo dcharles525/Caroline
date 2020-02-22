@@ -11,10 +11,12 @@ some ramblings about the development process and inner-workings of Cairo and Car
 <img src="screenshots/3.png">
 
 ## Documentation
+* Getting Started
+* Caroline Attributes
+* Caroline Functions
+* Ramblings
 
-The documentation is broken up into several sections: Getting Started, Caroline Attributes, Caroline Functions, and Ramblings.
-
-####Getting Started
+### Getting Started
 
 A sample application called "sample.vala" is included in this repo, it contains a simple application to show off how Caroline works. Below is a bare-bones example of how to interface with Caroline.
 ```
