@@ -1,4 +1,4 @@
-# Caroline
+![alt text](data/logo.png "Caroline")
 A simple Cairo Chart Library for GTK and Vala
 
 Caroline is a simple and light interface into Cairo allowing a developer to create a chart in just a few lines of
