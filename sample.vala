@@ -18,8 +18,9 @@ public void main (string[] args) {
 
   //Simply set Caroline to a variable
   var widget = new Caroline (
-    {59,78,43,42,71,41,12}, //data
-    "pie", //chart type
+    {10,20,30,40,50,60,70,80,90,23,65,32,12,89,21}, //dataX
+    {1,35,68,20,30,40,4,12,60,90,83,36,34,56,78}, //dataY
+    "scatter", //chart type
     true //yes or no for generateColors function (needed in the case of the pie chart)
   );
 
