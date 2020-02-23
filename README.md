@@ -1,5 +1,6 @@
 ![alt text](data/logo.png "Caroline")
-
+<br>
+Logo Created By @stsdc
 <br>
 A simple Cairo Chart Library for GTK and Vala
 
