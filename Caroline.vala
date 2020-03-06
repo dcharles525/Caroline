@@ -61,7 +61,7 @@ public class Caroline : Gtk.DrawingArea {
     public double b;
   }
 
-  public struct ScatterPoint {
+  public struct Point {
     public double x;
     public double y;
   }
@@ -94,7 +94,7 @@ public class Caroline : Gtk.DrawingArea {
 
   public ArrayList<ChartColor?> chartColorArray = new ArrayList<ChartColor?>();
 
-  public ArrayList<ScatterPoint?> scatterArray = new ArrayList<ScatterPoint?>();
+  public ArrayList<Point?> pointsArray = new ArrayList<Point?>();
 
   construct{
 
@@ -167,33 +167,35 @@ public class Caroline : Gtk.DrawingArea {
       this.width,
       this.height
     );
-    var dataXTemp = dataX;
-    dataXTemp = this.arraySort(dataXTemp);
+
+    this.chartType = chartType;
+    var dataXTemp = this.arraySort(dataX);
+    this.labelXList.add(0);
 
     for (int i = 0; i < dataX.length; i++) {
 
-      Caroline.ScatterPoint scatterPoint = {
+      Caroline.Point point = {
         dataXTemp[i],
         dataY[i]
       };
 
-      this.scatterArray.add(scatterPoint);
+      this.pointsArray.add(point);
 
     }
 
-    var tick = dataXTemp[dataXTemp.length-1] / spreadX;
-    this.labelXList.add(0);
-
-    for (int f = 0; f < this.spreadX; f++) {
-
-      this.labelXList.add(tick+(tick*f));
-
-    }
-
-    this.chartType = chartType;
-
-    if (generateColors)
+    if (chartType == "pie" && generateColors)
       this.generateColors();
+
+    if (chartType != "bar"){
+
+      var tick = dataXTemp[dataXTemp.length-1] / spreadX;
+
+      for (int f = 0; f < this.spreadX; f++)
+        this.labelXList.add(tick+(tick*f));
+
+    }else
+      for (int i = 0; i < dataX.length; i++)
+        this.labelXList.add(dataX[i]);
 
   }
 
@@ -290,26 +292,32 @@ public class Caroline : Gtk.DrawingArea {
       /*We loop through all of the x labels and actually draw thes lines and add the actual text for
       each tick mark.*/
       for (int i = 0; i < this.labelXList.size; i++){
-        var test = this.labelXList.get(i) * (this.width/this.labelXList.get(this.labelXList.size-1));
-        stdout.printf("x created: %f\n",this.chartPadding + this.spreadFinalX * i + (this.widthPadding / 3));
+
+        double rawXCalculation = 0;
+
+        if (this.chartType != "bar")
+          rawXCalculation = this.labelXList.get(i) * (this.width/this.labelXList.get(this.labelXList.size-1));
+        else
+          rawXCalculation = this.spreadFinalX * i;
 
         //line drawing
         cr.move_to(
-          this.chartPadding + test + (this.widthPadding / 3),
+          this.chartPadding + rawXCalculation + (this.widthPadding / 3),
           height + this.xTickStart
         );
 
         cr.line_to(
-          this.chartPadding + test + (this.widthPadding / 3),
+          this.chartPadding + rawXCalculation + (this.widthPadding / 3),
           height + this.xTickEnd
         );
 
         //moves the current drawing area back and lists the x axis value below the x tick
         cr.move_to(
-          xTextStart + test  + (this.widthPadding / 3),
+          xTextStart + rawXCalculation + (this.widthPadding / 3),
           height + this.xTextEnd
         );
 
+        stdout.printf("%f\n",this.labelXList.get(i));
         cr.show_text(this.labelXList.get(i).to_string());
 
       }
@@ -372,20 +380,20 @@ public class Caroline : Gtk.DrawingArea {
   private void calculations(){
 
     /*This next sector of arithmetic is to find the max value of the data array*/
-    this.max = this.scatterArray[0].y;
+    this.max = this.pointsArray[0].y;
 
     //Loop and compare each value to our initial value to see if it becomes the max
-    for (int i = 0; i < this.scatterArray.size; i++)
-      if (this.scatterArray[i].y > this.max)
-        this.max = this.scatterArray[i].y;
+    for (int i = 0; i < this.pointsArray.size; i++)
+      if (this.pointsArray[i].y > this.max)
+        this.max = this.pointsArray[i].y;
 
     /*This next sector of arithmetic is to find the min value of the data array*/
     this.min = 0;
 
     //Loop and compare each scatterArray to our initial value to see if it becomes the min
-    for (int i = 0; i < this.scatterArray.size; i++)
-      if (this.scatterArray[i].y < this.min)
-        this.min = this.scatterArray[i].y;
+    for (int i = 0; i < this.pointsArray.size; i++)
+      if (this.pointsArray[i].y < this.min)
+        this.min = this.pointsArray[i].y;
 
     /*Finds the gap between each y axis label to be displayed. spreadY is set on the
     developers side, it is meant to tell Caroline how many y axis ticks needed.*/
@@ -428,7 +436,7 @@ public class Caroline : Gtk.DrawingArea {
     cr.set_source_rgba(0, 174, 174,0.8);
 
     //Getting a scaler, which will help put the line in the right spot
-    double scaler = ((this.scatterArray[0].y - this.min) / (this.max - this.min)) * this.spreadY;
+    double scaler = ((this.pointsArray[0].y - this.min) / (this.max - this.min)) * this.spreadY;
 
     //We want to move the pointer on the canvas to where we want the line graph to start.
     cr.move_to(
@@ -439,10 +447,10 @@ public class Caroline : Gtk.DrawingArea {
       (this.height + this.chartPadding) - ((this.spreadFinalY * scaler))
     );
 
-    for (int i = 1; i < this.scatterArray.size; i++){
+    for (int i = 1; i < this.pointsArray.size; i++){
 
       //Recalculating the scaler to our current value
-      scaler = ((this.scatterArray[i].y - this.min) / (this.max - this.min)) * this.spreadY;
+      scaler = ((this.pointsArray[i].y - this.min) / (this.max - this.min)) * this.spreadY;
 
       /*line_to (https://valadoc.org/cairo/Cairo.Context.line_to.html) is a simple
       cario function that allows us to draw a line from the previous canvas pointer.*/
@@ -475,28 +483,24 @@ public class Caroline : Gtk.DrawingArea {
   */
   private void barChart(Cairo.Context cr){
 
-    //Set the color of the line (this default color is blue)
-
-
     //Getting a scaler, which will help put the line in the right spot
-    double scaler = ((this.scatterArray[0].y - this.min) / (this.max - this.min)) * this.spreadY;
-
+    double scaler = ((this.pointsArray[0].y - this.min) / (this.max - this.min)) * this.spreadY;
     double maxX = 0;
 
-    for (int i = 0; i < this.scatterArray.size; i++)
-      if (this.scatterArray.get(i).x > maxX)
-        maxX = this.scatterArray.get(i).x;
+    for (int i = 0; i < this.pointsArray.size; i++)
+      if (this.pointsArray.get(i).x > maxX)
+        maxX = this.pointsArray.get(i).x;
 
-    for (int i = 0; i < this.scatterArray.size; i++){
+    for (int i = 0; i < this.pointsArray.size; i++){
 
       //Recalculating the scaler to our current value
-      scaler = ((this.scatterArray[i].y - this.min) / (this.max - this.min)) * this.spreadY;
+      scaler = ((this.pointsArray[i].y - this.min) / (this.max - this.min)) * this.spreadY;
 
       /*Rectangle takes x,y,width,height as doubles, which will position the rectangle
       at the pointer on the canvas*/
       cr.rectangle(
         //We have a bit of a smaller buffer (10) since the rectangles should be centered on tick marks
-        this.rectangleXOffset + this.scatterArray.get(i).x * (this.width/maxX) + this.chartPadding + (this.widthPadding / 3),
+        (this.rectangleXOffset + this.spreadFinalX * (i + 1)) + (this.widthPadding / 3.35),
         this.height+this.chartPadding,
         this.rectangleXOffset,
         /*We want to draw our height "upwards" on the 2d plane, since 0,0 on this canvas is in the
@@ -510,7 +514,6 @@ public class Caroline : Gtk.DrawingArea {
       cr.fill();
 
     }
-
 
   }
 
@@ -531,10 +534,10 @@ public class Caroline : Gtk.DrawingArea {
 
     /*This for loop gets the total of all the data so we can scale the pie
     chart later on.*/
-    for (int i = 0; i < this.scatterArray.size; i++)
-      total += this.scatterArray[i].x;
+    for (int i = 0; i < this.pointsArray.size; i++)
+      total += this.pointsArray[i].x;
 
-    for (int i = 0; i < this.scatterArray.size; i++){
+    for (int i = 0; i < this.pointsArray.size; i++){
 
       //Uses the chart color arrya with the structs within it to set the color
       cr.set_source_rgb(
@@ -549,15 +552,15 @@ public class Caroline : Gtk.DrawingArea {
         this.pieChartYStart,
         this.pieChartRadius,
         startAngle,
-        startAngle + (this.scatterArray[i].x / total) * this.PIX
+        startAngle + (this.pointsArray[i].x / total) * this.PIX
       );
 
-      stdout.printf("%f\n",startAngle + (this.scatterArray[i].x / total) * this.PIX);
+      stdout.printf("%f\n",startAngle + (this.pointsArray[i].x / total) * this.PIX);
 
       /*Adds angle to startAngle to keep track of where to draw the next arc and then the code
       draws the straight lines to the middle of the circle, then fills the colors in, using
       cr.fill()*/
-      startAngle += (this.scatterArray[i].x / total) * this.PIX;
+      startAngle += (this.pointsArray[i].x / total) * this.PIX;
       cr.line_to(this.pieChartXStart, this.pieChartYStart);
       cr.fill();
 
@@ -577,7 +580,7 @@ public class Caroline : Gtk.DrawingArea {
       //set the color back to white for the text and write the amount next to the label
       cr.set_source_rgb(1, 1, 1);
       cr.move_to(this.width - this.pieChartLabelOffsetX, yOffset + this.pieChartLabelOffsetY);
-      cr.show_text(this.scatterArray[i].x.to_string());
+      cr.show_text(this.pointsArray[i].x.to_string());
 
       /*Drawing operator that strokes the current path using the current settings that were
       implemented eariler in this file.*/
@@ -600,14 +603,14 @@ public class Caroline : Gtk.DrawingArea {
     double finalsf = 0;
     double xAxisCalculation = 0;
 
-    for (int i = 0; i < this.scatterArray.size; i++)
-      if (this.scatterArray.get(i).x > maxX)
-        maxX = this.scatterArray.get(i).x;
+    for (int i = 0; i < this.pointsArray.size; i++)
+      if (this.pointsArray.get(i).x > maxX)
+        maxX = this.pointsArray.get(i).x;
 
-    for (int i = 0; i < this.scatterArray.size; i++){
+    for (int i = 0; i < this.pointsArray.size; i++){
 
-      scaler = ((this.scatterArray.get(i).y - this.min) / (this.max - this.min)) * this.spreadY;
-      xAxisCalculation = this.scatterArray.get(i).x * (this.width/maxX) + this.chartPadding + (this.widthPadding / 3);
+      scaler = ((this.pointsArray.get(i).y - this.min) / (this.max - this.min)) * this.spreadY;
+      xAxisCalculation = this.pointsArray.get(i).x * (this.width/maxX) + this.chartPadding + (this.widthPadding / 3);
 
       cr.arc(
         xAxisCalculation,
@@ -621,7 +624,7 @@ public class Caroline : Gtk.DrawingArea {
 
       //make util function and optimize!
       var yCount = 0;
-      int y = (int)this.scatterArray.get(i).y;
+      int y = (int)this.pointsArray.get(i).y;
 
       while(y > 0){
 
@@ -631,7 +634,7 @@ public class Caroline : Gtk.DrawingArea {
       }
 
       var xCount = 0;
-      int x = (int)this.scatterArray.get(i).x;
+      int x = (int)this.pointsArray.get(i).x;
 
       while(x > 0){
 
@@ -650,8 +653,8 @@ public class Caroline : Gtk.DrawingArea {
         (((this.height + this.chartPadding) - ((this.spreadFinalY * scaler))))-5
       );
       cr.show_text(
-        this.scatterArray.get(i).y.to_string().concat(
-        ",",this.scatterArray.get(i).x.to_string())
+        this.pointsArray.get(i).y.to_string().concat(
+        ",",this.pointsArray.get(i).x.to_string())
       );
 
     }
@@ -673,7 +676,7 @@ public class Caroline : Gtk.DrawingArea {
   */
   private void generateColors(){
 
-    for (int i = 0; i < this.scatterArray.size; i++){
+    for (int i = 0; i < this.pointsArray.size; i++){
 
       //Create color struct
       ChartColor chartColor = {
