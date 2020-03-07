@@ -20,23 +20,24 @@ public void main (string[] args) {
   Gtk.Grid mainGrid = new Gtk.Grid ();
   mainGrid.orientation = Gtk.Orientation.VERTICAL;
 
-  int benchNumber = 100;
+  int benchNumber = 10000;
   double[] x = new double[benchNumber];
   double[] y = new double[benchNumber];
 
   for (int i = 0; i < benchNumber; ++i){
 
-    x[i] = Random.double_range(1,10);
-    y[i] = Random.double_range(1,10);
+    x[i] = Random.double_range(0,10);
+    y[i] = Random.double_range(0,10);
 
   }
 
   //Simply set Caroline to a variable
   var carolineWidget = new Caroline (
-    {1,2,3,4,5,6,7,8,9,10}, //dataX
-    {0,1,2,0,2,1,0,1,2,3}, //dataY
-    "smooth-line", //chart type
-    true //yes or no for generateColors function (needed in the case of the pie chart)
+    x, //dataX
+    y, //dataY
+    "line", //chart type
+    true, //yes or no for generateColors function (needed in the case of the pie chart),
+    false // yes or no for scatter plot labels
   );
 
   now = new GLib.DateTime.now_local();

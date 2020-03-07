@@ -96,6 +96,8 @@ public class Caroline : Gtk.DrawingArea {
 
   public ArrayList<Point?> pointsArray = new ArrayList<Point?>();
 
+  public bool scatterLabels {get; set;}
+
   construct{
 
     //Initializing default values
@@ -139,6 +141,8 @@ public class Caroline : Gtk.DrawingArea {
     this.pieChartLabelOffsetY = 10;
     this.PIX = 6.28;
 
+    this.scatterLabels = true;
+
   }
 
   /**
@@ -146,7 +150,7 @@ public class Caroline : Gtk.DrawingArea {
   * chartType - this can either be line, bar, or pie
   * generateColors - array for ChartColor structs
   */
-  public Caroline(double[] dataX, double[] dataY, string chartType, bool generateColors){
+  public Caroline(double[] dataX, double[] dataY, string chartType, bool generateColors, bool scatterPlotLabels){
 
     /*Since our widget will already be "realized" we want to use add_events, this
     function allows us to set the window event bit flags, which I document directly below.
@@ -168,6 +172,7 @@ public class Caroline : Gtk.DrawingArea {
       this.height
     );
 
+    this.scatterLabels = scatterPlotLabels;
     this.chartType = chartType;
     this.labelXList.add(0);
 
@@ -180,23 +185,20 @@ public class Caroline : Gtk.DrawingArea {
 
     for (int i = 0; i < dataX.length; i++) {
 
-      Caroline.Point point = {
-        dataX[i],
-        dataY[i]
-      };
-
+      Caroline.Point point = {dataX[i], dataY[i]};
       this.pointsArray.add(point);
 
     }
 
-    this.arrayListSort();
+    if (chartType != "pie" && chartType != "scatter")
+      this.arrayListSort();
 
     if (chartType == "pie" && generateColors)
       this.generateColors();
 
-    if (chartType != "bar" && chartType != "line"){
+    if (chartType != "bar" ){
 
-      var tick = this.pointsArray[dataX.length-1].x / spreadX;
+      double tick = this.pointsArray[dataX.length-1].x / spreadX;
 
       for (int f = 0; f < this.spreadX; f++)
         this.labelXList.add(tick+(tick*f));
@@ -299,7 +301,7 @@ public class Caroline : Gtk.DrawingArea {
 
       /*We loop through all of the x labels and actually draw thes lines and add the actual text for
       each tick mark.*/
-      for (int i = 0; i < this.labelXList.size - 1; i++){
+      for (int i = 0; i < this.labelXList.size; i++){
 
         double rawXCalculation = 0;
 
@@ -348,9 +350,6 @@ public class Caroline : Gtk.DrawingArea {
     switch (this.chartType) {
       case "line":
         lineChart(cr);
-        break;
-      case "smooth-line":
-        smoothLineChart(cr);
         break;
       case "bar":
         barChart(cr);
@@ -462,7 +461,7 @@ public class Caroline : Gtk.DrawingArea {
       cr.line_to(
         /*axis, similar to move_to above, we just move the the line to the
         next x axis tick.*/
-        (this.chartPadding + this.spreadFinalX * (i+1)) + (this.widthPadding / 3),
+        (this.chartPadding + this.spreadFinalX * (i)) + (this.widthPadding / 3),
         /*y axis using our scaler value multiplied by how many y axis values we have,
         then subtracted from the height*/
         ((this.height + this.chartPadding) - ((this.spreadFinalY * scaler)))
@@ -603,7 +602,6 @@ public class Caroline : Gtk.DrawingArea {
 
     double scaler = 0;
     double maxX = 0;
-    double finalsf = 0;
     double xAxisCalculation = 0;
 
     for (int i = 0; i < this.pointsArray.size; i++)
@@ -625,42 +623,46 @@ public class Caroline : Gtk.DrawingArea {
 
       cr.fill();
 
-      //make util function and optimize!
-      var yCount = 0;
-      int y = (int)this.pointsArray.get(i).y;
+      if (scatterLabels){
 
-      while(y > 0){
+        //make util function and optimize!
+        var yCount = 0;
+        int y = (int)this.pointsArray.get(i).y;
 
-        y = y / 10;
+        while(y > 0){
+
+          y = y / 10;
+          yCount++;
+
+        }
+
         yCount++;
 
-      }
+        var xCount = 0;
+        int x = (int)this.pointsArray.get(i).x;
 
-      yCount++;
+        while(x > 0){
 
-      var xCount = 0;
-      int x = (int)this.pointsArray.get(i).x;
+          x = x / 10;
+          xCount++;
 
-      while(x > 0){
+        }
 
-        x = x / 10;
         xCount++;
 
+        double spacingY = 3.5 * yCount;
+        double spacingX = 3.5 * xCount;
+
+        cr.move_to(
+          xAxisCalculation - (spacingY + spacingX),
+          (((this.height + this.chartPadding) - ((this.spreadFinalY * scaler))))-5
+        );
+        cr.show_text(
+          snipLongDouble(this.pointsArray.get(i).x).concat(
+          ",",snipLongDouble(this.pointsArray.get(i).y))
+        );
+
       }
-
-      xCount++;
-
-      double spacingY = 3.5 * yCount;
-      double spacingX = 3.5 * xCount;
-
-      cr.move_to(
-        xAxisCalculation - (spacingY + spacingX),
-        (((this.height + this.chartPadding) - ((this.spreadFinalY * scaler))))-5
-      );
-      cr.show_text(
-        snipLongDouble(this.pointsArray.get(i).x).concat(
-        ",",snipLongDouble(this.pointsArray.get(i).y))
-      );
 
     }
 
@@ -698,6 +700,10 @@ public class Caroline : Gtk.DrawingArea {
 
   public void arrayListSort(){
 
+    GLib.DateTime now = new GLib.DateTime.now_local();
+    var sec = now.to_unix();
+    var msecStart = (sec * 1000) + (now.get_microsecond () / 1000);
+
     bool swapped = true;
     int j = 0;
     double tmpX,tmpY;
@@ -729,11 +735,16 @@ public class Caroline : Gtk.DrawingArea {
 
     }
 
+    now = new GLib.DateTime.now_local();
+    sec = now.to_unix();
+    var msecEnd = (sec * 1000) + (now.get_microsecond () / 1000);
+    stdout.printf("Sort Time Taken: %f\n",msecEnd - msecStart);
+
   }
 
   public string snipLongDouble(double number){
 
-    return "%.1f".printf(number);
+    return "%0.1f".printf(number);
 
   }
 
