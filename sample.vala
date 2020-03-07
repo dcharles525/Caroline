@@ -6,6 +6,10 @@ using Cairo;
 
 public void main (string[] args) {
 
+  GLib.DateTime now = new GLib.DateTime.now_local();
+  var sec = now.to_unix();
+  var msecStart = (sec * 1000) + (now.get_microsecond () / 1000);
+
   //Setting up the GTK window
   Gtk.init (ref args);
   var window = new Gtk.Window ();
@@ -16,16 +20,32 @@ public void main (string[] args) {
   Gtk.Grid mainGrid = new Gtk.Grid ();
   mainGrid.orientation = Gtk.Orientation.VERTICAL;
 
+  int benchNumber = 10;
+  double[] x = new double[benchNumber];
+  double[] y = new double[benchNumber];
+
+  for (int i = 0; i < benchNumber; ++i){
+
+    x[i] = Random.double_range(1,10);
+    y[i] = Random.double_range(1,10);
+
+  }
+
   //Simply set Caroline to a variable
-  var widget = new Caroline (
-    {10,20,30,40,50,60,70,80,90}, //dataX
-    {1,35,68,20,30,40,4,12,60}, //dataY
-    "pie", //chart type
+  var carolineWidget = new Caroline (
+    x, //dataX
+    y, //dataY
+    "smooth-line", //chart type
     true //yes or no for generateColors function (needed in the case of the pie chart)
   );
 
+  now = new GLib.DateTime.now_local();
+  sec = now.to_unix();
+  var msecEnd = (sec * 1000) + (now.get_microsecond () / 1000);
+  stdout.printf("Time Taken: %f\n",msecEnd - msecStart);
+
   //Add the Caroline widget tp the grid
-  mainGrid.attach (widget, 0, 0, 1, 1);
+  mainGrid.attach(carolineWidget, 0, 0, 1, 1);
   mainGrid.set_row_homogeneous(true);
   mainGrid.set_column_homogeneous(true);
 
