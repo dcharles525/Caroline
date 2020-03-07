@@ -20,7 +20,7 @@ public void main (string[] args) {
   Gtk.Grid mainGrid = new Gtk.Grid ();
   mainGrid.orientation = Gtk.Orientation.VERTICAL;
 
-  int benchNumber = 10;
+  int benchNumber = 100;
   double[] x = new double[benchNumber];
   double[] y = new double[benchNumber];
 
@@ -33,8 +33,8 @@ public void main (string[] args) {
 
   //Simply set Caroline to a variable
   var carolineWidget = new Caroline (
-    x, //dataX
-    y, //dataY
+    {1,2,3,4,5,6,7,8,9,10}, //dataX
+    {0,1,2,0,2,1,0,1,2,3}, //dataY
     "smooth-line", //chart type
     true //yes or no for generateColors function (needed in the case of the pie chart)
   );
