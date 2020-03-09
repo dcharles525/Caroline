@@ -351,6 +351,9 @@ public class Caroline : Gtk.DrawingArea {
       case "line":
         lineChart(cr);
         break;
+      case "smooth-line":
+        smoothLineChart(cr);
+        break;
       case "bar":
         barChart(cr);
         break;
@@ -465,6 +468,143 @@ public class Caroline : Gtk.DrawingArea {
         /*y axis using our scaler value multiplied by how many y axis values we have,
         then subtracted from the height*/
         ((this.height + this.chartPadding) - ((this.spreadFinalY * scaler)))
+      );
+
+    }
+
+    /*Drawing operator that strokes the current path using the current settings that were
+    implemented eariler in this file.*/
+    cr.stroke();
+
+  }
+
+  private void smoothLineChart(Cairo.Context cr){
+
+    //Setting thickness of the line using set_line_width which can take any double.
+    cr.set_line_width(this.lineThicknessData);
+
+    //Set the color of the line (this default color is blue)
+    cr.set_source_rgba(0, 174, 174,0.8);
+
+    //Getting a scaler, which will help put the line in the right spot
+    double scaler = ((this.pointsArray[0].y - this.min) / (this.max - this.min)) * this.spreadY;
+
+    //We want to move the pointer on the canvas to where we want the line graph to start.
+    cr.move_to(
+      //x axis set to "0", as 15 is the buffer in the widget
+      this.chartPadding + (this.widthPadding / 3),
+      /*y axis using our scaler value multiplied by how many y axis values we have,
+      then subtracted from the height*/
+      (this.height + this.chartPadding) - ((this.spreadFinalY * scaler))
+    );
+
+    double maxX = 0;
+
+    for (int i = 0; i < this.pointsArray.size; i++)
+      if (this.pointsArray.get(i).x > maxX)
+        maxX = this.pointsArray.get(i).x;
+
+    double previousX = this.chartPadding + (this.widthPadding / 3);
+    double previousY = (this.height + this.chartPadding) - ((this.spreadFinalY * scaler));
+    double currentX = 0;
+    double currentY = 0;
+    double aheadX = 0;
+    double aheadY = 0;
+    double scalerAhead = 0;
+    double counter = 0;
+
+    for (int i = 0; i < this.pointsArray.size; i += 2){
+
+      //Recalculating the scaler to our current value
+
+      if (this.pointsArray[i] != null){
+
+        stdout.printf("I: %d\n",i);
+        scaler = ((this.pointsArray[i].y - this.min) / (this.max - this.min)) * this.spreadY;
+        currentX = (this.chartPadding + this.spreadFinalX * (i)) + (this.widthPadding / 3);
+        currentY = ((this.height + this.chartPadding) - ((this.spreadFinalY * scaler)));
+
+      }else{
+
+        currentX = (this.chartPadding + this.spreadFinalX * (i)) + (this.widthPadding / 3);
+        currentY = ((this.height + this.chartPadding) - ((this.spreadFinalY * scaler)));
+
+      }
+
+      if (i+1 != this.pointsArray.size){
+
+        scalerAhead = ((this.pointsArray[i+1].y - this.min) / (this.max - this.min)) * this.spreadY;
+        aheadX = (this.chartPadding + this.spreadFinalX * (i+1)) + (this.widthPadding / 3);
+        aheadY = ((this.height + this.chartPadding) - ((this.spreadFinalY * scalerAhead)));
+
+      }else{
+
+        aheadX = (this.chartPadding + this.spreadFinalX * (i + 1)) + (this.widthPadding / 3);
+        aheadY = ((this.height + this.chartPadding) - ((this.spreadFinalY * scalerAhead)));
+
+      }
+
+      //stdout.printf("previous X: %f | Y: %f \n",previousX,previousY);
+      //stdout.printf("current X: %f | Y: %f \n",currentX,currentY);
+      //stdout.printf("ahead X: %f | Y: %f \n",aheadX,aheadY);
+
+      if (currentY < aheadY){
+
+        cr.curve_to(
+          currentX,
+          currentY,
+          (currentX + aheadX) / 2,
+          (currentY + aheadY) / 2,
+          aheadX - 10,
+          aheadY - 10
+        );
+
+        scalerAhead = ((this.pointsArray[i+2].y - this.min) / (this.max - this.min)) * this.spreadY;
+
+        cr.curve_to(
+          aheadX - 10,
+          aheadY - 10,
+          ((currentX + (aheadX -10)) / 2),
+          ((currentY + (aheadY - 10)) / 2),
+          previousX,
+          previousY
+
+        );
+
+      }else{
+
+        cr.curve_to(
+          currentX,
+          currentY,
+          (currentX + aheadX) / 2,
+          (currentY + aheadY) / 2,
+          aheadX,
+          aheadY
+        );
+
+      }
+
+
+      cr.stroke();
+
+      cr.arc(
+        aheadX,
+        aheadY,
+        3,
+        0,
+        6.28
+      );
+      cr.fill();
+
+      previousX = aheadX;
+      previousY = aheadY;
+
+      cr.move_to(
+        //x axis set to "0", as 15 is the buffer in the widget
+        aheadX,
+        /*y axis using our scaler value multiplied by how many y axis values we have,
+        then subtracted from the height*/
+        aheadY
       );
 
     }
