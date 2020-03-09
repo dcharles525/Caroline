@@ -31,7 +31,7 @@ public void main (string[] args) {
   var carolineWidget = new Caroline (
     x, //dataX
     y, //dataY
-    "bar", //chart type
+    "scatter", //chart type
     true, //yes or no for generateColors function (needed in the case of the pie chart),
     true // yes or no for scatter plot labels
   );
