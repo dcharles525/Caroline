@@ -6,10 +6,6 @@ using Cairo;
 
 public void main (string[] args) {
 
-  GLib.DateTime now = new GLib.DateTime.now_local();
-  var sec = now.to_unix();
-  var msecStart = (sec * 1000) + (now.get_microsecond () / 1000);
-
   //Setting up the GTK window
   Gtk.init (ref args);
   var window = new Gtk.Window ();
@@ -20,7 +16,7 @@ public void main (string[] args) {
   Gtk.Grid mainGrid = new Gtk.Grid ();
   mainGrid.orientation = Gtk.Orientation.VERTICAL;
 
-  int benchNumber = 10000;
+  int benchNumber = 10;
   double[] x = new double[benchNumber];
   double[] y = new double[benchNumber];
 
@@ -35,15 +31,10 @@ public void main (string[] args) {
   var carolineWidget = new Caroline (
     x, //dataX
     y, //dataY
-    "line", //chart type
+    "bar", //chart type
     true, //yes or no for generateColors function (needed in the case of the pie chart),
-    false // yes or no for scatter plot labels
+    true // yes or no for scatter plot labels
   );
-
-  now = new GLib.DateTime.now_local();
-  sec = now.to_unix();
-  var msecEnd = (sec * 1000) + (now.get_microsecond () / 1000);
-  stdout.printf("Time Taken: %f\n",msecEnd - msecStart);
 
   //Add the Caroline widget tp the grid
   mainGrid.attach(carolineWidget, 0, 0, 1, 1);
