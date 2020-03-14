@@ -16,15 +16,28 @@ public void main (string[] args) {
   Gtk.Grid mainGrid = new Gtk.Grid ();
   mainGrid.orientation = Gtk.Orientation.VERTICAL;
 
+  int benchNumber = 10;
+  double[] x = new double[benchNumber];
+  double[] y = new double[benchNumber];
+
+  for (int i = 0; i < benchNumber; ++i){
+
+    x[i] = Random.double_range(0,10);
+    y[i] = Random.double_range(0,10);
+
+  }
+
   //Simply set Caroline to a variable
-  var widget = new Caroline (
-    {59,78,43,42,71,41,12}, //data
-    "pie", //chart type
-    true //yes or no for generateColors function (needed in the case of the pie chart)
+  var carolineWidget = new Caroline (
+    x, //dataX
+    y, //dataY
+    "scatter", //chart type
+    true, //yes or no for generateColors function (needed in the case of the pie chart),
+    true // yes or no for scatter plot labels
   );
 
   //Add the Caroline widget tp the grid
-  mainGrid.attach (widget, 0, 0, 1, 1);
+  mainGrid.attach(carolineWidget, 0, 0, 1, 1);
   mainGrid.set_row_homogeneous(true);
   mainGrid.set_column_homogeneous(true);
 

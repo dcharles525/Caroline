@@ -1,5 +1,6 @@
 ![alt text](data/logo.png "Caroline")
-
+<br>
+Logo Created By @stsdc
 <br>
 A simple Cairo Chart Library for GTK and Vala
 
@@ -11,6 +12,7 @@ some ramblings about the development process and inner-workings of Cairo and Car
 <img src="screenshots/1.png">
 <img src="screenshots/2.png">
 <img src="screenshots/3.png">
+<img src="screenshots/5.png">
 
 ## Documentation
 * Getting Started
@@ -137,6 +139,11 @@ This is used to offset the text next to the color box label for the y axis.
 
 This is an array of ChartColor structs that are used to color parts of the charts (mainly for pie chart)
 this array is populated upon creation of the widget.
+
+**`scatterLabels DEFAULT: true boolean`**
+This value is used to tell the scatter plot type if it should display the labels or not. Why
+Not display the labels? Well, if you have 10000 points you might not want to show ever value.
+True will display labels, false won't display labels. 
 
 #### Private Attributes
 
