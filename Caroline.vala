@@ -1,6 +1,8 @@
 //============================================================+
 // File name   : Caroline.vala
-// Last Update : 2020-2-16
+// Last Update : 2020-3-14
+//
+// Version: 0.1.0
 //
 // Description : This is an extension of a GTK Drawing Area. Its purpose is to make it easy for any level
 // of developer to use charts in their application. More in depth documentation is found in below and in the
