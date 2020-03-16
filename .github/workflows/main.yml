@@ -24,9 +24,9 @@ jobs:
 
     - name: Build 
       run: |
-        sudo apt-get install libgee-0.8-2
-        sudo apt-get install libgtk-3-dev
         sudo apt-get install valac
+        sudo apt-get install libgtk-3-dev
+        sudo apt-get install libgee-0.8-2
         valac --pkg gtk+-3.0 --pkg gee-0.8 --library=Caroline -H Caroline.h Caroline.vala -X -fPIC -X -shared -o Caroline.so
         valac --pkg gtk+-3.0 --pkg gee-0.8 Caroline.vapi Sample.vala -X Caroline.so -X -I. -o demo
         sudo cp Caroline.so /usr/lib/
