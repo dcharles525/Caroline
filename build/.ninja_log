@@ -1,0 +1,8 @@
+# ninja log v5
+0	586	1584311167	build.ninja	d7da9d787f2e8242
+0	636	1584311285	build.ninja	d7da9d787f2e8242
+0	481	1584311286	unit-test@exe/Caroline.c	c134e230a56d6a97
+0	481	1584311286	unit-test@exe/UnitTests.c	c134e230a56d6a97
+481	973	1584311286	unit-test@exe/meson-generated_UnitTests.c.o	f50ee12daa2640d
+481	1151	1584311286	unit-test@exe/meson-generated_Caroline.c.o	9aa23250b3e8c85c
+1151	1301	1584311286	unit-test	762218c5e35b6b2a

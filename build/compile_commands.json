@@ -1,0 +1,17 @@
+[
+  {
+    "directory": "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/build",
+    "command": "valac -C --debug --debug --pkg gee-0.8 --pkg gobject-2.0 --pkg gtk+-3.0 --pkg glib-2.0 --color=always --directory unit-test@exe --basedir ../ ../Caroline.vala ../UnitTests.vala",
+    "file": "../Caroline.vala"
+  },
+  {
+    "directory": "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/build",
+    "command": "cc -Iunit-test@exe -I. -I.. -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/gee-0.8 -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -w -g -pthread  -MD -MQ 'unit-test@exe/meson-generated_Caroline.c.o' -MF 'unit-test@exe/meson-generated_Caroline.c.o.d' -o 'unit-test@exe/meson-generated_Caroline.c.o' -c 'unit-test@exe/Caroline.c'",
+    "file": "unit-test@exe/Caroline.c"
+  },
+  {
+    "directory": "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/build",
+    "command": "cc -Iunit-test@exe -I. -I.. -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/gee-0.8 -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -w -g -pthread  -MD -MQ 'unit-test@exe/meson-generated_UnitTests.c.o' -MF 'unit-test@exe/meson-generated_UnitTests.c.o.d' -o 'unit-test@exe/meson-generated_UnitTests.c.o' -c 'unit-test@exe/UnitTests.c'",
+    "file": "unit-test@exe/UnitTests.c"
+  }
+]
