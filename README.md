@@ -22,17 +22,24 @@ some ramblings about the development process and inner-workings of Cairo and Car
 
 ### Getting Started
 
-#### Compiling
+#### Compiling & Installing
 
+```
 valac --pkg gtk+-3.0 --pkg gee-0.8 --library=Caroline -H Caroline.h Caroline.vala -X -fPIC -X -shared -o Caroline.so
-
+```
+```
 valac --pkg gtk+-3.0 --pkg gee-0.8 Caroline.vapi Sample.vala -X Caroline.so -X -I. -o demo
-
+```
+```
 sudo cp Caroline.so /usr/lib/
-
+```
+```
 ./demo
+```
 
-A sample application called "sample.vala" is included in this repo, it contains a simple application to show off how Caroline works. Below is a bare-bones example of how to interface with Caroline.
+#### Simple Usage
+
+A sample application called "Sample.vala" is included in this repo, it contains a simple application to show off how Caroline works. Below is a bare-bones example of how to interface with Caroline.
 ```
 var widget = new Caroline (
   {59,78,43,42,71,41,12}, //data

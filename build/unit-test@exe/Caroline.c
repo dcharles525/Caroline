@@ -3,13 +3,15 @@
 
 /*============================================================+*/
 /* File name   : Caroline.vala*/
-/* Last Update : 2020-3-14*/
+/* Last Update : 2020-3-15*/
 /**/
-/* Version: 0.1.0*/
+/* Version: 0.1.1*/
 /**/
 /* Description : This is an extension of a GTK Drawing Area. Its purpose is to make it easy for any level*/
 /* of developer to use charts in their application. More in depth documentation is found in below and in the*/
 /* README, if you have any critiques or questions, go ahead and open an issue in this repo.*/
+/**/
+/* valac --pkg gtk+-3.0 --pkg gee-0.8 -C -H caroline.h --library caroline caroline.vala --basedir ./*/
 /**/
 /* Author: David Johnson*/
 /*============================================================+*/
@@ -306,13 +308,13 @@ static gdouble*
 _double_dup (gdouble* self)
 {
 	gdouble* dup;
-#line 86 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 88 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	dup = g_new0 (gdouble, 1);
-#line 86 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 88 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	memcpy (dup, self, sizeof (gdouble));
-#line 86 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 88 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return dup;
-#line 316 "Caroline.c"
+#line 318 "Caroline.c"
 }
 
 
@@ -339,61 +341,61 @@ caroline_construct (GType object_type,
 	gdouble _tmp3_;
 	gboolean _tmp4_ = FALSE;
 	gboolean _tmp16_ = FALSE;
-#line 156 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 158 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (chartType != NULL, NULL);
-#line 156 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 158 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self = (Caroline*) g_object_new (object_type, NULL);
-#line 161 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 163 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	gtk_widget_add_events ((GtkWidget*) self, (gint) ((GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK) | GDK_POINTER_MOTION_MASK));
-#line 173 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 175 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_width;
-#line 173 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 175 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp1_ = self->priv->_height;
-#line 173 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 175 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	gtk_widget_set_size_request ((GtkWidget*) self, _tmp0_, _tmp1_);
-#line 178 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 180 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_scatterLabels (self, scatterPlotLabels);
-#line 179 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 181 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_chartType (self, chartType);
-#line 180 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 182 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp2_ = self->labelXList;
-#line 180 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 182 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp3_ = (gdouble) 0;
-#line 180 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 182 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	gee_abstract_collection_add ((GeeAbstractCollection*) _tmp2_, &_tmp3_);
-#line 182 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 184 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (dataX_length1 < 15) {
-#line 182 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 184 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp4_ = TRUE;
-#line 369 "Caroline.c"
+#line 371 "Caroline.c"
 	} else {
 		const gchar* _tmp5_;
-#line 182 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 184 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp5_ = self->priv->_chartType;
-#line 182 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 184 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp4_ = g_strcmp0 (_tmp5_, "bar") == 0;
-#line 376 "Caroline.c"
+#line 378 "Caroline.c"
 	}
-#line 182 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 184 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (_tmp4_) {
-#line 184 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 186 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_spreadX (self, (gdouble) dataX_length1);
-#line 185 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 187 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_spreadY (self, (gdouble) dataY_length1);
-#line 384 "Caroline.c"
+#line 386 "Caroline.c"
 	}
 	{
 		gint i = 0;
-#line 189 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 191 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 0;
-#line 390 "Caroline.c"
+#line 392 "Caroline.c"
 		{
 			gboolean _tmp6_ = FALSE;
-#line 189 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 191 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp6_ = TRUE;
-#line 189 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 191 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 397 "Caroline.c"
+#line 399 "Caroline.c"
 				gint _tmp8_;
 				CarolinePoint point = {0};
 				gint _tmp9_;
@@ -403,75 +405,75 @@ caroline_construct (GType object_type,
 				CarolinePoint _tmp13_ = {0};
 				GeeArrayList* _tmp14_;
 				CarolinePoint _tmp15_;
-#line 189 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 191 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp6_) {
-#line 409 "Caroline.c"
+#line 411 "Caroline.c"
 					gint _tmp7_;
-#line 189 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 191 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp7_ = i;
-#line 189 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 191 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp7_ + 1;
-#line 415 "Caroline.c"
+#line 417 "Caroline.c"
 				}
-#line 189 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 191 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp6_ = FALSE;
-#line 189 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 191 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp8_ = i;
-#line 189 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 191 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(_tmp8_ < dataX_length1)) {
-#line 189 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 191 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 425 "Caroline.c"
+#line 427 "Caroline.c"
 				}
-#line 191 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 193 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp9_ = i;
-#line 191 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 193 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp10_ = dataX[_tmp9_];
-#line 191 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 193 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp11_ = i;
-#line 191 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 193 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp12_ = dataY[_tmp11_];
-#line 191 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 193 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp13_.x = _tmp10_;
-#line 191 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 193 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp13_.y = _tmp12_;
-#line 191 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 193 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				point = _tmp13_;
-#line 192 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 194 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp14_ = self->pointsArray;
-#line 192 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 194 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp15_ = point;
-#line 192 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 194 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				gee_abstract_collection_add ((GeeAbstractCollection*) _tmp14_, &_tmp15_);
-#line 447 "Caroline.c"
+#line 449 "Caroline.c"
 			}
 		}
 	}
-#line 196 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 198 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (g_strcmp0 (chartType, "pie") != 0) {
-#line 197 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 199 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_arrayListSort (self);
-#line 455 "Caroline.c"
+#line 457 "Caroline.c"
 	}
-#line 199 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 201 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (g_strcmp0 (chartType, "pie") == 0) {
-#line 199 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 201 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp16_ = generateColors;
-#line 461 "Caroline.c"
+#line 463 "Caroline.c"
 	} else {
-#line 199 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 201 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp16_ = FALSE;
-#line 465 "Caroline.c"
+#line 467 "Caroline.c"
 	}
-#line 199 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 201 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (_tmp16_) {
-#line 200 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 202 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_generateColors (self);
-#line 471 "Caroline.c"
+#line 473 "Caroline.c"
 	}
-#line 202 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 204 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (g_strcmp0 (chartType, "bar") != 0) {
-#line 475 "Caroline.c"
+#line 477 "Caroline.c"
 		gdouble tick = 0.0;
 		GeeArrayList* _tmp17_;
 		gpointer _tmp18_;
@@ -479,35 +481,35 @@ caroline_construct (GType object_type,
 		gdouble _tmp20_;
 		gdouble _tmp21_;
 		gdouble _tmp22_;
-#line 204 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 206 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp17_ = self->pointsArray;
-#line 204 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 206 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp18_ = gee_abstract_list_get ((GeeAbstractList*) _tmp17_, dataX_length1 - 1);
-#line 204 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 206 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp19_ = (CarolinePoint*) _tmp18_;
-#line 204 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 206 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp20_ = (*_tmp19_).x;
-#line 204 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 206 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp21_ = self->priv->_spreadX;
-#line 204 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 206 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp22_ = _tmp20_ / _tmp21_;
-#line 204 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 206 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_caroline_point_free0 (_tmp19_);
-#line 204 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 206 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		tick = _tmp22_;
-#line 499 "Caroline.c"
+#line 501 "Caroline.c"
 		{
 			gint f = 0;
-#line 206 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 208 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			f = 0;
-#line 504 "Caroline.c"
+#line 506 "Caroline.c"
 			{
 				gboolean _tmp23_ = FALSE;
-#line 206 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 208 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp23_ = TRUE;
-#line 206 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 208 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				while (TRUE) {
-#line 511 "Caroline.c"
+#line 513 "Caroline.c"
 					gint _tmp25_;
 					gdouble _tmp26_;
 					GeeArrayList* _tmp27_;
@@ -519,67 +521,67 @@ caroline_construct (GType object_type,
 					gdouble _tmp33_;
 					gdouble _tmp34_;
 					gint _tmp35_;
-#line 206 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 208 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (!_tmp23_) {
-#line 525 "Caroline.c"
+#line 527 "Caroline.c"
 						gint _tmp24_;
-#line 206 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 208 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp24_ = f;
-#line 206 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 208 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						f = _tmp24_ + 1;
-#line 531 "Caroline.c"
+#line 533 "Caroline.c"
 					}
-#line 206 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 208 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp23_ = FALSE;
-#line 206 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 208 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp25_ = f;
-#line 206 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 208 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp26_ = self->priv->_spreadX;
-#line 206 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 208 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (!(((gdouble) _tmp25_) < _tmp26_)) {
-#line 206 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 208 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						break;
-#line 543 "Caroline.c"
+#line 545 "Caroline.c"
 					}
-#line 207 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 209 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp27_ = self->labelXList;
-#line 207 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 209 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp28_ = tick;
-#line 207 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 209 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp29_ = tick;
-#line 207 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 209 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp30_ = f;
-#line 207 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 209 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp31_ = _tmp28_ + (_tmp29_ * _tmp30_);
-#line 207 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 209 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					gee_abstract_collection_add ((GeeAbstractCollection*) _tmp27_, &_tmp31_);
-#line 208 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 210 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp32_ = stdout;
-#line 208 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 210 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp33_ = tick;
-#line 208 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 210 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp34_ = tick;
-#line 208 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 210 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp35_ = f;
-#line 208 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 210 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					fprintf (_tmp32_, "%f\n", _tmp33_ + (_tmp34_ * _tmp35_));
-#line 567 "Caroline.c"
+#line 569 "Caroline.c"
 				}
 			}
 		}
 	} else {
 		{
 			gint i = 0;
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			i = 0;
-#line 576 "Caroline.c"
+#line 578 "Caroline.c"
 			{
 				gboolean _tmp36_ = FALSE;
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp36_ = TRUE;
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				while (TRUE) {
-#line 583 "Caroline.c"
+#line 585 "Caroline.c"
 					gint _tmp38_;
 					GeeArrayList* _tmp39_;
 					gint _tmp40_;
@@ -590,56 +592,56 @@ caroline_construct (GType object_type,
 					gpointer _tmp45_;
 					CarolinePoint* _tmp46_;
 					gdouble _tmp47_;
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (!_tmp36_) {
-#line 596 "Caroline.c"
+#line 598 "Caroline.c"
 						gint _tmp37_;
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp37_ = i;
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						i = _tmp37_ + 1;
-#line 602 "Caroline.c"
+#line 604 "Caroline.c"
 					}
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp36_ = FALSE;
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp38_ = i;
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp39_ = self->pointsArray;
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp40_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp39_);
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp41_ = _tmp40_;
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (!(_tmp38_ < _tmp41_)) {
-#line 213 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 215 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						break;
-#line 618 "Caroline.c"
+#line 620 "Caroline.c"
 					}
-#line 214 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 216 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp42_ = self->labelXList;
-#line 214 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 216 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp43_ = self->pointsArray;
-#line 214 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 216 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp44_ = i;
-#line 214 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 216 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp45_ = gee_abstract_list_get ((GeeAbstractList*) _tmp43_, _tmp44_);
-#line 214 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 216 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp46_ = (CarolinePoint*) _tmp45_;
-#line 214 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 216 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp47_ = (*_tmp46_).x;
-#line 214 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 216 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					gee_abstract_collection_add ((GeeAbstractCollection*) _tmp42_, &_tmp47_);
-#line 214 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 216 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_caroline_point_free0 (_tmp46_);
-#line 636 "Caroline.c"
+#line 638 "Caroline.c"
 				}
 			}
 		}
 	}
-#line 156 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 158 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return self;
-#line 643 "Caroline.c"
+#line 645 "Caroline.c"
 }
 
 
@@ -652,9 +654,9 @@ caroline_new (gdouble* dataX,
               gboolean generateColors,
               gboolean scatterPlotLabels)
 {
-#line 156 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 158 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return caroline_construct (TYPE_CAROLINE, dataX, dataX_length1, dataY, dataY_length1, chartType, generateColors, scatterPlotLabels);
-#line 658 "Caroline.c"
+#line 660 "Caroline.c"
 }
 
 
@@ -680,33 +682,33 @@ caroline_real_draw (GtkWidget* base,
 	const gchar* _tmp96_;
 	const gchar* _tmp97_;
 	GQuark _tmp99_ = 0U;
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	static GQuark _tmp98_label0 = 0;
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	static GQuark _tmp98_label1 = 0;
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	static GQuark _tmp98_label2 = 0;
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	static GQuark _tmp98_label3 = 0;
-#line 228 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 230 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self = (Caroline*) base;
-#line 228 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 230 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (cr != NULL, FALSE);
-#line 230 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 232 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_calculations (self);
-#line 236 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 238 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_widthPadding;
-#line 236 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 238 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_width (self, gtk_widget_get_allocated_width ((GtkWidget*) self) - _tmp0_);
-#line 237 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 239 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp1_ = self->priv->_heightPadding;
-#line 237 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 239 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_height (self, gtk_widget_get_allocated_height ((GtkWidget*) self) - _tmp1_);
-#line 239 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 241 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp2_ = self->priv->_chartType;
-#line 239 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 241 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (g_strcmp0 (_tmp2_, "pie") != 0) {
-#line 710 "Caroline.c"
+#line 712 "Caroline.c"
 		gdouble _tmp3_;
 		gint _tmp4_;
 		gint _tmp5_;
@@ -729,79 +731,79 @@ caroline_real_draw (GtkWidget* base,
 		gdouble _tmp22_;
 		gint _tmp50_;
 		gdouble _tmp51_;
-#line 242 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 244 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp3_ = self->priv->_lineThicknessTicks;
-#line 242 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 244 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_set_line_width (cr, _tmp3_);
-#line 245 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 247 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_set_source_rgba (cr, (gdouble) 255, (gdouble) 255, (gdouble) 255, 0.2);
-#line 249 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 251 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp4_ = self->priv->_chartPadding;
-#line 249 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 251 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp5_ = self->priv->_widthPadding;
-#line 249 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 251 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp6_ = self->priv->_chartPadding;
-#line 249 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 251 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_move_to (cr, (gdouble) (_tmp4_ + (_tmp5_ / 3)), (gdouble) _tmp6_);
-#line 255 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 257 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp7_ = self->priv->_chartPadding;
-#line 255 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 257 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp8_ = self->priv->_widthPadding;
-#line 255 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 257 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp9_ = self->priv->_height;
-#line 255 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 257 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp10_ = self->priv->_chartPadding;
-#line 255 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 257 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_line_to (cr, (gdouble) (_tmp7_ + (_tmp8_ / 3)), (gdouble) (_tmp9_ + _tmp10_));
-#line 261 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 263 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp11_ = self->priv->_width;
-#line 261 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 263 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp12_ = self->priv->_chartPadding;
-#line 261 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 263 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp13_ = self->priv->_widthPadding;
-#line 261 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 263 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp14_ = self->priv->_height;
-#line 261 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 263 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp15_ = self->priv->_chartPadding;
-#line 261 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 263 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_move_to (cr, (gdouble) ((_tmp11_ + _tmp12_) + (_tmp13_ / 3)), (gdouble) (_tmp14_ + _tmp15_));
-#line 265 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 267 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp16_ = self->priv->_chartPadding;
-#line 265 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 267 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp17_ = self->priv->_widthPadding;
-#line 265 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 267 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp18_ = self->priv->_height;
-#line 265 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 267 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp19_ = self->priv->_chartPadding;
-#line 265 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 267 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_line_to (cr, (gdouble) (_tmp16_ + (_tmp17_ / 3)), (gdouble) (_tmp18_ + _tmp19_));
-#line 272 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 274 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_stroke (cr);
-#line 275 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 277 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_new_path (cr);
-#line 276 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 278 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp20_ = self->priv->_lineThicknessTicks;
-#line 276 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 278 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_set_line_width (cr, _tmp20_);
-#line 279 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 281 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp21_ = self->priv->_height;
-#line 279 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 281 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp22_ = self->priv->_spreadY;
-#line 279 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 281 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_spreadFinalY (self, _tmp21_ / _tmp22_);
-#line 793 "Caroline.c"
+#line 795 "Caroline.c"
 		{
 			gint i = 0;
-#line 283 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 285 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			i = 0;
-#line 798 "Caroline.c"
+#line 800 "Caroline.c"
 			{
 				gboolean _tmp23_ = FALSE;
-#line 283 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 285 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp23_ = TRUE;
-#line 283 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 285 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				while (TRUE) {
-#line 805 "Caroline.c"
+#line 807 "Caroline.c"
 					gint _tmp25_;
 					gdouble _tmp26_;
 					gint _tmp27_;
@@ -827,109 +829,109 @@ caroline_real_draw (GtkWidget* base,
 					gchar* _tmp47_;
 					gchar* _tmp48_;
 					gchar* _tmp49_;
-#line 283 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 285 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (!_tmp23_) {
-#line 833 "Caroline.c"
+#line 835 "Caroline.c"
 						gint _tmp24_;
-#line 283 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 285 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp24_ = i;
-#line 283 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 285 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						i = _tmp24_ + 1;
-#line 839 "Caroline.c"
+#line 841 "Caroline.c"
 					}
-#line 283 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 285 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp23_ = FALSE;
-#line 283 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 285 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp25_ = i;
-#line 283 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 285 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp26_ = self->priv->_spreadY;
-#line 283 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 285 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (!(((gdouble) _tmp25_) < (_tmp26_ + 1))) {
-#line 283 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 285 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						break;
-#line 851 "Caroline.c"
+#line 853 "Caroline.c"
 					}
-#line 286 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 288 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp27_ = self->priv->_yTickStart;
-#line 286 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 288 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp28_ = self->priv->_height;
-#line 286 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 288 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp29_ = self->priv->_chartPadding;
-#line 286 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 288 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp30_ = self->priv->_spreadFinalY;
-#line 286 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 288 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp31_ = i;
-#line 286 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 288 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					cairo_move_to (cr, (gdouble) _tmp27_, (_tmp28_ + _tmp29_) - (_tmp30_ * _tmp31_));
-#line 290 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 292 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp32_ = self->priv->_yTickEnd;
-#line 290 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 292 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp33_ = self->priv->_height;
-#line 290 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 292 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp34_ = self->priv->_chartPadding;
-#line 290 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 292 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp35_ = self->priv->_spreadFinalY;
-#line 290 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 292 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp36_ = i;
-#line 290 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 292 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					cairo_line_to (cr, (gdouble) _tmp32_, (_tmp33_ + _tmp34_) - (_tmp35_ * _tmp36_));
-#line 296 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 298 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp37_ = self->priv->_yTextStart;
-#line 296 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 298 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp38_ = self->priv->_widthPadding;
-#line 296 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 298 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp39_ = self->priv->_height;
-#line 296 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 298 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp40_ = self->priv->_chartPadding;
-#line 296 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 298 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp41_ = self->priv->_spreadFinalY;
-#line 296 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 298 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp42_ = i;
-#line 296 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 298 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					cairo_move_to (cr, (gdouble) (_tmp37_ + (_tmp38_ / 3)), (_tmp39_ + _tmp40_) - (_tmp41_ * _tmp42_));
-#line 300 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 302 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp43_ = self->priv->_dataTypeY;
-#line 300 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 302 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp44_ = self->priv->labelYList;
-#line 300 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 302 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp45_ = i;
-#line 300 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 302 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp46_ = gee_abstract_list_get ((GeeAbstractList*) _tmp44_, _tmp45_);
-#line 300 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 302 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp47_ = (gchar*) _tmp46_;
-#line 300 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 302 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp48_ = g_strconcat (_tmp43_, _tmp47_, NULL);
-#line 300 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 302 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp49_ = _tmp48_;
-#line 300 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 302 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					cairo_show_text (cr, _tmp49_);
-#line 300 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 302 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_g_free0 (_tmp49_);
-#line 300 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 302 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_g_free0 (_tmp47_);
-#line 911 "Caroline.c"
+#line 913 "Caroline.c"
 				}
 			}
 		}
-#line 306 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 308 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp50_ = self->priv->_width;
-#line 306 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 308 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp51_ = self->priv->_spreadX;
-#line 306 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 308 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_spreadFinalX (self, _tmp50_ / (_tmp51_ - 1));
-#line 921 "Caroline.c"
+#line 923 "Caroline.c"
 		{
 			gint i = 0;
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			i = 0;
-#line 926 "Caroline.c"
+#line 928 "Caroline.c"
 			{
 				gboolean _tmp52_ = FALSE;
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp52_ = TRUE;
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				while (TRUE) {
-#line 933 "Caroline.c"
+#line 935 "Caroline.c"
 					gint _tmp54_;
 					GeeArrayList* _tmp55_;
 					gint _tmp56_;
@@ -960,53 +962,53 @@ caroline_real_draw (GtkWidget* base,
 					gchar* _tmp93_;
 					gchar* _tmp94_;
 					const gchar* _tmp95_;
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (!_tmp52_) {
-#line 966 "Caroline.c"
+#line 968 "Caroline.c"
 						gint _tmp53_;
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp53_ = i;
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						i = _tmp53_ + 1;
-#line 972 "Caroline.c"
+#line 974 "Caroline.c"
 					}
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp52_ = FALSE;
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp54_ = i;
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp55_ = self->labelXList;
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp56_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp55_);
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp57_ = _tmp56_;
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (!(_tmp54_ < _tmp57_)) {
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						break;
-#line 988 "Caroline.c"
+#line 990 "Caroline.c"
 					}
-#line 312 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 314 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					rawXCalculation = (gdouble) 0;
-#line 314 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 316 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp59_ = self->priv->_chartType;
-#line 314 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 316 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (g_strcmp0 (_tmp59_, "line") != 0) {
-#line 996 "Caroline.c"
+#line 998 "Caroline.c"
 						const gchar* _tmp60_;
-#line 314 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 316 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp60_ = self->priv->_chartType;
-#line 314 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 316 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp58_ = g_strcmp0 (_tmp60_, "bar") != 0;
-#line 1002 "Caroline.c"
+#line 1004 "Caroline.c"
 					} else {
-#line 314 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 316 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp58_ = FALSE;
-#line 1006 "Caroline.c"
+#line 1008 "Caroline.c"
 					}
-#line 314 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 316 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (_tmp58_) {
-#line 1010 "Caroline.c"
+#line 1012 "Caroline.c"
 						GeeArrayList* _tmp61_;
 						gint _tmp62_;
 						gpointer _tmp63_;
@@ -1018,194 +1020,194 @@ caroline_real_draw (GtkWidget* base,
 						gint _tmp69_;
 						gpointer _tmp70_;
 						gdouble* _tmp71_;
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp61_ = self->labelXList;
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp62_ = i;
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp63_ = gee_abstract_list_get ((GeeAbstractList*) _tmp61_, _tmp62_);
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp64_ = (gdouble*) _tmp63_;
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp65_ = self->priv->_width;
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp66_ = self->labelXList;
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp67_ = self->labelXList;
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp68_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp67_);
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp69_ = _tmp68_;
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp70_ = gee_abstract_list_get ((GeeAbstractList*) _tmp66_, _tmp69_ - 1);
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp71_ = (gdouble*) _tmp70_;
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						rawXCalculation = (*_tmp64_) * (_tmp65_ / (*_tmp71_));
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_g_free0 (_tmp71_);
-#line 315 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 317 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_g_free0 (_tmp64_);
-#line 1050 "Caroline.c"
+#line 1052 "Caroline.c"
 					} else {
 						gdouble _tmp72_;
 						gint _tmp73_;
-#line 317 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 319 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp72_ = self->priv->_spreadFinalX;
-#line 317 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 319 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp73_ = i;
-#line 317 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 319 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						rawXCalculation = _tmp72_ * _tmp73_;
-#line 1060 "Caroline.c"
+#line 1062 "Caroline.c"
 					}
-#line 320 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 322 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp74_ = self->priv->_chartPadding;
-#line 320 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 322 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp75_ = rawXCalculation;
-#line 320 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 322 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp76_ = self->priv->_widthPadding;
-#line 320 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 322 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp77_ = self->priv->_height;
-#line 320 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 322 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp78_ = self->priv->_xTickStart;
-#line 320 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 322 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					cairo_move_to (cr, (_tmp74_ + _tmp75_) + (_tmp76_ / 3), (gdouble) (_tmp77_ + _tmp78_));
-#line 325 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 327 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp79_ = self->priv->_chartPadding;
-#line 325 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 327 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp80_ = rawXCalculation;
-#line 325 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 327 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp81_ = self->priv->_widthPadding;
-#line 325 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 327 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp82_ = self->priv->_height;
-#line 325 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 327 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp83_ = self->priv->_xTickEnd;
-#line 325 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 327 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					cairo_line_to (cr, (_tmp79_ + _tmp80_) + (_tmp81_ / 3), (gdouble) (_tmp82_ + _tmp83_));
-#line 331 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 333 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp84_ = self->priv->_xTextStart;
-#line 331 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 333 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp85_ = rawXCalculation;
-#line 331 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 333 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp86_ = self->priv->_widthPadding;
-#line 331 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 333 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp87_ = self->priv->_height;
-#line 331 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 333 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp88_ = self->priv->_xTextEnd;
-#line 331 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 333 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					cairo_move_to (cr, (_tmp84_ + _tmp85_) + (_tmp86_ / 3), (gdouble) (_tmp87_ + _tmp88_));
-#line 336 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 338 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp89_ = self->labelXList;
-#line 336 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 338 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp90_ = i;
-#line 336 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 338 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp91_ = gee_abstract_list_get ((GeeAbstractList*) _tmp89_, _tmp90_);
-#line 336 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 338 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp92_ = (gdouble*) _tmp91_;
-#line 336 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 338 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp93_ = caroline_snipLongDouble (self, *_tmp92_);
-#line 336 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 338 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp94_ = _tmp93_;
-#line 336 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 338 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_g_free0 (_tmp92_);
-#line 336 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 338 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					roundedX = _tmp94_;
-#line 337 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 339 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp95_ = roundedX;
-#line 337 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 339 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					cairo_show_text (cr, _tmp95_);
-#line 310 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 312 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_g_free0 (roundedX);
-#line 1120 "Caroline.c"
+#line 1122 "Caroline.c"
 				}
 			}
 		}
-#line 343 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 345 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_stroke (cr);
-#line 347 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 349 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_restore (cr);
-#line 350 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 352 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		cairo_save (cr);
-#line 1130 "Caroline.c"
+#line 1132 "Caroline.c"
 	}
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp96_ = self->priv->_chartType;
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp97_ = _tmp96_;
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp99_ = (NULL == _tmp97_) ? 0 : g_quark_from_string (_tmp97_);
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (_tmp99_ == ((0 != _tmp98_label0) ? _tmp98_label0 : (_tmp98_label0 = g_quark_from_static_string ("line")))) {
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		switch (0) {
-#line 1142 "Caroline.c"
+#line 1144 "Caroline.c"
 			default:
 			{
-#line 358 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 360 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				caroline_lineChart (self, cr);
-#line 359 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 361 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				break;
-#line 1149 "Caroline.c"
+#line 1151 "Caroline.c"
 			}
 		}
 	} else if (_tmp99_ == ((0 != _tmp98_label1) ? _tmp98_label1 : (_tmp98_label1 = g_quark_from_static_string ("bar")))) {
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		switch (0) {
-#line 1155 "Caroline.c"
+#line 1157 "Caroline.c"
 			default:
 			{
-#line 361 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 363 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				caroline_barChart (self, cr);
-#line 362 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 364 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				break;
-#line 1162 "Caroline.c"
+#line 1164 "Caroline.c"
 			}
 		}
 	} else if (_tmp99_ == ((0 != _tmp98_label2) ? _tmp98_label2 : (_tmp98_label2 = g_quark_from_static_string ("pie")))) {
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		switch (0) {
-#line 1168 "Caroline.c"
+#line 1170 "Caroline.c"
 			default:
 			{
-#line 364 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 366 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				caroline_pieChart (self, cr);
-#line 365 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 367 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				break;
-#line 1175 "Caroline.c"
+#line 1177 "Caroline.c"
 			}
 		}
 	} else if (_tmp99_ == ((0 != _tmp98_label3) ? _tmp98_label3 : (_tmp98_label3 = g_quark_from_static_string ("scatter")))) {
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		switch (0) {
-#line 1181 "Caroline.c"
+#line 1183 "Caroline.c"
 			default:
 			{
-#line 367 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 369 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				caroline_scatterChart (self, cr);
-#line 368 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 370 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				break;
-#line 1188 "Caroline.c"
+#line 1190 "Caroline.c"
 			}
 		}
 	} else {
-#line 356 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 358 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		switch (0) {
-#line 1194 "Caroline.c"
+#line 1196 "Caroline.c"
 			default:
 			{
-#line 370 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 372 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				caroline_lineChart (self, cr);
-#line 371 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 373 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				break;
-#line 1201 "Caroline.c"
+#line 1203 "Caroline.c"
 			}
 		}
 	}
-#line 374 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 376 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = TRUE;
-#line 374 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 376 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 1209 "Caroline.c"
+#line 1211 "Caroline.c"
 }
 
 
@@ -1249,7 +1251,7 @@ double_to_string (gdouble self)
 	result = _tmp4_;
 #line 938 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 	return result;
-#line 1253 "Caroline.c"
+#line 1255 "Caroline.c"
 }
 
 
@@ -1275,53 +1277,53 @@ string_slice (const gchar* self,
 	string_length = (glong) _tmp1_;
 #line 1427 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 	if (start < ((glong) 0)) {
-#line 1279 "Caroline.c"
+#line 1281 "Caroline.c"
 		glong _tmp2_;
 #line 1428 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 		_tmp2_ = string_length;
 #line 1428 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 		start = _tmp2_ + start;
-#line 1285 "Caroline.c"
+#line 1287 "Caroline.c"
 	}
 #line 1430 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 	if (end < ((glong) 0)) {
-#line 1289 "Caroline.c"
+#line 1291 "Caroline.c"
 		glong _tmp3_;
 #line 1431 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 		_tmp3_ = string_length;
 #line 1431 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 		end = _tmp3_ + end;
-#line 1295 "Caroline.c"
+#line 1297 "Caroline.c"
 	}
 #line 1433 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 	if (start >= ((glong) 0)) {
-#line 1299 "Caroline.c"
+#line 1301 "Caroline.c"
 		glong _tmp5_;
 #line 1433 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 		_tmp5_ = string_length;
 #line 1433 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 		_tmp4_ = start <= _tmp5_;
-#line 1305 "Caroline.c"
+#line 1307 "Caroline.c"
 	} else {
 #line 1433 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 		_tmp4_ = FALSE;
-#line 1309 "Caroline.c"
+#line 1311 "Caroline.c"
 	}
 #line 1433 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 	g_return_val_if_fail (_tmp4_, NULL);
 #line 1434 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 	if (end >= ((glong) 0)) {
-#line 1315 "Caroline.c"
+#line 1317 "Caroline.c"
 		glong _tmp7_;
 #line 1434 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 		_tmp7_ = string_length;
 #line 1434 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 		_tmp6_ = end <= _tmp7_;
-#line 1321 "Caroline.c"
+#line 1323 "Caroline.c"
 	} else {
 #line 1434 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 		_tmp6_ = FALSE;
-#line 1325 "Caroline.c"
+#line 1327 "Caroline.c"
 	}
 #line 1434 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 	g_return_val_if_fail (_tmp6_, NULL);
@@ -1333,7 +1335,7 @@ string_slice (const gchar* self,
 	result = _tmp8_;
 #line 1436 "/usr/share/vala-0.40/vapi/glib-2.0.vapi"
 	return result;
-#line 1337 "Caroline.c"
+#line 1339 "Caroline.c"
 }
 
 
@@ -1349,33 +1351,33 @@ caroline_calculations (Caroline* self)
 	gdouble _tmp42_;
 	gdouble yLabel = 0.0;
 	gdouble _tmp43_;
-#line 390 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 392 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 393 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 395 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->pointsArray;
-#line 393 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 395 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp1_ = gee_abstract_list_get ((GeeAbstractList*) _tmp0_, 0);
-#line 393 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 395 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp2_ = (CarolinePoint*) _tmp1_;
-#line 393 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 395 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp3_ = (*_tmp2_).y;
-#line 393 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 395 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_max (self, _tmp3_);
-#line 393 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 395 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_caroline_point_free0 (_tmp2_);
-#line 1367 "Caroline.c"
+#line 1369 "Caroline.c"
 	{
 		gint i = 0;
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 0;
-#line 1372 "Caroline.c"
+#line 1374 "Caroline.c"
 		{
 			gboolean _tmp4_ = FALSE;
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp4_ = TRUE;
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 1379 "Caroline.c"
+#line 1381 "Caroline.c"
 				gint _tmp6_;
 				GeeArrayList* _tmp7_;
 				gint _tmp8_;
@@ -1387,90 +1389,90 @@ caroline_calculations (Caroline* self)
 				gdouble _tmp14_;
 				gdouble _tmp15_;
 				gboolean _tmp16_;
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp4_) {
-#line 1393 "Caroline.c"
+#line 1395 "Caroline.c"
 					gint _tmp5_;
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp5_ = i;
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp5_ + 1;
-#line 1399 "Caroline.c"
+#line 1401 "Caroline.c"
 				}
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp4_ = FALSE;
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp6_ = i;
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp7_ = self->pointsArray;
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp8_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp7_);
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp9_ = _tmp8_;
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(_tmp6_ < _tmp9_)) {
-#line 396 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 398 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 1415 "Caroline.c"
+#line 1417 "Caroline.c"
 				}
-#line 397 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 399 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp10_ = self->pointsArray;
-#line 397 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 399 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp11_ = i;
-#line 397 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 399 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp12_ = gee_abstract_list_get ((GeeAbstractList*) _tmp10_, _tmp11_);
-#line 397 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 399 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp13_ = (CarolinePoint*) _tmp12_;
-#line 397 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 399 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp14_ = (*_tmp13_).y;
-#line 397 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 399 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp15_ = self->priv->_max;
-#line 397 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 399 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp16_ = _tmp14_ > _tmp15_;
-#line 397 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 399 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp13_);
-#line 397 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 399 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (_tmp16_) {
-#line 1435 "Caroline.c"
+#line 1437 "Caroline.c"
 					GeeArrayList* _tmp17_;
 					gint _tmp18_;
 					gpointer _tmp19_;
 					CarolinePoint* _tmp20_;
 					gdouble _tmp21_;
-#line 398 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 400 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp17_ = self->pointsArray;
-#line 398 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 400 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp18_ = i;
-#line 398 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 400 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp19_ = gee_abstract_list_get ((GeeAbstractList*) _tmp17_, _tmp18_);
-#line 398 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 400 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp20_ = (CarolinePoint*) _tmp19_;
-#line 398 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 400 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp21_ = (*_tmp20_).y;
-#line 398 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 400 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					caroline_set_max (self, _tmp21_);
-#line 398 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 400 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_caroline_point_free0 (_tmp20_);
-#line 1455 "Caroline.c"
+#line 1457 "Caroline.c"
 				}
 			}
 		}
 	}
-#line 401 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 403 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_min (self, (gdouble) 0);
-#line 1462 "Caroline.c"
+#line 1464 "Caroline.c"
 	{
 		gint i = 0;
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 0;
-#line 1467 "Caroline.c"
+#line 1469 "Caroline.c"
 		{
 			gboolean _tmp22_ = FALSE;
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp22_ = TRUE;
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 1474 "Caroline.c"
+#line 1476 "Caroline.c"
 				gint _tmp24_;
 				GeeArrayList* _tmp25_;
 				gint _tmp26_;
@@ -1482,100 +1484,100 @@ caroline_calculations (Caroline* self)
 				gdouble _tmp32_;
 				gdouble _tmp33_;
 				gboolean _tmp34_;
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp22_) {
-#line 1488 "Caroline.c"
+#line 1490 "Caroline.c"
 					gint _tmp23_;
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp23_ = i;
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp23_ + 1;
-#line 1494 "Caroline.c"
+#line 1496 "Caroline.c"
 				}
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp22_ = FALSE;
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp24_ = i;
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp25_ = self->pointsArray;
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp26_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp25_);
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp27_ = _tmp26_;
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(_tmp24_ < _tmp27_)) {
-#line 404 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 406 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 1510 "Caroline.c"
+#line 1512 "Caroline.c"
 				}
-#line 405 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 407 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp28_ = self->pointsArray;
-#line 405 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 407 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp29_ = i;
-#line 405 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 407 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp30_ = gee_abstract_list_get ((GeeAbstractList*) _tmp28_, _tmp29_);
-#line 405 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 407 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp31_ = (CarolinePoint*) _tmp30_;
-#line 405 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 407 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp32_ = (*_tmp31_).y;
-#line 405 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 407 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp33_ = self->priv->_min;
-#line 405 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 407 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp34_ = _tmp32_ < _tmp33_;
-#line 405 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 407 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp31_);
-#line 405 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 407 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (_tmp34_) {
-#line 1530 "Caroline.c"
+#line 1532 "Caroline.c"
 					GeeArrayList* _tmp35_;
 					gint _tmp36_;
 					gpointer _tmp37_;
 					CarolinePoint* _tmp38_;
 					gdouble _tmp39_;
-#line 406 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 408 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp35_ = self->pointsArray;
-#line 406 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 408 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp36_ = i;
-#line 406 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 408 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp37_ = gee_abstract_list_get ((GeeAbstractList*) _tmp35_, _tmp36_);
-#line 406 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 408 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp38_ = (CarolinePoint*) _tmp37_;
-#line 406 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 408 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp39_ = (*_tmp38_).y;
-#line 406 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 408 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					caroline_set_min (self, _tmp39_);
-#line 406 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 408 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_caroline_point_free0 (_tmp38_);
-#line 1550 "Caroline.c"
+#line 1552 "Caroline.c"
 				}
 			}
 		}
 	}
-#line 410 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 412 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp40_ = self->priv->_max;
-#line 410 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 412 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp41_ = self->priv->_min;
-#line 410 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 412 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp42_ = self->priv->_spreadY;
-#line 410 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 412 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_gap (self, (_tmp40_ - _tmp41_) / _tmp42_);
-#line 413 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 415 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp43_ = self->priv->_min;
-#line 413 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 415 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	yLabel = _tmp43_;
-#line 1567 "Caroline.c"
+#line 1569 "Caroline.c"
 	{
 		gint i = 0;
-#line 415 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 417 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 0;
-#line 1572 "Caroline.c"
+#line 1574 "Caroline.c"
 		{
 			gboolean _tmp44_ = FALSE;
-#line 415 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 417 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp44_ = TRUE;
-#line 415 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 417 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 1579 "Caroline.c"
+#line 1581 "Caroline.c"
 				gint _tmp46_;
 				gdouble _tmp47_;
 				gint _tmp48_;
@@ -1585,103 +1587,103 @@ caroline_calculations (Caroline* self)
 				gint _tmp54_;
 				gint _tmp55_;
 				gboolean _tmp56_;
-#line 415 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 417 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp44_) {
-#line 1591 "Caroline.c"
+#line 1593 "Caroline.c"
 					gint _tmp45_;
-#line 415 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 417 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp45_ = i;
-#line 415 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 417 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp45_ + 1;
-#line 1597 "Caroline.c"
+#line 1599 "Caroline.c"
 				}
-#line 415 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 417 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp44_ = FALSE;
-#line 415 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 417 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp46_ = i;
-#line 415 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 417 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp47_ = self->priv->_spreadY;
-#line 415 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 417 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(((gdouble) _tmp46_) < (_tmp47_ + 1))) {
-#line 415 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 417 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 1609 "Caroline.c"
+#line 1611 "Caroline.c"
 				}
-#line 417 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 419 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp48_ = i;
-#line 417 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 419 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (_tmp48_ > 0) {
-#line 1615 "Caroline.c"
+#line 1617 "Caroline.c"
 					gdouble _tmp49_;
 					gdouble _tmp50_;
-#line 418 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 420 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp49_ = yLabel;
-#line 418 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 420 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp50_ = self->priv->_gap;
-#line 418 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 420 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					yLabel = _tmp49_ + _tmp50_;
-#line 1624 "Caroline.c"
+#line 1626 "Caroline.c"
 				}
-#line 421 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 423 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp51_ = yLabel;
-#line 421 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 423 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp52_ = double_to_string (_tmp51_);
-#line 421 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 423 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp53_ = _tmp52_;
-#line 421 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 423 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp54_ = strlen (_tmp53_);
-#line 421 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 423 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp55_ = _tmp54_;
-#line 421 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 423 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp56_ = _tmp55_ >= 8;
-#line 421 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 423 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_g_free0 (_tmp53_);
-#line 421 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 423 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (_tmp56_) {
-#line 1642 "Caroline.c"
+#line 1644 "Caroline.c"
 					GeeArrayList* _tmp57_;
 					gdouble _tmp58_;
 					gchar* _tmp59_;
 					gchar* _tmp60_;
 					gchar* _tmp61_;
 					gchar* _tmp62_;
-#line 422 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 424 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp57_ = self->priv->labelYList;
-#line 422 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 424 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp58_ = yLabel;
-#line 422 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 424 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp59_ = double_to_string (_tmp58_);
-#line 422 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 424 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp60_ = _tmp59_;
-#line 422 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 424 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp61_ = string_slice (_tmp60_, (glong) 0, (glong) 8);
-#line 422 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 424 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp62_ = _tmp61_;
-#line 422 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 424 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					gee_abstract_collection_add ((GeeAbstractCollection*) _tmp57_, _tmp62_);
-#line 422 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 424 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_g_free0 (_tmp62_);
-#line 422 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 424 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_g_free0 (_tmp60_);
-#line 1667 "Caroline.c"
+#line 1669 "Caroline.c"
 				} else {
 					GeeArrayList* _tmp63_;
 					gdouble _tmp64_;
 					gchar* _tmp65_;
 					gchar* _tmp66_;
-#line 424 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 426 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp63_ = self->priv->labelYList;
-#line 424 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 426 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp64_ = yLabel;
-#line 424 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 426 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp65_ = double_to_string (_tmp64_);
-#line 424 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 426 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp66_ = _tmp65_;
-#line 424 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 426 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					gee_abstract_collection_add ((GeeAbstractCollection*) _tmp63_, _tmp66_);
-#line 424 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 426 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_g_free0 (_tmp66_);
-#line 1685 "Caroline.c"
+#line 1687 "Caroline.c"
 				}
 			}
 		}
@@ -1720,65 +1722,65 @@ caroline_lineChart (Caroline* self,
 	gint _tmp13_;
 	gdouble _tmp14_;
 	gdouble _tmp15_;
-#line 440 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 442 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 440 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 442 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (cr != NULL);
-#line 443 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 445 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_lineThicknessData;
-#line 443 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 445 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	cairo_set_line_width (cr, _tmp0_);
-#line 446 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 448 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	cairo_set_source_rgba (cr, (gdouble) 0, (gdouble) 174, (gdouble) 174, 0.8);
-#line 449 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 451 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp1_ = self->pointsArray;
-#line 449 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 451 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp2_ = gee_abstract_list_get ((GeeAbstractList*) _tmp1_, 0);
-#line 449 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 451 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp3_ = (CarolinePoint*) _tmp2_;
-#line 449 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 451 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp4_ = (*_tmp3_).y;
-#line 449 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 451 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp5_ = self->priv->_min;
-#line 449 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 451 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp6_ = self->priv->_max;
-#line 449 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 451 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp7_ = self->priv->_min;
-#line 449 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 451 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp8_ = self->priv->_spreadY;
-#line 449 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 451 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp9_ = ((_tmp4_ - _tmp5_) / (_tmp6_ - _tmp7_)) * _tmp8_;
-#line 449 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 451 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_caroline_point_free0 (_tmp3_);
-#line 449 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 451 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	scaler = _tmp9_;
-#line 452 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 454 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp10_ = self->priv->_chartPadding;
-#line 452 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 454 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp11_ = self->priv->_widthPadding;
-#line 452 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 454 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp12_ = self->priv->_height;
-#line 452 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 454 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp13_ = self->priv->_chartPadding;
-#line 452 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 454 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp14_ = self->priv->_spreadFinalY;
-#line 452 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 454 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp15_ = scaler;
-#line 452 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 454 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	cairo_move_to (cr, (gdouble) (_tmp10_ + (_tmp11_ / 3)), (_tmp12_ + _tmp13_) - (_tmp14_ * _tmp15_));
-#line 1770 "Caroline.c"
+#line 1772 "Caroline.c"
 	{
 		gint i = 0;
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 1;
-#line 1775 "Caroline.c"
+#line 1777 "Caroline.c"
 		{
 			gboolean _tmp16_ = FALSE;
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp16_ = TRUE;
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 1782 "Caroline.c"
+#line 1784 "Caroline.c"
 				gint _tmp18_;
 				GeeArrayList* _tmp19_;
 				gint _tmp20_;
@@ -1800,79 +1802,79 @@ caroline_lineChart (Caroline* self,
 				gint _tmp36_;
 				gdouble _tmp37_;
 				gdouble _tmp38_;
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp16_) {
-#line 1806 "Caroline.c"
+#line 1808 "Caroline.c"
 					gint _tmp17_;
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp17_ = i;
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp17_ + 1;
-#line 1812 "Caroline.c"
+#line 1814 "Caroline.c"
 				}
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp16_ = FALSE;
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp18_ = i;
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp19_ = self->pointsArray;
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp20_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp19_);
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp21_ = _tmp20_;
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(_tmp18_ < _tmp21_)) {
-#line 460 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 462 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 1828 "Caroline.c"
+#line 1830 "Caroline.c"
 				}
-#line 463 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 465 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp22_ = self->pointsArray;
-#line 463 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 465 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp23_ = i;
-#line 463 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 465 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp24_ = gee_abstract_list_get ((GeeAbstractList*) _tmp22_, _tmp23_);
-#line 463 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 465 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp25_ = (CarolinePoint*) _tmp24_;
-#line 463 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 465 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp26_ = (*_tmp25_).y;
-#line 463 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 465 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp27_ = self->priv->_min;
-#line 463 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 465 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp28_ = self->priv->_max;
-#line 463 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 465 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp29_ = self->priv->_min;
-#line 463 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 465 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp30_ = self->priv->_spreadY;
-#line 463 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 465 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				scaler = ((_tmp26_ - _tmp27_) / (_tmp28_ - _tmp29_)) * _tmp30_;
-#line 463 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 465 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp25_);
-#line 467 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 469 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp31_ = self->priv->_chartPadding;
-#line 467 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 469 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp32_ = self->priv->_spreadFinalX;
-#line 467 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 469 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp33_ = i;
-#line 467 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 469 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp34_ = self->priv->_widthPadding;
-#line 467 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 469 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp35_ = self->priv->_height;
-#line 467 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 469 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp36_ = self->priv->_chartPadding;
-#line 467 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 469 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp37_ = self->priv->_spreadFinalY;
-#line 467 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 469 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp38_ = scaler;
-#line 467 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 469 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_line_to (cr, (_tmp31_ + (_tmp32_ * _tmp33_)) + (_tmp34_ / 3), (_tmp35_ + _tmp36_) - (_tmp37_ * _tmp38_));
-#line 1870 "Caroline.c"
+#line 1872 "Caroline.c"
 			}
 		}
 	}
-#line 480 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 482 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	cairo_stroke (cr);
-#line 1876 "Caroline.c"
+#line 1878 "Caroline.c"
 }
 
 
@@ -1901,47 +1903,47 @@ caroline_barChart (Caroline* self,
 	gdouble _tmp7_;
 	gdouble _tmp8_;
 	gdouble maxX = 0.0;
-#line 494 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 496 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 494 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 496 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (cr != NULL);
-#line 497 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 499 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->pointsArray;
-#line 497 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 499 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp1_ = gee_abstract_list_get ((GeeAbstractList*) _tmp0_, 0);
-#line 497 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 499 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp2_ = (CarolinePoint*) _tmp1_;
-#line 497 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 499 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp3_ = (*_tmp2_).y;
-#line 497 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 499 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp4_ = self->priv->_min;
-#line 497 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 499 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp5_ = self->priv->_max;
-#line 497 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 499 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp6_ = self->priv->_min;
-#line 497 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 499 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp7_ = self->priv->_spreadY;
-#line 497 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 499 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp8_ = ((_tmp3_ - _tmp4_) / (_tmp5_ - _tmp6_)) * _tmp7_;
-#line 497 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 499 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_caroline_point_free0 (_tmp2_);
-#line 497 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 499 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	scaler = _tmp8_;
-#line 498 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 500 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	maxX = (gdouble) 0;
-#line 1933 "Caroline.c"
+#line 1935 "Caroline.c"
 	{
 		gint i = 0;
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 0;
-#line 1938 "Caroline.c"
+#line 1940 "Caroline.c"
 		{
 			gboolean _tmp9_ = FALSE;
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp9_ = TRUE;
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 1945 "Caroline.c"
+#line 1947 "Caroline.c"
 				gint _tmp11_;
 				GeeArrayList* _tmp12_;
 				gint _tmp13_;
@@ -1953,87 +1955,87 @@ caroline_barChart (Caroline* self,
 				gdouble _tmp19_;
 				gdouble _tmp20_;
 				gboolean _tmp21_;
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp9_) {
-#line 1959 "Caroline.c"
+#line 1961 "Caroline.c"
 					gint _tmp10_;
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp10_ = i;
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp10_ + 1;
-#line 1965 "Caroline.c"
+#line 1967 "Caroline.c"
 				}
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp9_ = FALSE;
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp11_ = i;
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp12_ = self->pointsArray;
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp13_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp12_);
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp14_ = _tmp13_;
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(_tmp11_ < _tmp14_)) {
-#line 500 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 502 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 1981 "Caroline.c"
+#line 1983 "Caroline.c"
 				}
-#line 501 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 503 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp15_ = self->pointsArray;
-#line 501 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 503 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp16_ = i;
-#line 501 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 503 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp17_ = gee_abstract_list_get ((GeeAbstractList*) _tmp15_, _tmp16_);
-#line 501 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 503 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp18_ = (CarolinePoint*) _tmp17_;
-#line 501 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 503 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp19_ = (*_tmp18_).x;
-#line 501 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 503 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp20_ = maxX;
-#line 501 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 503 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp21_ = _tmp19_ > _tmp20_;
-#line 501 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 503 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp18_);
-#line 501 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 503 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (_tmp21_) {
-#line 2001 "Caroline.c"
+#line 2003 "Caroline.c"
 					GeeArrayList* _tmp22_;
 					gint _tmp23_;
 					gpointer _tmp24_;
 					CarolinePoint* _tmp25_;
 					gdouble _tmp26_;
-#line 502 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 504 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp22_ = self->pointsArray;
-#line 502 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 504 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp23_ = i;
-#line 502 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 504 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp24_ = gee_abstract_list_get ((GeeAbstractList*) _tmp22_, _tmp23_);
-#line 502 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 504 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp25_ = (CarolinePoint*) _tmp24_;
-#line 502 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 504 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp26_ = (*_tmp25_).x;
-#line 502 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 504 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					maxX = _tmp26_;
-#line 502 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 504 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_caroline_point_free0 (_tmp25_);
-#line 2021 "Caroline.c"
+#line 2023 "Caroline.c"
 				}
 			}
 		}
 	}
 	{
 		gint i = 0;
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 0;
-#line 2030 "Caroline.c"
+#line 2032 "Caroline.c"
 		{
 			gboolean _tmp27_ = FALSE;
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp27_ = TRUE;
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 2037 "Caroline.c"
+#line 2039 "Caroline.c"
 				gint _tmp29_;
 				GeeArrayList* _tmp30_;
 				gint _tmp31_;
@@ -2056,79 +2058,79 @@ caroline_barChart (Caroline* self,
 				gint _tmp48_;
 				gdouble _tmp49_;
 				gdouble _tmp50_;
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp27_) {
-#line 2062 "Caroline.c"
+#line 2064 "Caroline.c"
 					gint _tmp28_;
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp28_ = i;
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp28_ + 1;
-#line 2068 "Caroline.c"
+#line 2070 "Caroline.c"
 				}
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp27_ = FALSE;
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp29_ = i;
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp30_ = self->pointsArray;
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp31_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp30_);
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp32_ = _tmp31_;
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(_tmp29_ < _tmp32_)) {
-#line 504 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 506 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 2084 "Caroline.c"
+#line 2086 "Caroline.c"
 				}
-#line 507 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 509 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp33_ = self->pointsArray;
-#line 507 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 509 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp34_ = i;
-#line 507 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 509 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp35_ = gee_abstract_list_get ((GeeAbstractList*) _tmp33_, _tmp34_);
-#line 507 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 509 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp36_ = (CarolinePoint*) _tmp35_;
-#line 507 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 509 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp37_ = (*_tmp36_).y;
-#line 507 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 509 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp38_ = self->priv->_min;
-#line 507 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 509 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp39_ = self->priv->_max;
-#line 507 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 509 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp40_ = self->priv->_min;
-#line 507 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 509 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp41_ = self->priv->_spreadY;
-#line 507 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 509 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				scaler = ((_tmp37_ - _tmp38_) / (_tmp39_ - _tmp40_)) * _tmp41_;
-#line 507 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 509 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp36_);
-#line 511 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 513 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp42_ = self->priv->_rectangleXOffset;
-#line 511 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 513 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp43_ = self->priv->_spreadFinalX;
-#line 511 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 513 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp44_ = i;
-#line 511 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 513 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp45_ = self->priv->_widthPadding;
-#line 511 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 513 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp46_ = self->priv->_height;
-#line 511 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 513 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp47_ = self->priv->_chartPadding;
-#line 511 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 513 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp48_ = self->priv->_rectangleXOffset;
-#line 511 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 513 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp49_ = self->priv->_spreadFinalY;
-#line 511 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 513 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp50_ = scaler;
-#line 511 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 513 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_rectangle (cr, (_tmp42_ + (_tmp43_ * (_tmp44_ + 1))) + (_tmp45_ / 3.35), (gdouble) (_tmp46_ + _tmp47_), (gdouble) _tmp48_, -(_tmp49_ * _tmp50_));
-#line 522 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 524 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_set_source_rgba (cr, (gdouble) 0, (gdouble) 174, (gdouble) 174, 0.2);
-#line 524 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 526 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_fill (cr);
-#line 2132 "Caroline.c"
+#line 2134 "Caroline.c"
 			}
 		}
 	}
@@ -2151,27 +2153,27 @@ caroline_pieChart (Caroline* self,
 {
 	gdouble total = 0.0;
 	gdouble startAngle = 0.0;
-#line 540 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 542 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 540 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 542 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (cr != NULL);
-#line 542 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 544 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	total = (gdouble) 0;
-#line 543 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 545 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	startAngle = (gdouble) 0;
-#line 2163 "Caroline.c"
+#line 2165 "Caroline.c"
 	{
 		gint i = 0;
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 0;
-#line 2168 "Caroline.c"
+#line 2170 "Caroline.c"
 		{
 			gboolean _tmp0_ = FALSE;
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp0_ = TRUE;
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 2175 "Caroline.c"
+#line 2177 "Caroline.c"
 				gint _tmp2_;
 				GeeArrayList* _tmp3_;
 				gint _tmp4_;
@@ -2182,64 +2184,64 @@ caroline_pieChart (Caroline* self,
 				gpointer _tmp9_;
 				CarolinePoint* _tmp10_;
 				gdouble _tmp11_;
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp0_) {
-#line 2188 "Caroline.c"
+#line 2190 "Caroline.c"
 					gint _tmp1_;
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp1_ = i;
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp1_ + 1;
-#line 2194 "Caroline.c"
+#line 2196 "Caroline.c"
 				}
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp0_ = FALSE;
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp2_ = i;
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp3_ = self->pointsArray;
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp4_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp3_);
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp5_ = _tmp4_;
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(_tmp2_ < _tmp5_)) {
-#line 547 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 549 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 2210 "Caroline.c"
+#line 2212 "Caroline.c"
 				}
-#line 548 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 550 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp6_ = total;
-#line 548 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 550 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp7_ = self->pointsArray;
-#line 548 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 550 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp8_ = i;
-#line 548 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 550 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp9_ = gee_abstract_list_get ((GeeAbstractList*) _tmp7_, _tmp8_);
-#line 548 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 550 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp10_ = (CarolinePoint*) _tmp9_;
-#line 548 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 550 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp11_ = (*_tmp10_).x;
-#line 548 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 550 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				total = _tmp6_ + _tmp11_;
-#line 548 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 550 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp10_);
-#line 2228 "Caroline.c"
+#line 2230 "Caroline.c"
 			}
 		}
 	}
 	{
 		gint i = 0;
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 0;
-#line 2236 "Caroline.c"
+#line 2238 "Caroline.c"
 		{
 			gboolean _tmp12_ = FALSE;
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp12_ = TRUE;
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 2243 "Caroline.c"
+#line 2245 "Caroline.c"
 				gint _tmp14_;
 				GeeArrayList* _tmp15_;
 				gint _tmp16_;
@@ -2304,191 +2306,191 @@ caroline_pieChart (Caroline* self,
 				gdouble _tmp74_;
 				gchar* _tmp75_;
 				gchar* _tmp76_;
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp12_) {
-#line 2310 "Caroline.c"
+#line 2312 "Caroline.c"
 					gint _tmp13_;
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp13_ = i;
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp13_ + 1;
-#line 2316 "Caroline.c"
+#line 2318 "Caroline.c"
 				}
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp12_ = FALSE;
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp14_ = i;
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp15_ = self->pointsArray;
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp16_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp15_);
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp17_ = _tmp16_;
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(_tmp14_ < _tmp17_)) {
-#line 550 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 552 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 2332 "Caroline.c"
+#line 2334 "Caroline.c"
 				}
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp18_ = self->chartColorArray;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp19_ = i;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp20_ = gee_abstract_list_get ((GeeAbstractList*) _tmp18_, _tmp19_);
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp21_ = (CarolineChartColor*) _tmp20_;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp22_ = (*_tmp21_).r;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp23_ = self->chartColorArray;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp24_ = i;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp25_ = gee_abstract_list_get ((GeeAbstractList*) _tmp23_, _tmp24_);
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp26_ = (CarolineChartColor*) _tmp25_;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp27_ = (*_tmp26_).g;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp28_ = self->chartColorArray;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp29_ = i;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp30_ = gee_abstract_list_get ((GeeAbstractList*) _tmp28_, _tmp29_);
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp31_ = (CarolineChartColor*) _tmp30_;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp32_ = (*_tmp31_).b;
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_set_source_rgb (cr, _tmp22_, _tmp27_, _tmp32_);
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_chart_color_free0 (_tmp31_);
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_chart_color_free0 (_tmp26_);
-#line 553 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 555 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_chart_color_free0 (_tmp21_);
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp33_ = self->priv->_pieChartXStart;
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp34_ = self->priv->_pieChartYStart;
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp35_ = self->priv->_pieChartRadius;
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp36_ = startAngle;
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp37_ = startAngle;
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp38_ = self->pointsArray;
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp39_ = i;
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp40_ = gee_abstract_list_get ((GeeAbstractList*) _tmp38_, _tmp39_);
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp41_ = (CarolinePoint*) _tmp40_;
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp42_ = (*_tmp41_).x;
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp43_ = total;
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp44_ = self->priv->_PIX;
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_arc (cr, (gdouble) _tmp33_, (gdouble) _tmp34_, (gdouble) _tmp35_, _tmp36_, _tmp37_ + ((_tmp42_ / _tmp43_) * _tmp44_));
-#line 560 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 562 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp41_);
-#line 571 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 573 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp45_ = startAngle;
-#line 571 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 573 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp46_ = self->pointsArray;
-#line 571 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 573 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp47_ = i;
-#line 571 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 573 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp48_ = gee_abstract_list_get ((GeeAbstractList*) _tmp46_, _tmp47_);
-#line 571 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 573 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp49_ = (CarolinePoint*) _tmp48_;
-#line 571 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 573 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp50_ = (*_tmp49_).x;
-#line 571 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 573 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp51_ = total;
-#line 571 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 573 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp52_ = self->priv->_PIX;
-#line 571 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 573 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				startAngle = _tmp45_ + ((_tmp50_ / _tmp51_) * _tmp52_);
-#line 571 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 573 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp49_);
-#line 572 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 574 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp53_ = self->priv->_pieChartXStart;
-#line 572 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 574 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp54_ = self->priv->_pieChartYStart;
-#line 572 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 574 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_line_to (cr, (gdouble) _tmp53_, (gdouble) _tmp54_);
-#line 573 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 575 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_fill (cr);
-#line 576 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 578 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp55_ = self->priv->_pieChartYLabelBStart;
-#line 576 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 578 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp56_ = self->priv->_pieChartYLabelBSpacing;
-#line 576 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 578 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp57_ = i;
-#line 576 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 578 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				yOffset = _tmp55_ + (_tmp56_ * _tmp57_);
-#line 577 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 579 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp58_ = self->priv->_width;
-#line 577 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 579 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp59_ = self->priv->_pieChartYLabelBStart;
-#line 577 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 579 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp60_ = yOffset;
-#line 577 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 579 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_move_to (cr, (gdouble) (_tmp58_ - _tmp59_), (gdouble) _tmp60_);
-#line 578 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 580 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp61_ = self->priv->_width;
-#line 578 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 580 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp62_ = self->priv->_pieChartYLabelBStart;
-#line 578 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 580 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp63_ = yOffset;
-#line 578 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 580 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp64_ = self->priv->_pieChartLabelBSize;
-#line 578 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 580 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp65_ = self->priv->_pieChartLabelBSize;
-#line 578 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 580 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_rectangle (cr, (gdouble) (_tmp61_ - _tmp62_), (gdouble) _tmp63_, (gdouble) _tmp64_, (gdouble) _tmp65_);
-#line 586 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 588 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_fill (cr);
-#line 589 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 591 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_set_source_rgb (cr, (gdouble) 1, (gdouble) 1, (gdouble) 1);
-#line 590 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 592 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp66_ = self->priv->_width;
-#line 590 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 592 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp67_ = self->priv->_pieChartLabelOffsetX;
-#line 590 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 592 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp68_ = yOffset;
-#line 590 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 592 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp69_ = self->priv->_pieChartLabelOffsetY;
-#line 590 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 592 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_move_to (cr, (gdouble) (_tmp66_ - _tmp67_), (gdouble) (_tmp68_ + _tmp69_));
-#line 591 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 593 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp70_ = self->pointsArray;
-#line 591 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 593 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp71_ = i;
-#line 591 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 593 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp72_ = gee_abstract_list_get ((GeeAbstractList*) _tmp70_, _tmp71_);
-#line 591 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 593 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp73_ = (CarolinePoint*) _tmp72_;
-#line 591 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 593 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp74_ = (*_tmp73_).x;
-#line 591 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 593 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp75_ = caroline_snipLongDouble (self, _tmp74_);
-#line 591 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 593 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp76_ = _tmp75_;
-#line 591 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 593 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_show_text (cr, _tmp76_);
-#line 591 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 593 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_g_free0 (_tmp76_);
-#line 591 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 593 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp73_);
-#line 595 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 597 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_stroke (cr);
-#line 2492 "Caroline.c"
+#line 2494 "Caroline.c"
 			}
 		}
 	}
@@ -2514,35 +2516,35 @@ caroline_scatterChart (Caroline* self,
 	gdouble xAxisCalculation = 0.0;
 	gdouble yAxisCalculation = 0.0;
 	gdouble _tmp0_;
-#line 612 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 614 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 612 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 614 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (cr != NULL);
-#line 615 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 617 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	maxX = (gdouble) 0;
-#line 615 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 617 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	xAxisCalculation = (gdouble) 0;
-#line 615 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 617 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	yAxisCalculation = (gdouble) 0;
-#line 618 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 620 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_lineThicknessData;
-#line 618 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 620 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	cairo_set_line_width (cr, _tmp0_);
-#line 621 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 623 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	cairo_set_source_rgba (cr, (gdouble) 0, (gdouble) 174, (gdouble) 174, 0.8);
-#line 2534 "Caroline.c"
+#line 2536 "Caroline.c"
 	{
 		gint i = 0;
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 0;
-#line 2539 "Caroline.c"
+#line 2541 "Caroline.c"
 		{
 			gboolean _tmp1_ = FALSE;
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp1_ = TRUE;
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 2546 "Caroline.c"
+#line 2548 "Caroline.c"
 				gint _tmp3_;
 				GeeArrayList* _tmp4_;
 				gint _tmp5_;
@@ -2554,87 +2556,87 @@ caroline_scatterChart (Caroline* self,
 				gdouble _tmp11_;
 				gdouble _tmp12_;
 				gboolean _tmp13_;
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp1_) {
-#line 2560 "Caroline.c"
+#line 2562 "Caroline.c"
 					gint _tmp2_;
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp2_ = i;
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp2_ + 1;
-#line 2566 "Caroline.c"
+#line 2568 "Caroline.c"
 				}
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp1_ = FALSE;
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp3_ = i;
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp4_ = self->pointsArray;
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp5_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp4_);
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp6_ = _tmp5_;
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(_tmp3_ < _tmp6_)) {
-#line 624 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 626 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 2582 "Caroline.c"
+#line 2584 "Caroline.c"
 				}
-#line 625 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 627 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp7_ = self->pointsArray;
-#line 625 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 627 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp8_ = i;
-#line 625 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 627 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp9_ = gee_abstract_list_get ((GeeAbstractList*) _tmp7_, _tmp8_);
-#line 625 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 627 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp10_ = (CarolinePoint*) _tmp9_;
-#line 625 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 627 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp11_ = (*_tmp10_).x;
-#line 625 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 627 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp12_ = maxX;
-#line 625 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 627 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp13_ = _tmp11_ > _tmp12_;
-#line 625 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 627 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp10_);
-#line 625 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 627 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (_tmp13_) {
-#line 2602 "Caroline.c"
+#line 2604 "Caroline.c"
 					GeeArrayList* _tmp14_;
 					gint _tmp15_;
 					gpointer _tmp16_;
 					CarolinePoint* _tmp17_;
 					gdouble _tmp18_;
-#line 626 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 628 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp14_ = self->pointsArray;
-#line 626 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 628 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp15_ = i;
-#line 626 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 628 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp16_ = gee_abstract_list_get ((GeeAbstractList*) _tmp14_, _tmp15_);
-#line 626 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 628 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp17_ = (CarolinePoint*) _tmp16_;
-#line 626 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 628 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp18_ = (*_tmp17_).x;
-#line 626 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 628 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					maxX = _tmp18_;
-#line 626 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 628 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_caroline_point_free0 (_tmp17_);
-#line 2622 "Caroline.c"
+#line 2624 "Caroline.c"
 				}
 			}
 		}
 	}
 	{
 		gint i = 0;
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 0;
-#line 2631 "Caroline.c"
+#line 2633 "Caroline.c"
 		{
 			gboolean _tmp19_ = FALSE;
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp19_ = TRUE;
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 2638 "Caroline.c"
+#line 2640 "Caroline.c"
 				gint _tmp21_;
 				GeeArrayList* _tmp22_;
 				gint _tmp23_;
@@ -2664,97 +2666,97 @@ caroline_scatterChart (Caroline* self,
 				gdouble _tmp47_;
 				gdouble _tmp48_;
 				gboolean _tmp49_;
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp19_) {
-#line 2670 "Caroline.c"
+#line 2672 "Caroline.c"
 					gint _tmp20_;
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp20_ = i;
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp20_ + 1;
-#line 2676 "Caroline.c"
+#line 2678 "Caroline.c"
 				}
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp19_ = FALSE;
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp21_ = i;
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp22_ = self->pointsArray;
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp23_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp22_);
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp24_ = _tmp23_;
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(_tmp21_ < _tmp24_)) {
-#line 629 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 631 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 2692 "Caroline.c"
+#line 2694 "Caroline.c"
 				}
-#line 632 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 634 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp25_ = self->pointsArray;
-#line 632 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 634 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp26_ = i;
-#line 632 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 634 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp27_ = gee_abstract_list_get ((GeeAbstractList*) _tmp25_, _tmp26_);
-#line 632 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 634 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp28_ = (CarolinePoint*) _tmp27_;
-#line 632 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 634 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp29_ = (*_tmp28_).x;
-#line 632 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 634 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp30_ = self->priv->_width;
-#line 632 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 634 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp31_ = maxX;
-#line 632 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 634 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp32_ = self->priv->_chartPadding;
-#line 632 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 634 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp33_ = self->priv->_widthPadding;
-#line 632 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 634 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				xAxisCalculation = ((_tmp29_ * (_tmp30_ / _tmp31_)) + _tmp32_) + (_tmp33_ / 3);
-#line 632 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 634 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp28_);
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp34_ = self->priv->_height;
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp35_ = self->priv->_chartPadding;
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp36_ = self->priv->_spreadFinalY;
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp37_ = self->pointsArray;
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp38_ = i;
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp39_ = gee_abstract_list_get ((GeeAbstractList*) _tmp37_, _tmp38_);
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp40_ = (CarolinePoint*) _tmp39_;
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp41_ = (*_tmp40_).y;
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp42_ = self->priv->_min;
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp43_ = self->priv->_max;
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp44_ = self->priv->_min;
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp45_ = self->priv->_spreadY;
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				yAxisCalculation = (_tmp34_ + _tmp35_) - ((_tmp36_ * ((_tmp41_ - _tmp42_) / (_tmp43_ - _tmp44_))) * _tmp45_);
-#line 633 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 635 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_caroline_point_free0 (_tmp40_);
-#line 637 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 639 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp46_ = xAxisCalculation;
-#line 637 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 639 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp47_ = yAxisCalculation;
-#line 637 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 639 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp48_ = self->priv->_PIX;
-#line 637 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 639 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_arc (cr, _tmp46_, _tmp47_, (gdouble) 3, (gdouble) 0, _tmp48_);
-#line 645 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 647 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				cairo_fill (cr);
-#line 648 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 650 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp49_ = self->priv->_scatterLabels;
-#line 648 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 650 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (_tmp49_) {
-#line 2758 "Caroline.c"
+#line 2760 "Caroline.c"
 					gint yCount = 0;
 					gint y = 0;
 					GeeArrayList* _tmp50_;
@@ -2797,168 +2799,168 @@ caroline_scatterChart (Caroline* self,
 					gchar* _tmp89_;
 					gchar* _tmp90_;
 					gchar* _tmp91_;
-#line 650 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 652 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					yCount = 0;
-#line 650 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 652 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp50_ = self->pointsArray;
-#line 650 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 652 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp51_ = i;
-#line 650 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 652 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp52_ = gee_abstract_list_get ((GeeAbstractList*) _tmp50_, _tmp51_);
-#line 650 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 652 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp53_ = (CarolinePoint*) _tmp52_;
-#line 650 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 652 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp54_ = (*_tmp53_).y;
-#line 650 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 652 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp55_ = (gint) _tmp54_;
-#line 650 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 652 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_caroline_point_free0 (_tmp53_);
-#line 650 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 652 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					y = _tmp55_;
-#line 654 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 656 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					while (TRUE) {
-#line 2821 "Caroline.c"
+#line 2823 "Caroline.c"
 						gint _tmp56_;
 						gint _tmp57_;
 						gint _tmp58_;
-#line 654 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 656 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp56_ = y;
-#line 654 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 656 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						if (!(_tmp56_ > 0)) {
-#line 654 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 656 "/home/dcharles/Documents/Caroline/Caroline.vala"
 							break;
-#line 2831 "Caroline.c"
+#line 2833 "Caroline.c"
 						}
-#line 656 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 658 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp57_ = y;
-#line 656 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 658 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						y = _tmp57_ / 10;
-#line 657 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 659 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp58_ = yCount;
-#line 657 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 659 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						yCount = _tmp58_ + 1;
-#line 2841 "Caroline.c"
+#line 2843 "Caroline.c"
 					}
-#line 661 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 663 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp59_ = yCount;
-#line 661 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 663 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					yCount = _tmp59_ + 1;
-#line 663 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 665 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					xCount = 0;
-#line 663 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 665 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp60_ = self->pointsArray;
-#line 663 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 665 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp61_ = i;
-#line 663 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 665 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp62_ = gee_abstract_list_get ((GeeAbstractList*) _tmp60_, _tmp61_);
-#line 663 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 665 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp63_ = (CarolinePoint*) _tmp62_;
-#line 663 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 665 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp64_ = (*_tmp63_).x;
-#line 663 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 665 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp65_ = (gint) _tmp64_;
-#line 663 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 665 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_caroline_point_free0 (_tmp63_);
-#line 663 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 665 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					x = _tmp65_;
-#line 665 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 667 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					while (TRUE) {
-#line 2867 "Caroline.c"
+#line 2869 "Caroline.c"
 						gint _tmp66_;
 						gint _tmp67_;
 						gint _tmp68_;
-#line 665 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 667 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp66_ = x;
-#line 665 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 667 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						if (!(_tmp66_ > 0)) {
-#line 665 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 667 "/home/dcharles/Documents/Caroline/Caroline.vala"
 							break;
-#line 2877 "Caroline.c"
+#line 2879 "Caroline.c"
 						}
-#line 667 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 669 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp67_ = x;
-#line 667 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 669 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						x = _tmp67_ / 10;
-#line 668 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 670 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp68_ = xCount;
-#line 668 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 670 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						xCount = _tmp68_ + 1;
-#line 2887 "Caroline.c"
+#line 2889 "Caroline.c"
 					}
-#line 672 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 674 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp69_ = xCount;
-#line 672 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 674 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					xCount = _tmp69_ + 1;
-#line 675 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 677 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp70_ = yCount;
-#line 675 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 677 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					spacingY = 3.8 * _tmp70_;
-#line 676 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 678 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp71_ = xCount;
-#line 676 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 678 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					spacingX = 3.8 * _tmp71_;
-#line 679 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 681 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp72_ = xAxisCalculation;
-#line 679 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 681 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp73_ = spacingY;
-#line 679 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 681 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp74_ = spacingX;
-#line 679 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 681 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp75_ = yAxisCalculation;
-#line 679 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 681 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					cairo_move_to (cr, _tmp72_ - (_tmp73_ + _tmp74_), _tmp75_ - 5);
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp76_ = self->pointsArray;
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp77_ = i;
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp78_ = gee_abstract_list_get ((GeeAbstractList*) _tmp76_, _tmp77_);
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp79_ = (CarolinePoint*) _tmp78_;
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp80_ = (*_tmp79_).x;
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp81_ = caroline_snipLongDouble (self, _tmp80_);
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp82_ = _tmp81_;
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp83_ = self->pointsArray;
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp84_ = i;
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp85_ = gee_abstract_list_get ((GeeAbstractList*) _tmp83_, _tmp84_);
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp86_ = (CarolinePoint*) _tmp85_;
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp87_ = (*_tmp86_).y;
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp88_ = caroline_snipLongDouble (self, _tmp87_);
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp89_ = _tmp88_;
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp90_ = g_strconcat (_tmp82_, ",", _tmp89_, NULL);
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp91_ = _tmp90_;
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					cairo_show_text (cr, _tmp91_);
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_g_free0 (_tmp91_);
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_g_free0 (_tmp89_);
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_caroline_point_free0 (_tmp86_);
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_g_free0 (_tmp82_);
-#line 685 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 687 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_caroline_point_free0 (_tmp79_);
-#line 2955 "Caroline.c"
+#line 2957 "Caroline.c"
 				}
 			}
 		}
 	}
-#line 696 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 698 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	cairo_stroke (cr);
-#line 2962 "Caroline.c"
+#line 2964 "Caroline.c"
 }
 
 
@@ -2974,21 +2976,21 @@ caroline_scatterChart (Caroline* self,
 static void
 caroline_generateColors (Caroline* self)
 {
-#line 709 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 711 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 2980 "Caroline.c"
+#line 2982 "Caroline.c"
 	{
 		gint i = 0;
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		i = 0;
-#line 2985 "Caroline.c"
+#line 2987 "Caroline.c"
 		{
 			gboolean _tmp0_ = FALSE;
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			_tmp0_ = TRUE;
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			while (TRUE) {
-#line 2992 "Caroline.c"
+#line 2994 "Caroline.c"
 				gint _tmp2_;
 				GeeArrayList* _tmp3_;
 				gint _tmp4_;
@@ -2998,49 +3000,49 @@ caroline_generateColors (Caroline* self)
 				GeeArrayList* _tmp7_;
 				gint _tmp8_;
 				CarolineChartColor _tmp9_;
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!_tmp0_) {
-#line 3004 "Caroline.c"
+#line 3006 "Caroline.c"
 					gint _tmp1_;
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp1_ = i;
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					i = _tmp1_ + 1;
-#line 3010 "Caroline.c"
+#line 3012 "Caroline.c"
 				}
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp0_ = FALSE;
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp2_ = i;
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp3_ = self->pointsArray;
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp4_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp3_);
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp5_ = _tmp4_;
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				if (!(_tmp2_ < _tmp5_)) {
-#line 711 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 713 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					break;
-#line 3026 "Caroline.c"
+#line 3028 "Caroline.c"
 				}
-#line 714 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 716 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp6_.r = g_random_double_range ((gdouble) 0, (gdouble) 1);
-#line 714 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 716 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp6_.g = g_random_double_range ((gdouble) 0, (gdouble) 1);
-#line 714 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 716 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp6_.b = g_random_double_range ((gdouble) 0, (gdouble) 1);
-#line 714 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 716 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				chartColor = _tmp6_;
-#line 720 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 722 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp7_ = self->chartColorArray;
-#line 720 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 722 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp8_ = i;
-#line 720 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 722 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp9_ = chartColor;
-#line 720 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 722 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				gee_abstract_list_insert ((GeeAbstractList*) _tmp7_, _tmp8_, &_tmp9_);
-#line 3044 "Caroline.c"
+#line 3046 "Caroline.c"
 			}
 		}
 	}
@@ -3066,50 +3068,50 @@ caroline_arrayListSort (Caroline* self)
 	gdouble tmpY = 0.0;
 	CarolinePoint point = {0};
 	CarolinePoint _tmp0_ = {0};
-#line 736 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 738 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 738 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 740 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	swapped = TRUE;
-#line 739 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 741 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	j = 0;
-#line 741 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 743 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_.x = (gdouble) 0;
-#line 741 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 743 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_.y = (gdouble) 0;
-#line 741 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 743 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	point = _tmp0_;
-#line 743 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 745 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	while (TRUE) {
-#line 3084 "Caroline.c"
+#line 3086 "Caroline.c"
 		gboolean _tmp1_;
 		gint _tmp2_;
-#line 743 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 745 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp1_ = swapped;
-#line 743 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 745 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		if (!_tmp1_) {
-#line 743 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 745 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			break;
-#line 3093 "Caroline.c"
+#line 3095 "Caroline.c"
 		}
-#line 745 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 747 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		swapped = FALSE;
-#line 746 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 748 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp2_ = j;
-#line 746 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 748 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		j = _tmp2_ + 1;
-#line 3101 "Caroline.c"
+#line 3103 "Caroline.c"
 		{
 			gint i = 0;
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 			i = 0;
-#line 3106 "Caroline.c"
+#line 3108 "Caroline.c"
 			{
 				gboolean _tmp3_ = FALSE;
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				_tmp3_ = TRUE;
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 				while (TRUE) {
-#line 3113 "Caroline.c"
+#line 3115 "Caroline.c"
 					gint _tmp5_;
 					GeeArrayList* _tmp6_;
 					gint _tmp7_;
@@ -3126,63 +3128,63 @@ caroline_arrayListSort (Caroline* self)
 					CarolinePoint* _tmp18_;
 					gdouble _tmp19_;
 					gboolean _tmp20_;
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (!_tmp3_) {
-#line 3132 "Caroline.c"
+#line 3134 "Caroline.c"
 						gint _tmp4_;
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp4_ = i;
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						i = _tmp4_ + 1;
-#line 3138 "Caroline.c"
+#line 3140 "Caroline.c"
 					}
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp3_ = FALSE;
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp5_ = i;
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp6_ = self->pointsArray;
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp7_ = gee_abstract_collection_get_size ((GeeAbstractCollection*) _tmp6_);
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp8_ = _tmp7_;
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp9_ = j;
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (!(_tmp5_ < (_tmp8_ - _tmp9_))) {
-#line 748 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 750 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						break;
-#line 3156 "Caroline.c"
+#line 3158 "Caroline.c"
 					}
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp10_ = self->pointsArray;
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp11_ = i;
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp12_ = gee_abstract_list_get ((GeeAbstractList*) _tmp10_, _tmp11_);
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp13_ = (CarolinePoint*) _tmp12_;
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp14_ = (*_tmp13_).x;
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp15_ = self->pointsArray;
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp16_ = i;
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp17_ = gee_abstract_list_get ((GeeAbstractList*) _tmp15_, _tmp16_ + 1);
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp18_ = (CarolinePoint*) _tmp17_;
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp19_ = (*_tmp18_).x;
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_tmp20_ = _tmp14_ > _tmp19_;
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_caroline_point_free0 (_tmp18_);
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					_caroline_point_free0 (_tmp13_);
-#line 752 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 754 "/home/dcharles/Documents/Caroline/Caroline.vala"
 					if (_tmp20_) {
-#line 3186 "Caroline.c"
+#line 3188 "Caroline.c"
 						GeeArrayList* _tmp21_;
 						gint _tmp22_;
 						gpointer _tmp23_;
@@ -3213,93 +3215,93 @@ caroline_arrayListSort (Caroline* self)
 						GeeArrayList* _tmp48_;
 						gint _tmp49_;
 						CarolinePoint _tmp50_;
-#line 754 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 756 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp21_ = self->pointsArray;
-#line 754 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 756 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp22_ = i;
-#line 754 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 756 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp23_ = gee_abstract_list_get ((GeeAbstractList*) _tmp21_, _tmp22_);
-#line 754 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 756 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp24_ = (CarolinePoint*) _tmp23_;
-#line 754 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 756 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp25_ = (*_tmp24_).x;
-#line 754 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 756 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						tmpX = _tmp25_;
-#line 754 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 756 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_caroline_point_free0 (_tmp24_);
-#line 755 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 757 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp26_ = self->pointsArray;
-#line 755 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 757 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp27_ = i;
-#line 755 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 757 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp28_ = gee_abstract_list_get ((GeeAbstractList*) _tmp26_, _tmp27_);
-#line 755 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 757 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp29_ = (CarolinePoint*) _tmp28_;
-#line 755 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 757 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp30_ = (*_tmp29_).y;
-#line 755 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 757 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						tmpY = _tmp30_;
-#line 755 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 757 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_caroline_point_free0 (_tmp29_);
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp31_ = self->pointsArray;
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp32_ = i;
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp33_ = gee_abstract_list_get ((GeeAbstractList*) _tmp31_, _tmp32_ + 1);
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp34_ = (CarolinePoint*) _tmp33_;
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp35_ = (*_tmp34_).x;
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp36_ = self->pointsArray;
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp37_ = i;
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp38_ = gee_abstract_list_get ((GeeAbstractList*) _tmp36_, _tmp37_ + 1);
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp39_ = (CarolinePoint*) _tmp38_;
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp40_ = (*_tmp39_).y;
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp41_.x = _tmp35_;
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp41_.y = _tmp40_;
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						point = _tmp41_;
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_caroline_point_free0 (_tmp39_);
-#line 757 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 759 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_caroline_point_free0 (_tmp34_);
-#line 758 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 760 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp42_ = self->pointsArray;
-#line 758 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 760 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp43_ = i;
-#line 758 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 760 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp44_ = point;
-#line 758 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 760 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						gee_abstract_list_set ((GeeAbstractList*) _tmp42_, _tmp43_, &_tmp44_);
-#line 760 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 762 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp45_ = tmpX;
-#line 760 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 762 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp46_ = tmpY;
-#line 760 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 762 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp47_.x = _tmp45_;
-#line 760 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 762 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp47_.y = _tmp46_;
-#line 760 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 762 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						point = _tmp47_;
-#line 761 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 763 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp48_ = self->pointsArray;
-#line 761 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 763 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp49_ = i;
-#line 761 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 763 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						_tmp50_ = point;
-#line 761 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 763 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						gee_abstract_list_set ((GeeAbstractList*) _tmp48_, _tmp49_ + 1, &_tmp50_);
-#line 763 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 765 "/home/dcharles/Documents/Caroline/Caroline.vala"
 						swapped = TRUE;
-#line 3303 "Caroline.c"
+#line 3305 "Caroline.c"
 					}
 				}
 			}
@@ -3323,15 +3325,15 @@ caroline_snipLongDouble (Caroline* self,
 {
 	gchar* result = NULL;
 	gchar* _tmp0_;
-#line 782 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 784 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, NULL);
-#line 784 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 786 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = g_strdup_printf ("%0.1f", number);
-#line 784 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 786 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 784 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 786 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3335 "Caroline.c"
+#line 3337 "Caroline.c"
 }
 
 
@@ -3340,15 +3342,15 @@ caroline_get_spreadFinalY (Caroline* self)
 {
 	gdouble result;
 	gdouble _tmp0_;
-#line 28 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 30 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0.0);
-#line 28 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 30 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_spreadFinalY;
-#line 28 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 30 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 28 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 30 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3352 "Caroline.c"
+#line 3354 "Caroline.c"
 }
 
 
@@ -3356,11 +3358,11 @@ static void
 caroline_set_spreadFinalY (Caroline* self,
                            gdouble value)
 {
-#line 28 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 30 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 28 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 30 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_spreadFinalY = value;
-#line 3364 "Caroline.c"
+#line 3366 "Caroline.c"
 }
 
 
@@ -3369,15 +3371,15 @@ caroline_get_spreadFinalX (Caroline* self)
 {
 	gdouble result;
 	gdouble _tmp0_;
-#line 29 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 31 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0.0);
-#line 29 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 31 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_spreadFinalX;
-#line 29 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 31 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 29 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 31 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3381 "Caroline.c"
+#line 3383 "Caroline.c"
 }
 
 
@@ -3385,11 +3387,11 @@ static void
 caroline_set_spreadFinalX (Caroline* self,
                            gdouble value)
 {
-#line 29 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 31 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 29 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 31 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_spreadFinalX = value;
-#line 3393 "Caroline.c"
+#line 3395 "Caroline.c"
 }
 
 
@@ -3398,15 +3400,15 @@ caroline_get_yTickStart (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 31 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 33 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 31 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 33 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_yTickStart;
-#line 31 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 33 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 31 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 33 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3410 "Caroline.c"
+#line 3412 "Caroline.c"
 }
 
 
@@ -3414,11 +3416,11 @@ static void
 caroline_set_yTickStart (Caroline* self,
                          gint value)
 {
-#line 31 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 33 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 31 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 33 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_yTickStart = value;
-#line 3422 "Caroline.c"
+#line 3424 "Caroline.c"
 }
 
 
@@ -3427,15 +3429,15 @@ caroline_get_yTickEnd (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 32 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 34 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 32 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 34 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_yTickEnd;
-#line 32 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 34 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 32 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 34 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3439 "Caroline.c"
+#line 3441 "Caroline.c"
 }
 
 
@@ -3443,11 +3445,11 @@ static void
 caroline_set_yTickEnd (Caroline* self,
                        gint value)
 {
-#line 32 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 34 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 32 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 34 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_yTickEnd = value;
-#line 3451 "Caroline.c"
+#line 3453 "Caroline.c"
 }
 
 
@@ -3456,15 +3458,15 @@ caroline_get_yTextStart (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 33 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 35 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 33 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 35 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_yTextStart;
-#line 33 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 35 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 33 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 35 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3468 "Caroline.c"
+#line 3470 "Caroline.c"
 }
 
 
@@ -3472,11 +3474,11 @@ static void
 caroline_set_yTextStart (Caroline* self,
                          gint value)
 {
-#line 33 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 35 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 33 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 35 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_yTextStart = value;
-#line 3480 "Caroline.c"
+#line 3482 "Caroline.c"
 }
 
 
@@ -3485,15 +3487,15 @@ caroline_get_xTickStart (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 35 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 37 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 35 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 37 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_xTickStart;
-#line 35 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 37 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 35 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 37 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3497 "Caroline.c"
+#line 3499 "Caroline.c"
 }
 
 
@@ -3501,11 +3503,11 @@ static void
 caroline_set_xTickStart (Caroline* self,
                          gint value)
 {
-#line 35 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 37 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 35 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 37 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_xTickStart = value;
-#line 3509 "Caroline.c"
+#line 3511 "Caroline.c"
 }
 
 
@@ -3514,15 +3516,15 @@ caroline_get_xTickEnd (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 36 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 38 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 36 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 38 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_xTickEnd;
-#line 36 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 38 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 36 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 38 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3526 "Caroline.c"
+#line 3528 "Caroline.c"
 }
 
 
@@ -3530,11 +3532,11 @@ static void
 caroline_set_xTickEnd (Caroline* self,
                        gint value)
 {
-#line 36 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 38 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 36 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 38 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_xTickEnd = value;
-#line 3538 "Caroline.c"
+#line 3540 "Caroline.c"
 }
 
 
@@ -3543,15 +3545,15 @@ caroline_get_xTextStart (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 37 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 39 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 37 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 39 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_xTextStart;
-#line 37 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 39 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 37 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 39 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3555 "Caroline.c"
+#line 3557 "Caroline.c"
 }
 
 
@@ -3559,11 +3561,11 @@ static void
 caroline_set_xTextStart (Caroline* self,
                          gint value)
 {
-#line 37 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 39 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 37 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 39 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_xTextStart = value;
-#line 3567 "Caroline.c"
+#line 3569 "Caroline.c"
 }
 
 
@@ -3572,15 +3574,15 @@ caroline_get_xTextEnd (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 38 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 40 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 38 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 40 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_xTextEnd;
-#line 38 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 40 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 38 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 40 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3584 "Caroline.c"
+#line 3586 "Caroline.c"
 }
 
 
@@ -3588,11 +3590,11 @@ static void
 caroline_set_xTextEnd (Caroline* self,
                        gint value)
 {
-#line 38 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 40 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 38 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 40 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_xTextEnd = value;
-#line 3596 "Caroline.c"
+#line 3598 "Caroline.c"
 }
 
 
@@ -3601,15 +3603,15 @@ caroline_get_widthPadding (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 40 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 42 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 40 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 42 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_widthPadding;
-#line 40 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 42 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 40 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 42 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3613 "Caroline.c"
+#line 3615 "Caroline.c"
 }
 
 
@@ -3617,11 +3619,11 @@ static void
 caroline_set_widthPadding (Caroline* self,
                            gint value)
 {
-#line 40 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 42 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 40 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 42 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_widthPadding = value;
-#line 3625 "Caroline.c"
+#line 3627 "Caroline.c"
 }
 
 
@@ -3630,15 +3632,15 @@ caroline_get_heightPadding (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 41 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 43 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 41 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 43 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_heightPadding;
-#line 41 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 43 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 41 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 43 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3642 "Caroline.c"
+#line 3644 "Caroline.c"
 }
 
 
@@ -3646,11 +3648,11 @@ static void
 caroline_set_heightPadding (Caroline* self,
                             gint value)
 {
-#line 41 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 43 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 41 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 43 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_heightPadding = value;
-#line 3654 "Caroline.c"
+#line 3656 "Caroline.c"
 }
 
 
@@ -3659,15 +3661,15 @@ caroline_get_gap (Caroline* self)
 {
 	gdouble result;
 	gdouble _tmp0_;
-#line 43 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 45 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0.0);
-#line 43 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 45 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_gap;
-#line 43 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 45 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 43 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 45 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3671 "Caroline.c"
+#line 3673 "Caroline.c"
 }
 
 
@@ -3675,11 +3677,11 @@ static void
 caroline_set_gap (Caroline* self,
                   gdouble value)
 {
-#line 43 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 45 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 43 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 45 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_gap = value;
-#line 3683 "Caroline.c"
+#line 3685 "Caroline.c"
 }
 
 
@@ -3688,15 +3690,15 @@ caroline_get_max (Caroline* self)
 {
 	gdouble result;
 	gdouble _tmp0_;
-#line 44 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 46 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0.0);
-#line 44 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 46 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_max;
-#line 44 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 46 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 44 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 46 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3700 "Caroline.c"
+#line 3702 "Caroline.c"
 }
 
 
@@ -3704,11 +3706,11 @@ static void
 caroline_set_max (Caroline* self,
                   gdouble value)
 {
-#line 44 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 46 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 44 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 46 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_max = value;
-#line 3712 "Caroline.c"
+#line 3714 "Caroline.c"
 }
 
 
@@ -3717,15 +3719,15 @@ caroline_get_min (Caroline* self)
 {
 	gdouble result;
 	gdouble _tmp0_;
-#line 45 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 47 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0.0);
-#line 45 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 47 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_min;
-#line 45 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 47 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 45 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 47 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3729 "Caroline.c"
+#line 3731 "Caroline.c"
 }
 
 
@@ -3733,11 +3735,11 @@ static void
 caroline_set_min (Caroline* self,
                   gdouble value)
 {
-#line 45 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 47 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 45 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 47 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_min = value;
-#line 3741 "Caroline.c"
+#line 3743 "Caroline.c"
 }
 
 
@@ -3746,15 +3748,15 @@ caroline_get_rectangleXOffset (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 47 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 49 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 47 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 49 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_rectangleXOffset;
-#line 47 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 49 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 47 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 49 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3758 "Caroline.c"
+#line 3760 "Caroline.c"
 }
 
 
@@ -3762,11 +3764,11 @@ static void
 caroline_set_rectangleXOffset (Caroline* self,
                                gint value)
 {
-#line 47 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 49 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 47 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 49 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_rectangleXOffset = value;
-#line 3770 "Caroline.c"
+#line 3772 "Caroline.c"
 }
 
 
@@ -3775,15 +3777,15 @@ caroline_get_PIX (Caroline* self)
 {
 	gdouble result;
 	gdouble _tmp0_;
-#line 51 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 53 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0.0);
-#line 51 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 53 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_PIX;
-#line 51 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 53 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 51 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 53 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3787 "Caroline.c"
+#line 3789 "Caroline.c"
 }
 
 
@@ -3791,11 +3793,11 @@ static void
 caroline_set_PIX (Caroline* self,
                   gdouble value)
 {
-#line 51 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 53 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 51 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 53 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->_PIX = value;
-#line 3799 "Caroline.c"
+#line 3801 "Caroline.c"
 }
 
 
@@ -3804,15 +3806,15 @@ caroline_get_width (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 71 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 73 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 71 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 73 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_width;
-#line 71 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 73 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 71 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 73 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3816 "Caroline.c"
+#line 3818 "Caroline.c"
 }
 
 
@@ -3820,15 +3822,15 @@ void
 caroline_set_width (Caroline* self,
                     gint value)
 {
-#line 71 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 73 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 71 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 73 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_width (self) != value) {
-#line 71 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 73 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_width = value;
-#line 71 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 73 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_WIDTH_PROPERTY]);
-#line 3832 "Caroline.c"
+#line 3834 "Caroline.c"
 	}
 }
 
@@ -3838,15 +3840,15 @@ caroline_get_height (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 72 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 74 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 72 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 74 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_height;
-#line 72 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 74 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 72 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 74 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3850 "Caroline.c"
+#line 3852 "Caroline.c"
 }
 
 
@@ -3854,15 +3856,15 @@ void
 caroline_set_height (Caroline* self,
                      gint value)
 {
-#line 72 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 74 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 72 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 74 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_height (self) != value) {
-#line 72 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 74 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_height = value;
-#line 72 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 74 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_HEIGHT_PROPERTY]);
-#line 3866 "Caroline.c"
+#line 3868 "Caroline.c"
 	}
 }
 
@@ -3872,15 +3874,15 @@ caroline_get_chartPadding (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 74 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 76 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 74 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 76 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_chartPadding;
-#line 74 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 76 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 74 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 76 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3884 "Caroline.c"
+#line 3886 "Caroline.c"
 }
 
 
@@ -3888,15 +3890,15 @@ void
 caroline_set_chartPadding (Caroline* self,
                            gint value)
 {
-#line 74 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 76 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 74 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 76 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_chartPadding (self) != value) {
-#line 74 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 76 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_chartPadding = value;
-#line 74 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 76 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_CHART_PADDING_PROPERTY]);
-#line 3900 "Caroline.c"
+#line 3902 "Caroline.c"
 	}
 }
 
@@ -3906,15 +3908,15 @@ caroline_get_lineThicknessTicks (Caroline* self)
 {
 	gdouble result;
 	gdouble _tmp0_;
-#line 76 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 78 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0.0);
-#line 76 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 78 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_lineThicknessTicks;
-#line 76 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 78 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 76 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 78 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3918 "Caroline.c"
+#line 3920 "Caroline.c"
 }
 
 
@@ -3922,15 +3924,15 @@ void
 caroline_set_lineThicknessTicks (Caroline* self,
                                  gdouble value)
 {
-#line 76 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 78 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 76 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 78 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_lineThicknessTicks (self) != value) {
-#line 76 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 78 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_lineThicknessTicks = value;
-#line 76 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 78 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_LINE_THICKNESS_TICKS_PROPERTY]);
-#line 3934 "Caroline.c"
+#line 3936 "Caroline.c"
 	}
 }
 
@@ -3940,15 +3942,15 @@ caroline_get_lineThicknessPlane (Caroline* self)
 {
 	gdouble result;
 	gdouble _tmp0_;
-#line 77 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 79 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0.0);
-#line 77 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 79 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_lineThicknessPlane;
-#line 77 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 79 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 77 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 79 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3952 "Caroline.c"
+#line 3954 "Caroline.c"
 }
 
 
@@ -3956,15 +3958,15 @@ void
 caroline_set_lineThicknessPlane (Caroline* self,
                                  gdouble value)
 {
-#line 77 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 79 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 77 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 79 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_lineThicknessPlane (self) != value) {
-#line 77 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 79 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_lineThicknessPlane = value;
-#line 77 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 79 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_LINE_THICKNESS_PLANE_PROPERTY]);
-#line 3968 "Caroline.c"
+#line 3970 "Caroline.c"
 	}
 }
 
@@ -3974,15 +3976,15 @@ caroline_get_lineThicknessData (Caroline* self)
 {
 	gdouble result;
 	gdouble _tmp0_;
-#line 78 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 80 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0.0);
-#line 78 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 80 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_lineThicknessData;
-#line 78 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 80 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 78 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 80 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 3986 "Caroline.c"
+#line 3988 "Caroline.c"
 }
 
 
@@ -3990,15 +3992,15 @@ void
 caroline_set_lineThicknessData (Caroline* self,
                                 gdouble value)
 {
-#line 78 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 80 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 78 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 80 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_lineThicknessData (self) != value) {
-#line 78 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 80 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_lineThicknessData = value;
-#line 78 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 80 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_LINE_THICKNESS_DATA_PROPERTY]);
-#line 4002 "Caroline.c"
+#line 4004 "Caroline.c"
 	}
 }
 
@@ -4008,15 +4010,15 @@ caroline_get_spreadY (Caroline* self)
 {
 	gdouble result;
 	gdouble _tmp0_;
-#line 79 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 81 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0.0);
-#line 79 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 81 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_spreadY;
-#line 79 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 81 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 79 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 81 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4020 "Caroline.c"
+#line 4022 "Caroline.c"
 }
 
 
@@ -4024,15 +4026,15 @@ void
 caroline_set_spreadY (Caroline* self,
                       gdouble value)
 {
-#line 79 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 81 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 79 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 81 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_spreadY (self) != value) {
-#line 79 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 81 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_spreadY = value;
-#line 79 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 81 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_SPREAD_Y_PROPERTY]);
-#line 4036 "Caroline.c"
+#line 4038 "Caroline.c"
 	}
 }
 
@@ -4042,15 +4044,15 @@ caroline_get_spreadX (Caroline* self)
 {
 	gdouble result;
 	gdouble _tmp0_;
-#line 80 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 82 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0.0);
-#line 80 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 82 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_spreadX;
-#line 80 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 82 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 80 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 82 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4054 "Caroline.c"
+#line 4056 "Caroline.c"
 }
 
 
@@ -4058,15 +4060,15 @@ void
 caroline_set_spreadX (Caroline* self,
                       gdouble value)
 {
-#line 80 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 82 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 80 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 82 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_spreadX (self) != value) {
-#line 80 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 82 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_spreadX = value;
-#line 80 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 82 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_SPREAD_X_PROPERTY]);
-#line 4070 "Caroline.c"
+#line 4072 "Caroline.c"
 	}
 }
 
@@ -4076,15 +4078,15 @@ caroline_get_dataTypeY (Caroline* self)
 {
 	const gchar* result;
 	const gchar* _tmp0_;
-#line 82 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 84 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, NULL);
-#line 82 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 84 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_dataTypeY;
-#line 82 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 84 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 82 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 84 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4088 "Caroline.c"
+#line 4090 "Caroline.c"
 }
 
 
@@ -4092,21 +4094,21 @@ void
 caroline_set_dataTypeY (Caroline* self,
                         const gchar* value)
 {
-#line 82 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 84 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 82 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 84 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (g_strcmp0 (value, caroline_get_dataTypeY (self)) != 0) {
-#line 4100 "Caroline.c"
+#line 4102 "Caroline.c"
 		gchar* _tmp0_;
-#line 82 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 84 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp0_ = g_strdup (value);
-#line 82 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 84 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_g_free0 (self->priv->_dataTypeY);
-#line 82 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 84 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_dataTypeY = _tmp0_;
-#line 82 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 84 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_DATA_TYPE_Y_PROPERTY]);
-#line 4110 "Caroline.c"
+#line 4112 "Caroline.c"
 	}
 }
 
@@ -4116,15 +4118,15 @@ caroline_get_dataTypeX (Caroline* self)
 {
 	const gchar* result;
 	const gchar* _tmp0_;
-#line 83 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 85 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, NULL);
-#line 83 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 85 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_dataTypeX;
-#line 83 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 85 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 83 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 85 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4128 "Caroline.c"
+#line 4130 "Caroline.c"
 }
 
 
@@ -4132,21 +4134,21 @@ void
 caroline_set_dataTypeX (Caroline* self,
                         const gchar* value)
 {
-#line 83 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 85 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 83 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 85 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (g_strcmp0 (value, caroline_get_dataTypeX (self)) != 0) {
-#line 4140 "Caroline.c"
+#line 4142 "Caroline.c"
 		gchar* _tmp0_;
-#line 83 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 85 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp0_ = g_strdup (value);
-#line 83 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 85 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_g_free0 (self->priv->_dataTypeX);
-#line 83 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 85 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_dataTypeX = _tmp0_;
-#line 83 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 85 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_DATA_TYPE_X_PROPERTY]);
-#line 4150 "Caroline.c"
+#line 4152 "Caroline.c"
 	}
 }
 
@@ -4156,15 +4158,15 @@ caroline_get_chartType (Caroline* self)
 {
 	const gchar* result;
 	const gchar* _tmp0_;
-#line 84 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 86 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, NULL);
-#line 84 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 86 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_chartType;
-#line 84 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 86 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 84 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 86 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4168 "Caroline.c"
+#line 4170 "Caroline.c"
 }
 
 
@@ -4172,21 +4174,21 @@ void
 caroline_set_chartType (Caroline* self,
                         const gchar* value)
 {
-#line 84 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 86 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 84 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 86 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (g_strcmp0 (value, caroline_get_chartType (self)) != 0) {
-#line 4180 "Caroline.c"
+#line 4182 "Caroline.c"
 		gchar* _tmp0_;
-#line 84 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 86 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_tmp0_ = g_strdup (value);
-#line 84 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 86 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		_g_free0 (self->priv->_chartType);
-#line 84 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 86 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_chartType = _tmp0_;
-#line 84 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 86 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_CHART_TYPE_PROPERTY]);
-#line 4190 "Caroline.c"
+#line 4192 "Caroline.c"
 	}
 }
 
@@ -4196,15 +4198,15 @@ caroline_get_pieChartXStart (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 88 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 90 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 88 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 90 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_pieChartXStart;
-#line 88 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 90 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 88 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 90 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4208 "Caroline.c"
+#line 4210 "Caroline.c"
 }
 
 
@@ -4212,15 +4214,15 @@ void
 caroline_set_pieChartXStart (Caroline* self,
                              gint value)
 {
-#line 88 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 90 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 88 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 90 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_pieChartXStart (self) != value) {
-#line 88 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 90 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_pieChartXStart = value;
-#line 88 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 90 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_PIE_CHART_XSTART_PROPERTY]);
-#line 4224 "Caroline.c"
+#line 4226 "Caroline.c"
 	}
 }
 
@@ -4230,15 +4232,15 @@ caroline_get_pieChartYStart (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 89 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 91 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 89 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 91 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_pieChartYStart;
-#line 89 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 91 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 89 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 91 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4242 "Caroline.c"
+#line 4244 "Caroline.c"
 }
 
 
@@ -4246,15 +4248,15 @@ void
 caroline_set_pieChartYStart (Caroline* self,
                              gint value)
 {
-#line 89 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 91 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 89 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 91 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_pieChartYStart (self) != value) {
-#line 89 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 91 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_pieChartYStart = value;
-#line 89 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 91 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_PIE_CHART_YSTART_PROPERTY]);
-#line 4258 "Caroline.c"
+#line 4260 "Caroline.c"
 	}
 }
 
@@ -4264,15 +4266,15 @@ caroline_get_pieChartRadius (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 90 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 92 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 90 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 92 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_pieChartRadius;
-#line 90 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 92 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 90 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 92 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4276 "Caroline.c"
+#line 4278 "Caroline.c"
 }
 
 
@@ -4280,15 +4282,15 @@ void
 caroline_set_pieChartRadius (Caroline* self,
                              gint value)
 {
-#line 90 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 92 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 90 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 92 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_pieChartRadius (self) != value) {
-#line 90 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 92 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_pieChartRadius = value;
-#line 90 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 92 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_PIE_CHART_RADIUS_PROPERTY]);
-#line 4292 "Caroline.c"
+#line 4294 "Caroline.c"
 	}
 }
 
@@ -4298,15 +4300,15 @@ caroline_get_pieChartYLabelBStart (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 91 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 93 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 91 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 93 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_pieChartYLabelBStart;
-#line 91 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 93 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 91 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 93 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4310 "Caroline.c"
+#line 4312 "Caroline.c"
 }
 
 
@@ -4314,15 +4316,15 @@ void
 caroline_set_pieChartYLabelBStart (Caroline* self,
                                    gint value)
 {
-#line 91 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 93 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 91 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 93 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_pieChartYLabelBStart (self) != value) {
-#line 91 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 93 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_pieChartYLabelBStart = value;
-#line 91 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 93 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_PIE_CHART_YLABEL_BSTART_PROPERTY]);
-#line 4326 "Caroline.c"
+#line 4328 "Caroline.c"
 	}
 }
 
@@ -4332,15 +4334,15 @@ caroline_get_pieChartYLabelBSpacing (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 92 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 94 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 92 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 94 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_pieChartYLabelBSpacing;
-#line 92 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 94 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 92 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 94 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4344 "Caroline.c"
+#line 4346 "Caroline.c"
 }
 
 
@@ -4348,15 +4350,15 @@ void
 caroline_set_pieChartYLabelBSpacing (Caroline* self,
                                      gint value)
 {
-#line 92 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 94 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 92 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 94 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_pieChartYLabelBSpacing (self) != value) {
-#line 92 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 94 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_pieChartYLabelBSpacing = value;
-#line 92 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 94 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_PIE_CHART_YLABEL_BSPACING_PROPERTY]);
-#line 4360 "Caroline.c"
+#line 4362 "Caroline.c"
 	}
 }
 
@@ -4366,15 +4368,15 @@ caroline_get_pieChartLabelBSize (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 93 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 95 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 93 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 95 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_pieChartLabelBSize;
-#line 93 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 95 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 93 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 95 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4378 "Caroline.c"
+#line 4380 "Caroline.c"
 }
 
 
@@ -4382,15 +4384,15 @@ void
 caroline_set_pieChartLabelBSize (Caroline* self,
                                  gint value)
 {
-#line 93 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 95 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 93 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 95 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_pieChartLabelBSize (self) != value) {
-#line 93 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 95 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_pieChartLabelBSize = value;
-#line 93 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 95 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_PIE_CHART_LABEL_BSIZE_PROPERTY]);
-#line 4394 "Caroline.c"
+#line 4396 "Caroline.c"
 	}
 }
 
@@ -4400,15 +4402,15 @@ caroline_get_pieChartLabelOffsetX (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 94 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 96 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 94 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 96 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_pieChartLabelOffsetX;
-#line 94 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 96 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 94 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 96 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4412 "Caroline.c"
+#line 4414 "Caroline.c"
 }
 
 
@@ -4416,15 +4418,15 @@ void
 caroline_set_pieChartLabelOffsetX (Caroline* self,
                                    gint value)
 {
-#line 94 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 96 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 94 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 96 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_pieChartLabelOffsetX (self) != value) {
-#line 94 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 96 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_pieChartLabelOffsetX = value;
-#line 94 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 96 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_PIE_CHART_LABEL_OFFSET_X_PROPERTY]);
-#line 4428 "Caroline.c"
+#line 4430 "Caroline.c"
 	}
 }
 
@@ -4434,15 +4436,15 @@ caroline_get_pieChartLabelOffsetY (Caroline* self)
 {
 	gint result;
 	gint _tmp0_;
-#line 95 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 97 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, 0);
-#line 95 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 97 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_pieChartLabelOffsetY;
-#line 95 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 97 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 95 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 97 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4446 "Caroline.c"
+#line 4448 "Caroline.c"
 }
 
 
@@ -4450,15 +4452,15 @@ void
 caroline_set_pieChartLabelOffsetY (Caroline* self,
                                    gint value)
 {
-#line 95 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 97 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 95 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 97 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_pieChartLabelOffsetY (self) != value) {
-#line 95 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 97 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_pieChartLabelOffsetY = value;
-#line 95 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 97 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_PIE_CHART_LABEL_OFFSET_Y_PROPERTY]);
-#line 4462 "Caroline.c"
+#line 4464 "Caroline.c"
 	}
 }
 
@@ -4468,15 +4470,15 @@ caroline_get_scatterLabels (Caroline* self)
 {
 	gboolean result;
 	gboolean _tmp0_;
-#line 101 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 103 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_val_if_fail (self != NULL, FALSE);
-#line 101 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 103 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = self->priv->_scatterLabels;
-#line 101 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 103 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	result = _tmp0_;
-#line 101 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 103 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return result;
-#line 4480 "Caroline.c"
+#line 4482 "Caroline.c"
 }
 
 
@@ -4484,15 +4486,15 @@ void
 caroline_set_scatterLabels (Caroline* self,
                             gboolean value)
 {
-#line 101 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 103 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_return_if_fail (self != NULL);
-#line 101 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 103 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	if (caroline_get_scatterLabels (self) != value) {
-#line 101 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 103 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		self->priv->_scatterLabels = value;
-#line 101 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 103 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_object_notify_by_pspec ((GObject *) self, caroline_properties[CAROLINE_SCATTER_LABELS_PROPERTY]);
-#line 4496 "Caroline.c"
+#line 4498 "Caroline.c"
 	}
 }
 
@@ -4505,83 +4507,83 @@ caroline_constructor (GType type,
 	GObject * obj;
 	GObjectClass * parent_class;
 	Caroline * self;
-#line 103 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 105 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	parent_class = G_OBJECT_CLASS (caroline_parent_class);
-#line 103 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 105 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	obj = parent_class->constructor (type, n_construct_properties, construct_properties);
-#line 103 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 105 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self = G_TYPE_CHECK_INSTANCE_CAST (obj, TYPE_CAROLINE, Caroline);
-#line 106 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 108 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_widthPadding (self, 50);
-#line 107 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 109 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_heightPadding (self, 50);
-#line 109 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 111 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_chartPadding (self, 14);
-#line 111 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 113 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_yTickStart (self, 20);
-#line 112 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 114 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_yTickEnd (self, 45);
-#line 113 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 115 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_yTextStart (self, 0);
-#line 115 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 117 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_xTickStart (self, 20);
-#line 116 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 118 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_xTickEnd (self, 5);
-#line 117 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 119 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_xTextStart (self, 11);
-#line 118 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 120 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_xTextEnd (self, 30);
-#line 120 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 122 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_width (self, 500);
-#line 121 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 123 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_height (self, 500);
-#line 122 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 124 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_spreadX (self, (gdouble) 10);
-#line 123 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 125 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_spreadY (self, (gdouble) 10);
-#line 124 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 126 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_lineThicknessTicks (self, 0.5);
-#line 125 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 127 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_lineThicknessData (self, (gdouble) 1);
-#line 126 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 128 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_lineThicknessTicks (self, (gdouble) 2);
-#line 127 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 129 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_dataTypeY (self, "");
-#line 128 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 130 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_dataTypeX (self, "");
-#line 129 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 131 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_gap (self, (gdouble) 0);
-#line 130 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 132 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_min (self, (gdouble) 0);
-#line 131 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 133 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_max (self, (gdouble) 0);
-#line 132 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 134 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_chartType (self, "line");
-#line 134 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 136 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_rectangleXOffset (self, 10);
-#line 136 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 138 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_pieChartXStart (self, 175);
-#line 137 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 139 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_pieChartYStart (self, 175);
-#line 138 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 140 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_pieChartRadius (self, 150);
-#line 139 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 141 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_pieChartYLabelBStart (self, 50);
-#line 140 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 142 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_pieChartYLabelBSpacing (self, 25);
-#line 141 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 143 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_pieChartLabelBSize (self, 15);
-#line 142 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 144 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_pieChartLabelOffsetX (self, 20);
-#line 143 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 145 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_pieChartLabelOffsetY (self, 10);
-#line 144 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 146 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_PIX (self, 6.28);
-#line 146 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 148 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_set_scatterLabels (self, TRUE);
-#line 103 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 105 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return obj;
-#line 4585 "Caroline.c"
+#line 4587 "Caroline.c"
 }
 
 
@@ -4589,22 +4591,22 @@ CarolineChartColor*
 caroline_chart_color_dup (const CarolineChartColor* self)
 {
 	CarolineChartColor* dup;
-#line 60 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 62 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	dup = g_new0 (CarolineChartColor, 1);
-#line 60 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 62 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	memcpy (dup, self, sizeof (CarolineChartColor));
-#line 60 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 62 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return dup;
-#line 4599 "Caroline.c"
+#line 4601 "Caroline.c"
 }
 
 
 void
 caroline_chart_color_free (CarolineChartColor* self)
 {
-#line 60 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 62 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_free (self);
-#line 4608 "Caroline.c"
+#line 4610 "Caroline.c"
 }
 
 
@@ -4625,22 +4627,22 @@ CarolinePoint*
 caroline_point_dup (const CarolinePoint* self)
 {
 	CarolinePoint* dup;
-#line 66 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 68 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	dup = g_new0 (CarolinePoint, 1);
-#line 66 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 68 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	memcpy (dup, self, sizeof (CarolinePoint));
-#line 66 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 68 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	return dup;
-#line 4635 "Caroline.c"
+#line 4637 "Caroline.c"
 }
 
 
 void
 caroline_point_free (CarolinePoint* self)
 {
-#line 66 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 68 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_free (self);
-#line 4644 "Caroline.c"
+#line 4646 "Caroline.c"
 }
 
 
@@ -4660,61 +4662,61 @@ caroline_point_get_type (void)
 static void
 caroline_class_init (CarolineClass * klass)
 {
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	caroline_parent_class = g_type_class_peek_parent (klass);
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_type_class_add_private (klass, sizeof (CarolinePrivate));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	((GtkWidgetClass *) klass)->draw = (gboolean (*) (GtkWidget*, cairo_t*)) caroline_real_draw;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	G_OBJECT_CLASS (klass)->get_property = _vala_caroline_get_property;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	G_OBJECT_CLASS (klass)->set_property = _vala_caroline_set_property;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	G_OBJECT_CLASS (klass)->constructor = caroline_constructor;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	G_OBJECT_CLASS (klass)->finalize = caroline_finalize;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_WIDTH_PROPERTY, caroline_properties[CAROLINE_WIDTH_PROPERTY] = g_param_spec_int ("width", "width", "width", G_MININT, G_MAXINT, 0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_HEIGHT_PROPERTY, caroline_properties[CAROLINE_HEIGHT_PROPERTY] = g_param_spec_int ("height", "height", "height", G_MININT, G_MAXINT, 0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_CHART_PADDING_PROPERTY, caroline_properties[CAROLINE_CHART_PADDING_PROPERTY] = g_param_spec_int ("chartPadding", "chartPadding", "chartPadding", G_MININT, G_MAXINT, 0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_LINE_THICKNESS_TICKS_PROPERTY, caroline_properties[CAROLINE_LINE_THICKNESS_TICKS_PROPERTY] = g_param_spec_double ("lineThicknessTicks", "lineThicknessTicks", "lineThicknessTicks", -G_MAXDOUBLE, G_MAXDOUBLE, 0.0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_LINE_THICKNESS_PLANE_PROPERTY, caroline_properties[CAROLINE_LINE_THICKNESS_PLANE_PROPERTY] = g_param_spec_double ("lineThicknessPlane", "lineThicknessPlane", "lineThicknessPlane", -G_MAXDOUBLE, G_MAXDOUBLE, 0.0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_LINE_THICKNESS_DATA_PROPERTY, caroline_properties[CAROLINE_LINE_THICKNESS_DATA_PROPERTY] = g_param_spec_double ("lineThicknessData", "lineThicknessData", "lineThicknessData", -G_MAXDOUBLE, G_MAXDOUBLE, 0.0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_SPREAD_Y_PROPERTY, caroline_properties[CAROLINE_SPREAD_Y_PROPERTY] = g_param_spec_double ("spreadY", "spreadY", "spreadY", -G_MAXDOUBLE, G_MAXDOUBLE, 0.0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_SPREAD_X_PROPERTY, caroline_properties[CAROLINE_SPREAD_X_PROPERTY] = g_param_spec_double ("spreadX", "spreadX", "spreadX", -G_MAXDOUBLE, G_MAXDOUBLE, 0.0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_DATA_TYPE_Y_PROPERTY, caroline_properties[CAROLINE_DATA_TYPE_Y_PROPERTY] = g_param_spec_string ("dataTypeY", "dataTypeY", "dataTypeY", NULL, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_DATA_TYPE_X_PROPERTY, caroline_properties[CAROLINE_DATA_TYPE_X_PROPERTY] = g_param_spec_string ("dataTypeX", "dataTypeX", "dataTypeX", NULL, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_CHART_TYPE_PROPERTY, caroline_properties[CAROLINE_CHART_TYPE_PROPERTY] = g_param_spec_string ("chartType", "chartType", "chartType", NULL, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_PIE_CHART_XSTART_PROPERTY, caroline_properties[CAROLINE_PIE_CHART_XSTART_PROPERTY] = g_param_spec_int ("pieChartXStart", "pieChartXStart", "pieChartXStart", G_MININT, G_MAXINT, 0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_PIE_CHART_YSTART_PROPERTY, caroline_properties[CAROLINE_PIE_CHART_YSTART_PROPERTY] = g_param_spec_int ("pieChartYStart", "pieChartYStart", "pieChartYStart", G_MININT, G_MAXINT, 0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_PIE_CHART_RADIUS_PROPERTY, caroline_properties[CAROLINE_PIE_CHART_RADIUS_PROPERTY] = g_param_spec_int ("pieChartRadius", "pieChartRadius", "pieChartRadius", G_MININT, G_MAXINT, 0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_PIE_CHART_YLABEL_BSTART_PROPERTY, caroline_properties[CAROLINE_PIE_CHART_YLABEL_BSTART_PROPERTY] = g_param_spec_int ("pieChartYLabelBStart", "pieChartYLabelBStart", "pieChartYLabelBStart", G_MININT, G_MAXINT, 0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_PIE_CHART_YLABEL_BSPACING_PROPERTY, caroline_properties[CAROLINE_PIE_CHART_YLABEL_BSPACING_PROPERTY] = g_param_spec_int ("pieChartYLabelBSpacing", "pieChartYLabelBSpacing", "pieChartYLabelBSpacing", G_MININT, G_MAXINT, 0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_PIE_CHART_LABEL_BSIZE_PROPERTY, caroline_properties[CAROLINE_PIE_CHART_LABEL_BSIZE_PROPERTY] = g_param_spec_int ("pieChartLabelBSize", "pieChartLabelBSize", "pieChartLabelBSize", G_MININT, G_MAXINT, 0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_PIE_CHART_LABEL_OFFSET_X_PROPERTY, caroline_properties[CAROLINE_PIE_CHART_LABEL_OFFSET_X_PROPERTY] = g_param_spec_int ("pieChartLabelOffsetX", "pieChartLabelOffsetX", "pieChartLabelOffsetX", G_MININT, G_MAXINT, 0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_PIE_CHART_LABEL_OFFSET_Y_PROPERTY, caroline_properties[CAROLINE_PIE_CHART_LABEL_OFFSET_Y_PROPERTY] = g_param_spec_int ("pieChartLabelOffsetY", "pieChartLabelOffsetY", "pieChartLabelOffsetY", G_MININT, G_MAXINT, 0, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	g_object_class_install_property (G_OBJECT_CLASS (klass), CAROLINE_SCATTER_LABELS_PROPERTY, caroline_properties[CAROLINE_SCATTER_LABELS_PROPERTY] = g_param_spec_boolean ("scatterLabels", "scatterLabels", "scatterLabels", FALSE, G_PARAM_STATIC_STRINGS | G_PARAM_READABLE | G_PARAM_WRITABLE));
-#line 4718 "Caroline.c"
+#line 4720 "Caroline.c"
 }
 
 
@@ -4725,25 +4727,25 @@ caroline_instance_init (Caroline * self)
 	GeeArrayList* _tmp1_;
 	GeeArrayList* _tmp2_;
 	GeeArrayList* _tmp3_;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv = CAROLINE_GET_PRIVATE (self);
-#line 49 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 51 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp0_ = gee_array_list_new (G_TYPE_STRING, (GBoxedCopyFunc) g_strdup, (GDestroyNotify) g_free, NULL, NULL, NULL);
-#line 49 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 51 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->priv->labelYList = _tmp0_;
-#line 86 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 88 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp1_ = gee_array_list_new (G_TYPE_DOUBLE, (GBoxedCopyFunc) _double_dup, (GDestroyNotify) g_free, NULL, NULL, NULL);
-#line 86 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 88 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->labelXList = _tmp1_;
-#line 97 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 99 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp2_ = gee_array_list_new (CAROLINE_TYPE_CHART_COLOR, (GBoxedCopyFunc) caroline_chart_color_dup, (GDestroyNotify) caroline_chart_color_free, NULL, NULL, NULL);
-#line 97 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 99 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->chartColorArray = _tmp2_;
-#line 99 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 101 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_tmp3_ = gee_array_list_new (CAROLINE_TYPE_POINT, (GBoxedCopyFunc) caroline_point_dup, (GDestroyNotify) caroline_point_free, NULL, NULL, NULL);
-#line 99 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 101 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self->pointsArray = _tmp3_;
-#line 4747 "Caroline.c"
+#line 4749 "Caroline.c"
 }
 
 
@@ -4751,25 +4753,25 @@ static void
 caroline_finalize (GObject * obj)
 {
 	Caroline * self;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	self = G_TYPE_CHECK_INSTANCE_CAST (obj, TYPE_CAROLINE, Caroline);
-#line 49 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 51 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_g_object_unref0 (self->priv->labelYList);
-#line 82 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 84 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_g_free0 (self->priv->_dataTypeY);
-#line 83 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 85 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_g_free0 (self->priv->_dataTypeX);
-#line 84 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 86 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_g_free0 (self->priv->_chartType);
-#line 86 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 88 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_g_object_unref0 (self->labelXList);
-#line 97 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 99 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_g_object_unref0 (self->chartColorArray);
-#line 99 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 101 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	_g_object_unref0 (self->pointsArray);
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	G_OBJECT_CLASS (caroline_parent_class)->finalize (obj);
-#line 4773 "Caroline.c"
+#line 4775 "Caroline.c"
 }
 
 
@@ -4795,135 +4797,135 @@ _vala_caroline_get_property (GObject * object,
 {
 	Caroline * self;
 	self = G_TYPE_CHECK_INSTANCE_CAST (object, TYPE_CAROLINE, Caroline);
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	switch (property_id) {
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_WIDTH_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_int (value, caroline_get_width (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_HEIGHT_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_int (value, caroline_get_height (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_CHART_PADDING_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_int (value, caroline_get_chartPadding (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_LINE_THICKNESS_TICKS_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_double (value, caroline_get_lineThicknessTicks (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_LINE_THICKNESS_PLANE_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_double (value, caroline_get_lineThicknessPlane (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_LINE_THICKNESS_DATA_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_double (value, caroline_get_lineThicknessData (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_SPREAD_Y_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_double (value, caroline_get_spreadY (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_SPREAD_X_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_double (value, caroline_get_spreadX (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_DATA_TYPE_Y_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_string (value, caroline_get_dataTypeY (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_DATA_TYPE_X_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_string (value, caroline_get_dataTypeX (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_CHART_TYPE_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_string (value, caroline_get_chartType (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_XSTART_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_int (value, caroline_get_pieChartXStart (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_YSTART_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_int (value, caroline_get_pieChartYStart (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_RADIUS_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_int (value, caroline_get_pieChartRadius (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_YLABEL_BSTART_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_int (value, caroline_get_pieChartYLabelBStart (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_YLABEL_BSPACING_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_int (value, caroline_get_pieChartYLabelBSpacing (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_LABEL_BSIZE_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_int (value, caroline_get_pieChartLabelBSize (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_LABEL_OFFSET_X_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_int (value, caroline_get_pieChartLabelOffsetX (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_LABEL_OFFSET_Y_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_int (value, caroline_get_pieChartLabelOffsetY (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_SCATTER_LABELS_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		g_value_set_boolean (value, caroline_get_scatterLabels (self));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 4921 "Caroline.c"
+#line 4923 "Caroline.c"
 		default:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 4927 "Caroline.c"
+#line 4929 "Caroline.c"
 	}
 }
 
@@ -4936,135 +4938,135 @@ _vala_caroline_set_property (GObject * object,
 {
 	Caroline * self;
 	self = G_TYPE_CHECK_INSTANCE_CAST (object, TYPE_CAROLINE, Caroline);
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 	switch (property_id) {
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_WIDTH_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_width (self, g_value_get_int (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_HEIGHT_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_height (self, g_value_get_int (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_CHART_PADDING_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_chartPadding (self, g_value_get_int (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_LINE_THICKNESS_TICKS_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_lineThicknessTicks (self, g_value_get_double (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_LINE_THICKNESS_PLANE_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_lineThicknessPlane (self, g_value_get_double (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_LINE_THICKNESS_DATA_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_lineThicknessData (self, g_value_get_double (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_SPREAD_Y_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_spreadY (self, g_value_get_double (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_SPREAD_X_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_spreadX (self, g_value_get_double (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_DATA_TYPE_Y_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_dataTypeY (self, g_value_get_string (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_DATA_TYPE_X_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_dataTypeX (self, g_value_get_string (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_CHART_TYPE_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_chartType (self, g_value_get_string (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_XSTART_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_pieChartXStart (self, g_value_get_int (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_YSTART_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_pieChartYStart (self, g_value_get_int (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_RADIUS_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_pieChartRadius (self, g_value_get_int (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_YLABEL_BSTART_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_pieChartYLabelBStart (self, g_value_get_int (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_YLABEL_BSPACING_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_pieChartYLabelBSpacing (self, g_value_get_int (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_LABEL_BSIZE_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_pieChartLabelBSize (self, g_value_get_int (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_LABEL_OFFSET_X_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_pieChartLabelOffsetX (self, g_value_get_int (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_PIE_CHART_LABEL_OFFSET_Y_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_pieChartLabelOffsetY (self, g_value_get_int (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		case CAROLINE_SCATTER_LABELS_PROPERTY:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		caroline_set_scatterLabels (self, g_value_get_boolean (value));
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 5062 "Caroline.c"
+#line 5064 "Caroline.c"
 		default:
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-#line 20 "/mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/Caroline.vala"
+#line 22 "/home/dcharles/Documents/Caroline/Caroline.vala"
 		break;
-#line 5068 "Caroline.c"
+#line 5070 "Caroline.c"
 	}
 }
 

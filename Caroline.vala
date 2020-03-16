@@ -8,7 +8,7 @@
 // of developer to use charts in their application. More in depth documentation is found in below and in the
 // README, if you have any critiques or questions, go ahead and open an issue in this repo.
 //
-// valac --pkg gtk+-3.0 --pkg gee-0.8 -C -H caroline.h --library caroline caroline.vala --basedir ./
+// valac --pkg gtk+-3.0 --pkg gee-0.8 Caroline.vapi Sample.vala -X Caroline.so -X -I. -o demo
 //
 // Author: David Johnson
 //============================================================+

@@ -1,55 +1,27 @@
-Build started at 2020-03-15T18:28:05.376230
+Build started at 2020-03-15T22:13:23.987561
 Main binary: /usr/bin/python3
 Python system: Linux
 The Meson build system
 Version: 0.49.2
-Source dir: /mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline
-Build dir: /mnt/6caf58d5-d873-41ac-930d-63ff042b1cad/Documents/Caroline/build
+Source dir: /home/dcharles/Documents/Caroline
+Build dir: /home/dcharles/Documents/Caroline/build
 Build type: native build
 Project name: com.github.dcharles525.caroline
 Project version: undefined
-Native C compiler: cc (gcc 7.5.0 "cc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0")
+Native C compiler: cc (gcc 7.4.0 "cc (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0")
 Native Vala compiler: valac (valac 0.40.19)
 Build machine cpu family: x86_64
 Build machine cpu: x86_64
 Dependency glib-2.0 found: YES (cached)
 Dependency gtk+-3.0 found: YES (cached)
 Dependency gobject-2.0 found: YES (cached)
-Found pkg-config: /usr/bin/pkg-config (0.29.1)
-Determining dependency 'gee-0.8' with pkg-config executable '/usr/bin/pkg-config'
-Called `/usr/bin/pkg-config --modversion gee-0.8` -> 0
-0.20.2
-Called `/usr/bin/pkg-config --cflags gee-0.8` -> 0
--I/usr/include/gee-0.8 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include
-Called `/usr/bin/pkg-config gee-0.8 --libs` -> 0
--L/usr/lib/x86_64-linux-gnu -lgee-0.8 -lgobject-2.0 -lglib-2.0
-Called `/usr/bin/pkg-config gee-0.8 --libs` -> 0
--lgee-0.8 -lgobject-2.0 -lglib-2.0
+Dependency gee-0.8 found: YES (cached)
+Adding test "caroline-vala"
+Build targets in project: 1
+Found ninja-1.8.2 at /usr/bin/ninja
 Running compile:
-Working directory:  /tmp/tmpr9tivkx7
-Command line:  cc /tmp/tmpr9tivkx7/testfile.c -pipe -D_FILE_OFFSET_BITS=64 -o /tmp/tmpr9tivkx7/output.exe -O0 
-
-Code:
- #include<stdio.h>
-        
-        int main(int argc, char **argv) {
-            printf("%ld\n", (long)(sizeof(void *)));
-            return 0;
-        };
-Compiler stdout:
- 
-Compiler stderr:
- 
-Program stdout:
-
-8
-
-Program stderr:
-
-
-Running compile:
-Working directory:  /tmp/tmpanc4kqlx
-Command line:  cc /tmp/tmpanc4kqlx/testfile.c -pipe -D_FILE_OFFSET_BITS=64 -c -o /tmp/tmpanc4kqlx/output.obj -O0 --print-search-dirs 
+Working directory:  /tmp/tmpi_6jfw5j
+Command line:  cc /tmp/tmpi_6jfw5j/testfile.c -pipe -D_FILE_OFFSET_BITS=64 -c -o /tmp/tmpi_6jfw5j/output.obj -O0 --print-search-dirs 
 
 Code:
  
@@ -60,7 +32,3 @@ libraries: =/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../
 
 Compiler stderr:
  
-Dependency gee-0.8 found: YES 0.20.2
-Adding test "unit-test"
-Build targets in project: 1
-Found ninja-1.8.2 at /usr/bin/ninja
