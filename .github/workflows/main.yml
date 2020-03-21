@@ -41,7 +41,6 @@ jobs:
         rm -R build
         meson build
         cd build 
-        meson test 
-         
+    # meson test
       
         
