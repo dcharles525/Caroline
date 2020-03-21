@@ -37,7 +37,7 @@ jobs:
         rm demo 
     - name: Tests 
       run: |
-        sudo apt-get install build-essential
+        sudo apt-get install meson
         meson build
         cd build 
         meson test 
