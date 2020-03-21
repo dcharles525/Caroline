@@ -1,6 +1,0 @@
-# ninja log v5
-0	339	1584807543	caroline-vala@exe/Caroline.c	b55fc3a9fe54c6fa
-0	339	1584807543	caroline-vala@exe/UnitTests.c	b55fc3a9fe54c6fa
-340	591	1584807543	caroline-vala@exe/meson-generated_UnitTests.c.o	e18c61728b361d52
-339	723	1584807543	caroline-vala@exe/meson-generated_Caroline.c.o	9e723ec60222841d
-723	824	1584807543	caroline-vala	5f5af66b441a8afc
