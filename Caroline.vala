@@ -1,12 +1,14 @@
 //============================================================+
 // File name   : Caroline.vala
-// Last Update : 2020-3-14
+// Last Update : 2020-3-15
 //
-// Version: 0.1.0
+// Version: 0.1.1
 //
 // Description : This is an extension of a GTK Drawing Area. Its purpose is to make it easy for any level
 // of developer to use charts in their application. More in depth documentation is found in below and in the
 // README, if you have any critiques or questions, go ahead and open an issue in this repo.
+//
+// valac --pkg gtk+-3.0 --pkg gee-0.8 Caroline.vapi Sample.vala -X Caroline.so -X -I. -o demo
 //
 // Author: David Johnson
 //============================================================+
@@ -784,6 +786,5 @@ public class Caroline : Gtk.DrawingArea {
     return "%0.1f".printf(number);
 
   }
-
 
 }

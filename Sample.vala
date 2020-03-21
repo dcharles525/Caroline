@@ -2,7 +2,11 @@ using Gtk;
 using Gee;
 using Cairo;
 
-//To run this program: valac --pkg gtk+-3.0 --pkg gee-0.8 Caroline.vala sample.vala -o demo
+/*
+* To run this program:
+* valac --pkg gtk+-3.0 --pkg gee-0.8 -X -I. -X -L. -X -caroline -o sample Sample.vala caroline.vapi
+* valac  Caroline.vapi Sample.vala -X Caroline.so -X -I. -o demo
+*/
 
 public void main (string[] args) {
 
@@ -28,7 +32,7 @@ public void main (string[] args) {
   }
 
   //Simply set Caroline to a variable
-  var carolineWidget = new Caroline (
+  var carolineWidget = new Caroline(
     x, //dataX
     y, //dataY
     "scatter", //chart type

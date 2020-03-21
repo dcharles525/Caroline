@@ -1,0 +1,17 @@
+[
+  {
+    "directory": "/home/dcharles/Documents/Caroline/build",
+    "command": "valac -C --debug --debug --pkg gee-0.8 --pkg gobject-2.0 --pkg gtk+-3.0 --pkg glib-2.0 --color=always --directory caroline-vala@exe --basedir ../ ../Caroline.vala ../UnitTests.vala",
+    "file": "../Caroline.vala"
+  },
+  {
+    "directory": "/home/dcharles/Documents/Caroline/build",
+    "command": "cc -Icaroline-vala@exe -I. -I.. -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/gee-0.8 -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -w -g -pthread  -MD -MQ 'caroline-vala@exe/meson-generated_Caroline.c.o' -MF 'caroline-vala@exe/meson-generated_Caroline.c.o.d' -o 'caroline-vala@exe/meson-generated_Caroline.c.o' -c 'caroline-vala@exe/Caroline.c'",
+    "file": "caroline-vala@exe/Caroline.c"
+  },
+  {
+    "directory": "/home/dcharles/Documents/Caroline/build",
+    "command": "cc -Icaroline-vala@exe -I. -I.. -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/gee-0.8 -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -w -g -pthread  -MD -MQ 'caroline-vala@exe/meson-generated_UnitTests.c.o' -MF 'caroline-vala@exe/meson-generated_UnitTests.c.o.d' -o 'caroline-vala@exe/meson-generated_UnitTests.c.o' -c 'caroline-vala@exe/UnitTests.c'",
+    "file": "caroline-vala@exe/UnitTests.c"
+  }
+]
