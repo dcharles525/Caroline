@@ -38,6 +38,7 @@ jobs:
     - name: Tests 
       run: |
         sudo apt-get install meson
+        rm -R build
         meson build
         cd build 
         meson test 
