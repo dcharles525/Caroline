@@ -1,3 +1,5 @@
+![CI](https://github.com/dcharles525/Caroline/workflows/CI/badge.svg?branch=master)
+
 ![alt text](data/logo.png "Caroline")
 <br>
 Logo Created By @stsdc
