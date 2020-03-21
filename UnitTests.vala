@@ -79,7 +79,7 @@ void main (string[] args){
 
   orderingTest();
   typeAssignmentsTest();
-  benchMarkTest();
+  //benchMarkTest();
 
   Idle.add (() => {
     Test.run ();
