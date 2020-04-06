@@ -2,13 +2,13 @@ using Gtk;
 using Gee;
 using Cairo;
 
-//To run this program: valac --pkg gtk+-3.0 --pkg gee-0.8 Caroline.vala sample.vala -o demo
+/*
+* To run this program:
+* valac --pkg gtk+-3.0 --pkg gee-0.8 -X -I. -X -L. -X -caroline -o sample Sample.vala caroline.vapi
+* valac  Caroline.vapi Sample.vala -X Caroline.so -X -I. -o demo
+*/
 
 public void main (string[] args) {
-
-  GLib.DateTime now = new GLib.DateTime.now_local();
-  var sec = now.to_unix();
-  var msecStart = (sec * 1000) + (now.get_microsecond () / 1000);
 
   //Setting up the GTK window
   Gtk.init (ref args);
@@ -32,18 +32,13 @@ public void main (string[] args) {
   }
 
   //Simply set Caroline to a variable
-  var carolineWidget = new Caroline (
+  var carolineWidget = new Caroline(
     {1,2,3,4,5,6,7,8,9,10}, //dataX
-    {1,2,3,2,4,2,3,2,1,2}, //dataY
+    y, //dataY
     "smooth-line", //chart type
     true, //yes or no for generateColors function (needed in the case of the pie chart),
-    false // yes or no for scatter plot labels
+    true // yes or no for scatter plot labels
   );
-
-  now = new GLib.DateTime.now_local();
-  sec = now.to_unix();
-  var msecEnd = (sec * 1000) + (now.get_microsecond () / 1000);
-  stdout.printf("Time Taken: %f\n",msecEnd - msecStart);
 
   //Add the Caroline widget tp the grid
   mainGrid.attach(carolineWidget, 0, 0, 1, 1);
