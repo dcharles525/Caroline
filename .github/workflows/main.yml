@@ -29,8 +29,8 @@ jobs:
         sudo apt-get install libgtk-3-dev
         sudo apt-get install libgee-0.8-dev
         cd build_dev
-        chmod 777 build.sh
-        ./build.sh
+        valac --pkg gtk+-3.0 --pkg gee-0.8 --library=Caroline -H Caroline.h ../Caroline.vala -X -fPIC -X -shared -o Caroline.so
+        valac --pkg gtk+-3.0 --pkg gee-0.8 Caroline.vapi ../Sample.vala -X Caroline.so -X -I. -o demo
     - name: Tests 
       run: |
         sudo apt-get install meson
