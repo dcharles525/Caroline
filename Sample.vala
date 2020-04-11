@@ -33,7 +33,7 @@ public void main (string[] args) {
 
   //Simply set Caroline to a variable
   var carolineWidget = new Caroline(
-    {1,2,3,4,5,6,7,8,9,10}, //dataX
+    {0,1,2,3,4,5,6,7,8,9}, //dataX
     y, //dataY
     "smooth-line", //chart type
     true, //yes or no for generateColors function (needed in the case of the pie chart),

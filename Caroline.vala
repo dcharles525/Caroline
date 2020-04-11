@@ -240,7 +240,7 @@ public class Caroline : Gtk.DrawingArea {
       //As the function illudes too, this sets the width of the lines for the x & y ticks.
       cr.set_line_width(this.lineThicknessTicks);
 
-      //As the function illudes too, this sets the color of the lines.
+      //setting the color of the lines.
       cr.set_source_rgba(255, 255, 255, 0.2);
 
       /*We want to move the pointer on the canvas to where we want the axis's to be, to
@@ -483,6 +483,16 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
+  /**
+  * Draws a smooth line based on teh pointsArray
+  *
+  * Uses the Cario.Context to draw a smooth line using the curve_to function in the
+  * Cairo library. Additionally we draw the points (similar to scatter plot) so we can
+  * see the exact points on the curved line.
+  *
+  * @param type cr | Cairo.Context
+  * @return return void
+  */
   private void smoothLineChart(Cairo.Context cr){
 
     //Setting thickness of the line using set_line_width which can take any double.
@@ -503,29 +513,28 @@ public class Caroline : Gtk.DrawingArea {
       (this.height + this.chartPadding) - ((this.spreadFinalY * scaler))
     );
 
-    for (int i = 0; i < this.pointsArray.size - 1; i++){
+    for (int i = 0; i < this.pointsArray.size; i++){
 
+      //Calculating the "before values", with bezier curves you need to think of this as your starting point
       double beforeX = (this.chartPadding + this.spreadFinalX * (i)) + (this.widthPadding / 3);
       double beforeY = this.pointsArray[i].y;
+
+      //Getting a scaler, which will help put the line in the right spot
       scaler = ((beforeY - this.min) / (this.max - this.min)) * this.spreadY;
       beforeY = ((this.height + this.chartPadding) - ((this.spreadFinalY * scaler)));
 
+      //Calculating the "current point" which is one ahead of before in the array of data.
       double currentX = (this.chartPadding + this.spreadFinalX * (i+1)) + (this.widthPadding / 3);
       double currentY = ((i + 1) >= this.pointsArray.size) ? this.pointsArray[i].y : this.pointsArray[i+1].y;
 
+      //Getting a scaler, which will help put the line in the right spot
       scaler = ((currentY - this.min) / (this.max - this.min)) * this.spreadY;
       currentY = ((this.height + this.chartPadding) - ((this.spreadFinalY * scaler)));
 
+      //This will choose the "smoothness" of the line
       double force = (currentX - beforeX) / 2.0;
 
-      /*cr.arc(
-        beforeX,
-        beforeY,
-        3,
-        0,
-        this.PIX
-      );*/
-
+      //Draw the curved line
       cr.curve_to(
         beforeX + force,
         beforeY,
@@ -535,7 +544,39 @@ public class Caroline : Gtk.DrawingArea {
         currentY
       );
 
-      stdout.printf("%f | %f \n",this.pointsArray[i].x,this.pointsArray[i].y);
+    }
+
+    /*Drawing operator that strokes the current path using the current settings that were
+    implemented eariler in this file.*/
+    cr.stroke();
+
+    double maxX = 0;
+
+    /*finding the max X value so we can calculate where to place the arcs for point indentification on the
+    curved line*/
+    for (int i = 0; i < this.pointsArray.size; i++)
+      if (this.pointsArray[i].x > maxX)
+        maxX = this.pointsArray[i].x;
+
+    //
+    for (int i = 0; i < this.pointsArray.size; i++){
+
+      //Calculating both axis points for the point
+      var arcX = this.pointsArray[i].x * (this.width/maxX) + this.chartPadding + (this.widthPadding / 3);
+      var arcY = (this.height + this.chartPadding) - ((this.spreadFinalY * ((this.pointsArray[i].y -
+      this.min) / (this.max - this.min)) * this.spreadY));
+
+      //Drawing arc
+      cr.arc(
+        arcX,
+        arcY,
+        3,
+        0,
+        this.PIX
+      );
+
+      //Filling in arc so we keep the "smooth" A E S T H E T I C
+      cr.fill();
 
     }
 
