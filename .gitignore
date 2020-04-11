@@ -1,5 +1,7 @@
 _ignore
-
+build_dev
+build
+build.sh
 build-po.sh
 install.sh
 *~
