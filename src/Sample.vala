@@ -20,10 +20,10 @@ public void main (string[] args) {
   Gtk.Grid mainGrid = new Gtk.Grid ();
   mainGrid.orientation = Gtk.Orientation.VERTICAL;
 
-  int benchNumber = 10;
+  //int benchNumber = 10;
 
   //CDC 4/19 Data
-  double[] y = {1,0,1,0,3,0,0,0,0,0,2,1,0,3,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,2,0,0,0,0,0,1,0,8,6,23,25,20,66,47,64,147,
+  double[] y = {8,6,23,25,20,66,47,64,147,
   225,290,278,267,338,1237,775,2797,3419,4777,3528,8821,10934,10115,13987,16916,17965,19332,18251,22635,22562,27043,
   26135,18819,9338,63455,43348,21597,31534,31705,33251,33288,29145,24156,26385,27158,29164,29002,29916,25995};
 
@@ -36,8 +36,8 @@ public void main (string[] args) {
   var carolineWidget = new Caroline(
     x, //dataX
     y, //dataY
-    {"smooth-line","scatter","bar"}, //chart type
-    true, //yes or no for generateColors function (needed in the case of the pie chart),
+    {"line"}, //chart type
+    false, //yes or no for generateColors function (needed in the case of the pie chart),
     false // yes or no for scatter plot labels
   );
 
