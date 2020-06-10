@@ -37,7 +37,7 @@ public void main (string[] args) {
     x, //dataX
     y, //dataY
     {"line"}, //chart type
-    false, //yes or no for generateColors function (needed in the case of the pie chart),
+    true, //yes or no for generateColors function (needed in the case of the pie chart),
     false // yes or no for scatter plot labels
   );
 

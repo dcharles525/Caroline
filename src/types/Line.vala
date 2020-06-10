@@ -2,6 +2,16 @@ using Gee;
 
 public class Line{
 
+  /**
+  * Draws a line based on the pointsArray
+  *
+  * Uses the Cairo.Context to draw the line chart via the .move_to function
+  * which allows you to move the current point to the necessary area and
+  * line_to() which goes from one point to another while leaving a line behind.
+  *
+  * @param type cr | Cairo.Context
+  * @return return void
+  */
   public void drawLineChart(Cairo.Context cr, ArrayList<Caroline.Point?> pointsArray, double baseline){
 
     //Setting thickness of the line using set_line_width which can take any double.
@@ -16,7 +26,7 @@ public class Line{
       baseline,
       pointsArray[0].y
     );
-    stdout.printf("%f | %f",pointsArray[0].x,pointsArray[0].y);
+
     for (int i = 0; i < pointsArray.size; i++){
 
       /*line_to (https://valadoc.org/cairo/Cairo.Context.line_to.html) is a simple

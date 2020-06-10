@@ -1,6 +1,6 @@
 //============================================================+
 // File name   : Caroline.vala
-// Last Update : 2020-4-11
+// Last Update : 2020-6-9
 //
 // Version: 0.2.0
 //
@@ -149,7 +149,6 @@ public class Caroline : Gtk.DrawingArea {
     this.pieChartLabelBSize = 15;
     this.pieChartLabelOffsetX = 20;
     this.pieChartLabelOffsetY = 10;
-    this.PIX = 6.28;
 
     this.scatterLabels = true;
 
@@ -201,11 +200,8 @@ public class Caroline : Gtk.DrawingArea {
 
     }
 
-    foreach (string type in chartTypeArray){
-
+    foreach (string type in chartTypeArray)
       this.chartTypes.add(type);
-
-    }
 
     if (chartType != "pie")
       this.arrayListSort();
@@ -257,103 +253,11 @@ public class Caroline : Gtk.DrawingArea {
       //setting the color of the lines.
       cr.set_source_rgba(255, 255, 255, 0.2);
 
-      /*We want to move the pointer on the canvas to where we want the axis's to be, to
-      learn more about move_to: https://valadoc.org/cairo/Cairo.Context.move_to.html*/
-      cr.move_to(
-        this.chartPadding + (this.widthPadding / 3),
-        this.chartPadding
-      );
+      this.drawOutline(cr);
 
-      //We draw a line from x axis 15 to the height plus 15
-      cr.line_to(
-        this.chartPadding + (this.widthPadding / 3),
-        this.height + this.chartPadding
-      );
+      this.drawYTicks(cr);
 
-      //Now we draw the x axis using the same methodolgy as the y axis directly above.
-      cr.move_to(
-        this.width + this.chartPadding + (this.widthPadding / 3),
-        this.height + this.chartPadding
-      );
-      cr.line_to(
-        this.chartPadding + (this.widthPadding / 3),
-        this.height + this.chartPadding
-      );
-
-      /*Drawing operator that strokes the current path using the current settings that were
-      implemented eariler in this file.*/
-      cr.stroke();
-
-      //Reset the path so when we execute move_to again we are starting from 0,0 on the cario canvas
-      cr.new_path();
-      cr.set_line_width(this.lineThicknessTicks);
-
-      //Figure out the spread of each of the y coordinates.
-      this.spreadFinalY = this.height/this.spreadY;
-
-      /*We loop through all of the y labels and actually draw thes lines and add the actual text for
-      each tick mark.*/
-      for (int i = 0; i < this.spreadY + 1; i++){
-
-        //line drawing
-        cr.move_to(
-          this.yTickStart,
-          height + this.chartPadding - (this.spreadFinalY * i)
-        );
-        cr.line_to(
-          this.yTickEnd,
-          height + this.chartPadding - (this.spreadFinalY * i)
-        );
-
-        //moves the current drawing area so the text will display properly
-        cr.move_to(
-          this.yTextStart + (this.widthPadding / 3),
-          height + this.chartPadding - (this.spreadFinalY * i)
-        );
-        cr.show_text(this.dataTypeY.concat(this.labelYList.get(i)));
-
-      };
-
-      /*Figure out the spread of each of the x coordinates, notice this is differnt from the y
-      plane, we want to display each data point on the x axis here.*/
-      this.spreadFinalX = this.width/(this.spreadX-1);
-
-      /*We loop through all of the x labels and actually draw thes lines and add the actual text for
-      each tick mark.*/
-      for (int i = 0; i < this.spreadX; i++){
-
-        double rawXCalculation = 0;
-
-        if (this.chartType != "line" && this.chartType != "bar")
-          rawXCalculation = this.labelXList.get(i) * (this.width/this.labelXList.get(this.labelXList.size-1));
-        else
-          rawXCalculation = this.spreadFinalX * i;
-
-        //line drawing
-        cr.move_to(
-          this.chartPadding + rawXCalculation + (this.widthPadding / 3),
-          height + this.xTickStart
-        );
-
-        cr.line_to(
-          this.chartPadding + rawXCalculation + (this.widthPadding / 3),
-          height + this.xTickEnd
-        );
-
-        //moves the current drawing area back and lists the x axis value below the x tick
-        cr.move_to(
-          xTextStart + rawXCalculation + (this.widthPadding / 3),
-          height + this.xTextEnd
-        );
-
-        var roundedX = snipLongDouble(this.labelXList.get(i));
-        cr.show_text(roundedX);
-
-      }
-
-      /*Drawing operator that strokes the current path using the current settings that were
-      implemented eariler in this file.*/
-      cr.stroke();
+      this.drawXTicks(cr);
 
       /*Sets the drawing area and its attributes back to their defaults, which are set on
       previous save() or the initial value*/
@@ -363,6 +267,12 @@ public class Caroline : Gtk.DrawingArea {
       cr.save();
 
     }
+
+    //Setting thickness of the line using set_line_width which can take any double.
+    cr.set_line_width(1);
+
+    //Set the color of the line (this default color is blue)
+    cr.set_source_rgba(0, 174, 174,0.8);
 
     for (int f = 0; f < this.chartTypes.size; f++){
 
@@ -379,20 +289,37 @@ public class Caroline : Gtk.DrawingArea {
           line.drawLineChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
           break;
         case "smooth-line":
-          smoothLineChart(cr);
+          LineSmooth lineSmooth = new LineSmooth();
+          lineSmooth.drawLineSmoothChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
           break;
         case "bar":
           Bar bar = new Bar();
           bar.drawBarChart(cr,this.pointsCalculatedBarArray,this.height+this.chartPadding);
           break;
         case "pie":
-          pieChart(cr);
+          Pie pie = new Pie();
+          pie.drawPieChart(
+            cr,
+            this.pointsArray,
+            this.chartColorArray,
+            this.pieChartXStart,
+            this.pieChartYStart,
+            this.pieChartRadius,
+            this.pieChartYLabelBStart,
+            this.pieChartYLabelBSpacing,
+            this.pieChartLabelOffsetX,
+            this.pieChartLabelOffsetY,
+            this.pieChartLabelBSize,
+            this.width
+          );
           break;
         case "scatter":
-          scatterChart(cr);
+          Scatter scatter = new Scatter();
+          scatter.drawScatterChart(cr,this.pointsCalculatedArray,this.pointsArray,this.scatterLabels);
           break;
         default:
-          lineChart(cr);
+          LineSmooth lineSmooth = new LineSmooth();
+          lineSmooth.drawLineSmoothChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
           break;
       }
 
@@ -469,7 +396,7 @@ public class Caroline : Gtk.DrawingArea {
 
       double x = this.pointsArray[i].x * (this.width/maxX) + this.chartPadding + (this.widthPadding / 3);
       double y = (this.height + this.chartPadding) - ((this.spreadFinalY * scaler));
-      stdout.printf("%f\n",((this.spreadFinalY * scaler)));
+
       Caroline.Point point = {x, y};
       this.pointsCalculatedArray.add(point);
 
@@ -500,81 +427,118 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
+  private void drawOutline(Cairo.Context cr){
 
+    double widthPaddingDiv = this.chartPadding + (this.widthPadding / 3);
 
-  /**
-  * Draws a line based on the pointsArray
-  *
-  * Uses the Cairo.Context to draw the line chart via the .move_to function
-  * which allows you to move the current point to the necessary area and
-  * line_to() which goes from one point to another while leaving a line behind.
-  *
-  * @param type cr | Cairo.Context
-  * @return return void
-  */
-  private void lineChart(Cairo.Context cr){
+    /*We want to move the pointer on the canvas to where we want the axis's to be, to
+    learn more about move_to: https://valadoc.org/cairo/Cairo.Context.move_to.html*/
+    cr.move_to(
+      widthPaddingDiv,
+      this.chartPadding
+    );
 
+    //We draw a line from x axis 15 to the height plus 15
+    cr.line_to(
+      widthPaddingDiv,
+      this.height + this.chartPadding
+    );
 
+    //Now we draw the x axis using the same methodolgy as the y axis directly above.
+    cr.move_to(
+      this.width + widthPaddingDiv,
+      this.height + this.chartPadding
+    );
+    cr.line_to(
+      widthPaddingDiv,
+      this.height + this.chartPadding
+    );
 
-  }
-
-  /**
-  * Draws a smooth line based on teh pointsArray
-  *
-  * Uses the Cario.Context to draw a smooth line using the curve_to function in the
-  * Cairo library. Additionally we draw the points (similar to scatter plot) so we can
-  * see the exact points on the curved line.
-  *
-  * @param type cr | Cairo.Context
-  * @return return void
-  */
-  private void smoothLineChart(Cairo.Context cr){
-
-
-
-  }
-
-  /**
-  * Draws a set of rectangles based on the pointsArray
-  *
-  * Uses the Cairo.Context to draw a set of rectanges that will be positioned in a bar
-  * chart format. The most important function used is rectangle, which allows us to quickly
-  * form objects without having to use line_to.
-  *
-  * @param type cr | Cairo.Context
-  * @return return void
-  */
-
-  /**
-  * Draws a pie chart based on the pointsArray
-  *
-  * Uses the Cairo.Context to draw the pie chart by first, figuring out the radians for each piece
-  * of data. You can see that we need to find the total of the set of data. Then we loop over it
-  * creating the arc, lines, fill, and labels all in one swoop.
-  *
-  * @param type cr | Cairo.Context
-  * @return return void
-  */
-  private void pieChart(Cairo.Context cr){
-
-
+    /*Drawing operator that strokes the current path using the current settings that were
+    implemented eariler in this file.*/
+    cr.stroke();
 
   }
 
-  /**
-  * Draws a scatter plot based on the pointsArray
-  *
-  * Uses the Cairo.Context to draw each points (as an arc) based on its scaled x & y values. After
-  * the placement of the points, we have the option (based on scatterLabels) that if true will draw
-  * the points x and y numbers with an comma for aesthetic. If (scatterLabels) false the x & y values
-  * will now show as text (for larger data sets).
-  *
-  * @param type cr | Cairo.Context
-  * @return return void
-  */
-  private void scatterChart(Cairo.Context cr){
+  private void drawYTicks(Cairo.Context cr){
 
+    //Reset the path so when we execute move_to again we are starting from 0,0 on the cario canvas
+    cr.new_path();
 
+    //Figure out the spread of each of the y coordinates.
+    this.spreadFinalY = this.height/this.spreadY;
+
+    /*We loop through all of the y labels and actually draw thes lines and add the actual text for
+    each tick mark.*/
+    for (int i = 0; i < this.spreadY + 1; i++){
+
+      double y = height + this.chartPadding - (this.spreadFinalY * i);
+
+      //line drawing
+      cr.move_to(
+        this.yTickStart,
+        y
+      );
+      cr.line_to(
+        this.yTickEnd,
+        y
+      );
+
+      //moves the current drawing area so the text will display properly
+      cr.move_to(
+        this.yTextStart + (this.widthPadding / 3),
+        y
+      );
+      cr.show_text(this.dataTypeY.concat(this.labelYList.get(i)));
+
+    };
+
+  }
+
+  private void drawXTicks(Cairo.Context cr){
+
+    /*Figure out the spread of each of the x coordinates, notice this is differnt from the y
+    plane, we want to display each data point on the x axis here.*/
+    this.spreadFinalX = this.width/(this.spreadX-1);
+
+    /*We loop through all of the x labels and actually draw thes lines and add the actual text for
+    each tick mark.*/
+    for (int i = 0; i < this.spreadX; i++){
+
+      double rawXCalculation = 0;
+
+      if (this.chartType != "line" && this.chartType != "bar")
+        rawXCalculation = this.labelXList.get(i) * (this.width/this.labelXList.get(this.labelXList.size-1));
+      else
+        rawXCalculation = this.spreadFinalX * i;
+
+      double x = this.chartPadding + rawXCalculation + (this.widthPadding / 3);
+
+      //line drawing
+      cr.move_to(
+        x,
+        height + this.xTickStart
+      );
+
+      cr.line_to(
+        x,
+        height + this.xTickEnd
+      );
+
+      //moves the current drawing area back and lists the x axis value below the x tick
+      cr.move_to(
+        xTextStart + rawXCalculation + (this.widthPadding / 3),
+        height + this.xTextEnd
+      );
+
+      var roundedX = snipLongDouble(this.labelXList.get(i));
+      cr.show_text(roundedX);
+
+    }
+
+    /*Drawing operator that strokes the current path using the current settings that were
+    implemented eariler in this file.*/
+    cr.stroke();
 
   }
 
