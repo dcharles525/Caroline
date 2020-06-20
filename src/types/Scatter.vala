@@ -12,8 +12,11 @@ public class Scatter{
   * the points x and y numbers with an comma for aesthetic. If (scatterLabels) false the x & y values
   * will now show as text (for larger data sets).
   *
-  * @param type cr | Cairo.Context
-  * @return return void
+  * @param Cairo.Context cr
+  * @param ArrayList<Caroline.Point?> pointsArrayCalculated
+  * @param ArrayList<Caroline.Point?> pointsArray
+  * @param double baseline
+  * @return void
   */
   public void drawScatterChart(
     Cairo.Context cr,

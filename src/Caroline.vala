@@ -1,14 +1,12 @@
 //============================================================+
 // File name   : Caroline.vala
-// Last Update : 2020-6-9
+// Last Update : 2020-6-20
 //
 // Version: 0.2.0
 //
 // Description : This is an extension of a GTK Drawing Area. Its purpose is to make it easy for any level
 // of developer to use charts in their application. More in depth documentation is found in below and in the
 // README, if you have any critiques or questions, go ahead and open an issue in this repo.
-//
-// valac --pkg gtk+-3.0 --pkg gee-0.8 Caroline.vapi Sample.vala -X Caroline.so -X -I. -o demo
 //
 // Author: David Johnson
 //============================================================+
@@ -27,7 +25,7 @@ public class Caroline : Gtk.DrawingArea {
   *
   */
 
-  public double spreadFinalY { get; set; }
+  private double spreadFinalY { get; set; }
   private double spreadFinalX { get; set; }
 
   private int yTickStart { get; set; }
@@ -39,14 +37,12 @@ public class Caroline : Gtk.DrawingArea {
   private int xTextStart { get; set; }
   private int xTextEnd { get; set; }
 
-  public int widthPadding { get; set; }
+  private int widthPadding { get; set; }
   private int heightPadding { get; set; }
 
   private double gapPoint { get; set; }
   private double maxPoint { get; set; }
   private double minPoint { get; set; }
-
-
 
   private ArrayList<string> labelYList = new ArrayList<string>();
 
@@ -104,7 +100,6 @@ public class Caroline : Gtk.DrawingArea {
 
   public ArrayList<Point?> pointsArray = new ArrayList<Point?>();
   public ArrayList<Point?> pointsCalculatedArray = new ArrayList<Point?>();
-  public ArrayList<Point?> pointsCalculatedBarArray = new ArrayList<Point?>();
 
   public ArrayList<string> chartTypes = new ArrayList<string>();
 
@@ -155,12 +150,13 @@ public class Caroline : Gtk.DrawingArea {
   }
 
   /**
-  * data - the actual data for that charts
+  * dataX - x axis data for the charts
+  * dataY - y axis data for the charts
   * chartType - this can either be line, bar, or pie
   * generateColors - array for ChartColor structs
   * scatterPlotLabels - show labels on the scatter plot
   */
-  public Caroline(double[] dataX, double[] dataY, string[] chartTypeArray, bool generateColors, bool scatterPlotLabels){
+  public Caroline(double[] dataX, double[] dataY, string chartType, bool generateColors, bool scatterPlotLabels){
 
     /*Since our widget will already be "realized" we want to use add_events, this
     function allows us to set the window event bit flags, which I document directly below.
@@ -183,7 +179,7 @@ public class Caroline : Gtk.DrawingArea {
     );
 
     this.scatterLabels = scatterPlotLabels;
-    this.chartType = chartTypeArray[0];
+    this.chartType = chartType;
     this.labelXList.add(0);
 
     if (dataX.length < 15){
@@ -200,8 +196,7 @@ public class Caroline : Gtk.DrawingArea {
 
     }
 
-    foreach (string type in chartTypeArray)
-      this.chartTypes.add(type);
+    this.chartType = chartType;
 
     if (chartType != "pie")
       this.arrayListSort();
@@ -218,10 +213,6 @@ public class Caroline : Gtk.DrawingArea {
         this.labelXList.add((tick+(tick*f)) + (tick));
     }
 
-    //  }else
-    //  for (int i = 0; i < pointsArray.size; i++)
-    //this.labelXList.add(pointsArray[i].x);
-
   }
 
   /**
@@ -231,8 +222,8 @@ public class Caroline : Gtk.DrawingArea {
   * pointer on the canvas and draw the x & y axis. After we draw all the ticks on each axis.
   * Lastly we point to the proper chart type function which will draw the chart itself.
   *
-  * @param type var Description
-  * @return return type
+  * @param Cairo.Context cr
+  * @return boolean
   */
   public override bool draw (Cairo.Context cr) {
 
@@ -254,9 +245,7 @@ public class Caroline : Gtk.DrawingArea {
       cr.set_source_rgba(255, 255, 255, 0.2);
 
       this.drawOutline(cr);
-
       this.drawYTicks(cr);
-
       this.drawXTicks(cr);
 
       /*Sets the drawing area and its attributes back to their defaults, which are set on
@@ -274,55 +263,51 @@ public class Caroline : Gtk.DrawingArea {
     //Set the color of the line (this default color is blue)
     cr.set_source_rgba(0, 174, 174,0.8);
 
-    for (int f = 0; f < this.chartTypes.size; f++){
+    if (this.chartType != "bar")
+      this.pointCalculations(false);
+    else
+      this.pointCalculations(true);
 
-      if (this.chartTypes.get(f) != "bar")
-        this.pointCalculationsLoose();
-      else
-        this.pointCalculationsBar();
-
-      /*This switch-case will execute the proper chart depending on what the
-      developer has choosen.*/
-      switch (this.chartTypes.get(f)) {
-        case "line":
-          Line line = new Line();
-          line.drawLineChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
-          break;
-        case "smooth-line":
-          LineSmooth lineSmooth = new LineSmooth();
-          lineSmooth.drawLineSmoothChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
-          break;
-        case "bar":
-          Bar bar = new Bar();
-          bar.drawBarChart(cr,this.pointsCalculatedBarArray,this.height+this.chartPadding);
-          break;
-        case "pie":
-          Pie pie = new Pie();
-          pie.drawPieChart(
-            cr,
-            this.pointsArray,
-            this.chartColorArray,
-            this.pieChartXStart,
-            this.pieChartYStart,
-            this.pieChartRadius,
-            this.pieChartYLabelBStart,
-            this.pieChartYLabelBSpacing,
-            this.pieChartLabelOffsetX,
-            this.pieChartLabelOffsetY,
-            this.pieChartLabelBSize,
-            this.width
-          );
-          break;
-        case "scatter":
-          Scatter scatter = new Scatter();
-          scatter.drawScatterChart(cr,this.pointsCalculatedArray,this.pointsArray,this.scatterLabels);
-          break;
-        default:
-          LineSmooth lineSmooth = new LineSmooth();
-          lineSmooth.drawLineSmoothChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
-          break;
-      }
-
+    /*This switch-case will execute the proper chart depending on what the
+    developer has choosen.*/
+    switch (this.chartType) {
+      case "line":
+        Line line = new Line();
+        line.drawLineChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
+        break;
+      case "smooth-line":
+        LineSmooth lineSmooth = new LineSmooth();
+        lineSmooth.drawLineSmoothChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
+        break;
+      case "bar":
+        Bar bar = new Bar();
+        bar.drawBarChart(cr,this.pointsCalculatedArray,this.height+this.chartPadding);
+        break;
+      case "pie":
+        Pie pie = new Pie();
+        pie.drawPieChart(
+          cr,
+          this.pointsArray,
+          this.chartColorArray,
+          this.pieChartXStart,
+          this.pieChartYStart,
+          this.pieChartRadius,
+          this.pieChartYLabelBStart,
+          this.pieChartYLabelBSpacing,
+          this.pieChartLabelOffsetX,
+          this.pieChartLabelOffsetY,
+          this.pieChartLabelBSize,
+          this.width
+        );
+        break;
+      case "scatter":
+        Scatter scatter = new Scatter();
+        scatter.drawScatterChart(cr,this.pointsCalculatedArray,this.pointsArray,this.scatterLabels);
+        break;
+      default:
+        LineSmooth lineSmooth = new LineSmooth();
+        lineSmooth.drawLineSmoothChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
+        break;
     }
 
     return true;
@@ -332,10 +317,9 @@ public class Caroline : Gtk.DrawingArea {
   /**
   * Finds the correct positioning for the x & y labels.
   *
-  * Below we first attempt to find the max and min values of the data array. After
-  * that we use those values to calculate the gap between each of the labels. This
-  * gap value will also be used elsewhere for the chart lines. Finally we dynamically
-  * write the y labels to our list to be used in the drawing stage, this allows us to
+  * Below we first attempt to find the max and min values of the data array. After that we use those values to
+  * calculate the gap between each of the labels. This gap value will also be used elsewhere for the chart lines.
+  * Finally we dynamically write the y labels to our list to be used in the drawing stage, this allows us to
   * not have to manually input values for the y axis.
   *
   * @param none
@@ -381,10 +365,21 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
-  private void pointCalculationsLoose(){
+  /**
+  * Calculate Absolute Points
+  *
+  * Takes a boolean to check which types of calculations to run (bar chart or any other) then stores the points within
+  * a point and then into an array of calculated points.
+  *
+  * @param bool barOrNot
+  * @return void
+  */
+  private void pointCalculations(bool barOrNot){
 
     this.pointsCalculatedArray.clear();
     double maxX = 0;
+    double divisor = 0;
+    double y = 0;
 
     for (int i = 0; i < this.pointsArray.size; i++)
       if (this.pointsArray.get(i).x > maxX)
@@ -394,8 +389,17 @@ public class Caroline : Gtk.DrawingArea {
 
       double scaler = ((this.pointsArray[i].y - this.minPoint) / (this.maxPoint - this.minPoint)) * this.spreadY;
 
-      double x = this.pointsArray[i].x * (this.width/maxX) + this.chartPadding + (this.widthPadding / 3);
-      double y = (this.height + this.chartPadding) - ((this.spreadFinalY * scaler));
+      if (!barOrNot)
+        divisor = 3;
+      else
+        divisor = 4.35;
+
+      double x = this.pointsArray[i].x * (this.width/maxX) + this.chartPadding + (this.widthPadding / divisor);
+
+      if (!barOrNot)
+        y = (this.height + this.chartPadding) - ((this.spreadFinalY * scaler));
+      else
+        y = -(this.spreadFinalY * scaler);
 
       Caroline.Point point = {x, y};
       this.pointsCalculatedArray.add(point);
@@ -404,29 +408,15 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
-  private void pointCalculationsBar(){
-
-    this.pointsCalculatedBarArray.clear();
-    double maxX = 0;
-
-    for (int i = 0; i < this.pointsArray.size; i++)
-      if (this.pointsArray.get(i).x > maxX)
-        maxX = this.pointsArray.get(i).x;
-
-    for (int i = 0; i < this.pointsArray.size; i++) {
-
-      double scaler = ((this.pointsArray[i].y - this.minPoint) / (this.maxPoint - this.minPoint)) * this.spreadY;
-
-      double x = this.pointsArray[i].x * (this.width/maxX) + this.chartPadding + (this.widthPadding / 4.35);
-      double y = -(this.spreadFinalY * scaler);
-
-      Caroline.Point point = {x, y};
-      this.pointsCalculatedBarArray.add(point);
-
-    }
-
-  }
-
+  /**
+  * Draw Chart Outline
+  *
+  * Draws the x and y axis lines that frame the chart using just move_to and line_to. This function is run in the
+  * draw function.
+  *
+  * @param Cairo.Context cr
+  * @return void
+  */
   private void drawOutline(Cairo.Context cr){
 
     double widthPaddingDiv = this.chartPadding + (this.widthPadding / 3);
@@ -460,6 +450,15 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
+  /**
+  * Draw Y Axis Ticks
+  *
+  * Draws y axis ticks on the y axis line by using the spreadFinalY spacing between each tick then it shows the
+  * value of the y axis above the tick using show_text, move_to, and line_to.
+  *
+  * @param Cairo.Context cr
+  * @return void
+  */
   private void drawYTicks(Cairo.Context cr){
 
     //Reset the path so when we execute move_to again we are starting from 0,0 on the cario canvas
@@ -495,6 +494,15 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
+  /**
+  * Draw X Axis Ticks
+  *
+  * Draws x axis ticks on the x axis line by using the spreadFinalX spacing between each tick then it shows the
+  * value of the x axis above the tick using show_text, move_to, and line_to.
+  *
+  * @param Cairo.Context cr
+  * @return void
+  */
   private void drawXTicks(Cairo.Context cr){
 
     /*Figure out the spread of each of the x coordinates, notice this is differnt from the y
@@ -507,9 +515,9 @@ public class Caroline : Gtk.DrawingArea {
 
       double rawXCalculation = 0;
 
-      if (this.chartType != "line" && this.chartType != "bar")
-        rawXCalculation = this.labelXList.get(i) * (this.width/this.labelXList.get(this.labelXList.size-1));
-      else
+      //if ( this.chartType != "bar")
+        //rawXCalculation = this.labelXList.get(i) * (this.width/this.labelXList.get(this.labelXList.size-1));
+      //else
         rawXCalculation = this.spreadFinalX * i;
 
       double x = this.chartPadding + rawXCalculation + (this.widthPadding / 3);
@@ -531,7 +539,7 @@ public class Caroline : Gtk.DrawingArea {
         height + this.xTextEnd
       );
 
-      var roundedX = snipLongDouble(this.labelXList.get(i));
+      var roundedX = "%0.1f".printf(this.labelXList.get(i));
       cr.show_text(roundedX);
 
     }
@@ -548,8 +556,7 @@ public class Caroline : Gtk.DrawingArea {
   * In this function function we use the ChartColor struct to add a random double form 0-1 for a simple
   * rgb color.then it is added to an array to be access else where.
   *
-  * @param type none
-  * @return return void
+  * @return void
   */
   private void generateColors(){
 
@@ -575,8 +582,7 @@ public class Caroline : Gtk.DrawingArea {
   * bar and line charts. However in pie charts, we don't need to know the order, hence we exlude this
   * sorting since its the main performance bottle neck within the system.
   *
-  * @param type none
-  * @return return void
+  * @return void
   */
   public void arrayListSort(){
 
@@ -612,21 +618,6 @@ public class Caroline : Gtk.DrawingArea {
       }
 
     }
-
-  }
-
-  /**
-  * Cuts decimals off a float number
-  *
-  * In several areas within our system we need to remove some decimals within a number so they we can display
-  * readable numbers for the chart and developer.
-  *
-  * @param type number | double
-  * @return return string
-  */
-  public string snipLongDouble(double number){
-
-    return "%0.1f".printf(number);
 
   }
 

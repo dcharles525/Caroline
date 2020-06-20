@@ -11,8 +11,10 @@ public class Bar{
   * chart format. The most important function used is rectangle, which allows us to quickly
   * form objects without having to use line_to.
   *
-  * @param type cr | Cairo.Context
-  * @return return void
+  * @param Cairo.Context cr
+  * @param ArrayList<Caroline.Point?> pointsArray
+  * @param double baseline
+  * @return void
   */
   public void drawBarChart(Cairo.Context cr, ArrayList<Caroline.Point?> pointsArray, double baseline){
 

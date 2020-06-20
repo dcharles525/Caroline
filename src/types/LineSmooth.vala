@@ -9,8 +9,10 @@ public class LineSmooth{
   * Cairo library. Additionally we draw the points (similar to scatter plot) so we can
   * see the exact points on the curved line.
   *
-  * @param type cr | Cairo.Context
-  * @return return void
+  * @param Cairo.Context cr
+  * @param ArrayList<Caroline.Point?> pointsArray
+  * @param double baseline
+  * @return void
   */
   public void drawLineSmoothChart(Cairo.Context cr, ArrayList<Caroline.Point?> pointsArray, double baseline){
 

@@ -3,12 +3,20 @@ using Gee;
 using Cairo;
 
 /*
-* To run this program:
-* valac --pkg gtk+-3.0 --pkg gee-0.8 -X -I. -X -L. -X -caroline -o sample Sample.vala caroline.vapi
-* valac  Caroline.vapi Sample.vala -X Caroline.so -X -I. -o demo
+* 197ms - UI Lag (1,000,000)
+* 40ms - Minimal Lag (100,000)
+* 25ms - Minimal Lag (10,000)
+* 24ms - Minimal Lag (1000)
+* 24ms - Minimal Lag (100)
+* 24ms - Minimal Lag (10)
+*
 */
 
 public void main (string[] args) {
+
+  GLib.DateTime now = new GLib.DateTime.now_local();
+  var sec = now.to_unix();
+  var msecStart = (sec * 1000) + (now.get_microsecond () / 1000);
 
   //Setting up the GTK window
   Gtk.init (ref args);
@@ -20,14 +28,15 @@ public void main (string[] args) {
   Gtk.Grid mainGrid = new Gtk.Grid ();
   mainGrid.orientation = Gtk.Orientation.VERTICAL;
 
-  //int benchNumber = 10;
+  int benchNumber = 30;
 
-  //CDC 4/19 Data
-  double[] y = {8,6,23,25,20,66,47,64,147,
-  225,290,278,267,338,1237,775,2797,3419,4777,3528,8821,10934,10115,13987,16916,17965,19332,18251,22635,22562,27043,
-  26135,18819,9338,63455,43348,21597,31534,31705,33251,33288,29145,24156,26385,27158,29164,29002,29916,25995};
+  double[] y = new double[benchNumber+1];
+  double[] x = new double[benchNumber+1];
 
-  double[] x = new double[y.length];
+  y[0] = 0;
+
+  for (int i = 0; i < y.length; ++i)
+    y[i] = Random.int_range(0,100);
 
   for (int i = 0; i < y.length; ++i)
     x[i] = i;
@@ -36,10 +45,15 @@ public void main (string[] args) {
   var carolineWidget = new Caroline(
     x, //dataX
     y, //dataY
-    {"line"}, //chart type
+    "scatter", //chart type
     true, //yes or no for generateColors function (needed in the case of the pie chart),
     false // yes or no for scatter plot labels
   );
+
+  now = new GLib.DateTime.now_local();
+  sec = now.to_unix();
+  var msecEnd = (sec * 1000) + (now.get_microsecond () / 1000);
+  stdout.printf("Time Taken: %f\n",msecEnd - msecStart);
 
   //Add the Caroline widget tp the grid
   mainGrid.attach(carolineWidget, 0, 0, 1, 1);

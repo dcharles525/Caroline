@@ -9,8 +9,10 @@ public class Line{
   * which allows you to move the current point to the necessary area and
   * line_to() which goes from one point to another while leaving a line behind.
   *
-  * @param type cr | Cairo.Context
-  * @return return void
+  * @param Cairo.Context cr
+  * @param ArrayList<Caroline.Point?> pointsArray
+  * @param double baseline
+  * @return void
   */
   public void drawLineChart(Cairo.Context cr, ArrayList<Caroline.Point?> pointsArray, double baseline){
 

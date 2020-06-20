@@ -12,6 +12,19 @@ public class Pie{
   * creating the arc, lines, fill, and labels all in one swoop.
   *
   * @param Cairo.Context cr
+  * @param ArrayList<Caroline.Point?> pointsArray
+  * @param ArrayList<Caroline.ChartColor?> chartColorArray
+  * @param double baseline
+  * @param int pieChartXStart
+  * @param int pieChartYStart
+  * @param int pieChartRadius
+  * @param int pieChartYLabelBStart
+  * @param int pieChartYLabelBSpacing
+  * @param int pieChartLabelOffsetX
+  * @param int pieChartLabelOffsetY
+  * @param int pieChartLabelBSize
+  * @param double width
+  * @return void
   * @return return void
   */
   public void drawPieChart(
