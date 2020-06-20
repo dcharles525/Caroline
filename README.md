@@ -10,6 +10,7 @@ Caroline is a simple and light interface into Cairo allowing a developer to crea
 code! Below is some screenshots of what you can do with it currently. Also below is a road map, documentation, and
 some ramblings about the development process and inner-workings of Cairo and Caroline!
 
+<img src="data/6.png">
 <img src="data/4.png">
 <img src="data/1.png">
 <img src="data/2.png">
