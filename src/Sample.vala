@@ -3,12 +3,20 @@ using Gee;
 using Cairo;
 
 /*
-* To run this program:
-* valac --pkg gtk+-3.0 --pkg gee-0.8 -X -I. -X -L. -X -caroline -o sample Sample.vala caroline.vapi
-* valac  Caroline.vapi Sample.vala -X Caroline.so -X -I. -o demo
+* 197ms - UI Lag (1,000,000)
+* 40ms - Minimal Lag (100,000)
+* 25ms - Minimal Lag (10,000)
+* 24ms - Minimal Lag (1000)
+* 24ms - Minimal Lag (100)
+* 24ms - Minimal Lag (10)
+*
 */
 
 public void main (string[] args) {
+
+  GLib.DateTime now = new GLib.DateTime.now_local();
+  var sec = now.to_unix();
+  var msecStart = (sec * 1000) + (now.get_microsecond () / 1000);
 
   //Setting up the GTK window
   Gtk.init (ref args);
@@ -21,24 +29,31 @@ public void main (string[] args) {
   mainGrid.orientation = Gtk.Orientation.VERTICAL;
 
   int benchNumber = 10;
-  double[] x = new double[benchNumber];
-  double[] y = new double[benchNumber];
 
-  for (int i = 0; i < benchNumber; ++i){
+  double[] y = new double[benchNumber+1];
+  double[] x = new double[benchNumber+1];
 
-    x[i] = Random.double_range(0,10);
-    y[i] = Random.double_range(0,10);
+  y[0] = 0;
 
-  }
+  for (int i = 0; i < y.length; ++i)
+    y[i] = Random.int_range(0,100);
+
+  for (int i = 0; i < y.length; ++i)
+    x[i] = i;
 
   //Simply set Caroline to a variable
   var carolineWidget = new Caroline(
     x, //dataX
     y, //dataY
-    "scatter", //chart type
+    "smooth-line", //chart type
     true, //yes or no for generateColors function (needed in the case of the pie chart),
-    true // yes or no for scatter plot labels
+    false // yes or no for scatter plot labels
   );
+
+  now = new GLib.DateTime.now_local();
+  sec = now.to_unix();
+  var msecEnd = (sec * 1000) + (now.get_microsecond () / 1000);
+  stdout.printf("Time Taken: %f\n",msecEnd - msecStart);
 
   //Add the Caroline widget tp the grid
   mainGrid.attach(carolineWidget, 0, 0, 1, 1);
