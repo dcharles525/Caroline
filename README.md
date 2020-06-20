@@ -45,4 +45,4 @@ This is how we generate a simple line chart. See the full sample application to 
 
 ### Caroline Documentation
 
-Check out the code! It has lots of detailed documentation and try using the Sample.vala file.
+Check out the code! It has lots of detailed documentation and try using the Sample.vala file. Chart types are now bar, line, smooth-line, scatter, and pie.
