@@ -575,6 +575,30 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
+  public override void realize() {
+    Gtk.Allocation alloc;
+    this.get_allocation(out alloc);
+    var attr = Gdk.WindowAttr();
+    attr.window_type = Gdk.WindowType.CHILD;
+    attr.x = alloc.x;
+    attr.y = alloc.y;
+    attr.width = alloc.width;
+    attr.height = alloc.height;
+    attr.visual = this.get_visual();
+    attr.event_mask = this.get_events()
+         & (~Gdk.EventMask.POINTER_MOTION_MASK)
+         & (~Gdk.EventMask.LEAVE_NOTIFY_MASK)
+         & (~Gdk.EventMask.BUTTON_PRESS_MASK)
+         & (~Gdk.EventMask.BUTTON_RELEASE_MASK);
+    Gdk.WindowAttributesType mask = Gdk.WindowAttributesType.X
+         | Gdk.WindowAttributesType.X
+         | Gdk.WindowAttributesType.VISUAL;
+    var window = new Gdk.Window(this.get_parent_window(), attr, mask);
+    this.set_window(window);
+    this.register_window(window);
+    this.set_realized(true);
+  }
+
   /**
   * Sort an array list
   *
