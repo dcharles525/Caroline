@@ -12,11 +12,16 @@ deps = [
 api='0.2'
 
 lib_sources = files(
-  'Caroline.vala'
+  'src/Caroline.vala',
+  'src/types/Bar.vala',
+  'src/types/LineSmooth.vala',
+  'src/types/Line.vala',
+  'src/types/Pie.vala',
+  'src/types/Scatter.vala'
 )
 
 test_sources = files(
-  'UnitTests.vala'
+  'src/UnitTests.vala'
 )
 
 lib = shared_library('caroline-'+api, lib_sources,
