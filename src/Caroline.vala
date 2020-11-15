@@ -125,7 +125,7 @@ public class Caroline : Gtk.DrawingArea {
     this.width = 500;
     this.height = 500;
     this.spreadX = 10;
-    this.spreadY = 10;
+    this.spreadY = 4;
     this.lineThicknessTicks = 0.5;
     this.lineThicknessData = 1;
     this.lineThicknessTicks = 2;
@@ -180,38 +180,8 @@ public class Caroline : Gtk.DrawingArea {
 
     this.scatterLabels = scatterPlotLabels;
     this.chartType = chartType;
-    this.labelXList.add(0);
 
-    if (dataX.length < 15){
-
-      this.spreadX = dataX.length;
-      this.spreadY = dataY.length;
-
-    }
-
-    for (int i = 0; i < dataX.length; i++) {
-
-      Caroline.Point point = {dataX[i], dataY[i]};
-      this.pointsArray.add(point);
-
-    }
-
-    this.chartType = chartType;
-
-    if (chartType != "pie")
-      this.arrayListSort();
-
-    if (chartType == "pie" && generateColors)
-      this.generateColors();
-
-    double tick = this.pointsArray[dataY.length-1].x / spreadX;
-
-    for (double f = 0; f < this.spreadX; f++){
-      if (f == 0)
-        this.labelXList.add(tick+(tick*f));
-      else
-        this.labelXList.add((tick+(tick*f)) + (tick));
-    }
+    this.updateData (dataX, dataY, generateColors);
 
   }
 
@@ -600,6 +570,56 @@ public class Caroline : Gtk.DrawingArea {
   }
 
   /**
+  * Takes update data and refreshes caroline
+  *
+  * Takes x, y, and generate colors data and recalculates with the new data. Then the labels are reloaded since some of
+  * the data ranges may change. 
+  *
+  * @param double[] dataX
+  * @param double[] dataY
+  * @param bool generateColors
+  *
+  * @return void
+  */
+  public void updateData (double[] dataX, double[] dataY, bool generateColors) {
+  
+    this.pointsArray.clear ();
+    this.labelXList.clear ();
+    this.labelYList.clear ();
+
+    for (int i = 0; i < dataX.length; i++) {
+
+      Caroline.Point point = {dataX[i], dataY[i]};
+      this.pointsArray.add(point);
+
+    }
+    this.labelXList.add(0);
+
+    if (dataX.length < 15){
+
+      this.spreadX = dataX.length;
+      this.spreadY = dataY.length;
+
+    }
+
+    if (chartType != "pie")
+      this.arrayListSort();
+
+    if (chartType == "pie" && generateColors)
+      this.generateColors();
+
+    double tick = this.pointsArray[dataY.length-1].x / spreadX;
+
+    for (double f = 0; f < this.spreadX; f++){
+      if (f == 0)
+        this.labelXList.add(tick+(tick*f));
+      else
+        this.labelXList.add((tick+(tick*f)) + (tick));
+    }
+
+  }
+
+  /**
   * Sort an array list
   *
   * Within this function we sort the array list by the x axis. Why? Well we need to know in what order to create
@@ -608,7 +628,7 @@ public class Caroline : Gtk.DrawingArea {
   *
   * @return void
   */
-  public void arrayListSort(){
+  private void arrayListSort(){
 
     bool swapped = true;
     int j = 0;
