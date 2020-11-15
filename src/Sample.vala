@@ -28,7 +28,7 @@ public void main (string[] args) {
   Gtk.Grid mainGrid = new Gtk.Grid ();
   mainGrid.orientation = Gtk.Orientation.VERTICAL;
 
-  int benchNumber = 10;
+  int benchNumber = 20;
 
   double[] y = new double[benchNumber+1];
   double[] x = new double[benchNumber+1];
@@ -63,6 +63,28 @@ public void main (string[] args) {
   window.add(mainGrid);
   window.destroy.connect (Gtk.main_quit);
   window.show_all ();
+
+  Timeout.add (3000, () => {
+
+    benchNumber = 20;
+
+    double[] y2 = new double[benchNumber+1];
+    double[] x2 = new double[benchNumber+1];
+
+    y2[0] = 0;
+
+    for (int i = 0; i < y2.length; ++i)
+      y2[i] = Random.int_range(0,100);
+
+    for (int i = 0; i < y2.length; ++i)
+      x2[i] = i;
+
+    carolineWidget.updateData (x2, y2, false);
+    carolineWidget.queue_draw ();
+    window.show_all ();
+    return true; 
+
+  });
 
   Gtk.main ();
 
