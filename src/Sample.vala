@@ -28,24 +28,35 @@ public void main (string[] args) {
   Gtk.Grid mainGrid = new Gtk.Grid ();
   mainGrid.orientation = Gtk.Orientation.VERTICAL;
 
-  int benchNumber = 20;
+  GenericArray<double?> y = new GenericArray<double?> ();
+  GenericArray<double?> x = new GenericArray<double?> ();
 
-  double[] y = new double[benchNumber+1];
-  double[] x = new double[benchNumber+1];
+  y.add (0);
 
-  y[0] = 0;
+  for (int i = 0; i < 9; ++i)
+    y.add (Random.int_range(0,100));
 
-  for (int i = 0; i < y.length; ++i)
-    y[i] = Random.int_range(0,100);
+  for (int i = 0; i < 10; ++i)
+    x.add (i);
 
-  for (int i = 0; i < y.length; ++i)
-    x[i] = i;
+  Array<GenericArray<double?>> xArray = new Array<GenericArray<double?>> ();
+  Array<GenericArray<double?>> yArray = new Array<GenericArray<double?>> ();
+  Array<string> sArray = new Array<string> ();
+
+  xArray.append_val (x);
+  xArray.append_val (x);
+
+  yArray.append_val (y);
+  yArray.append_val (y);
+
+  sArray.append_val ("scatter");
+  sArray.append_val ("smooth-line");
 
   //Simply set Caroline to a variable
   var carolineWidget = new Caroline(
-    x, //dataX
-    y, //dataY
-    "smooth-line", //chart type
+    xArray, //dataX
+    yArray, //dataY
+    sArray, //chart type
     true, //yes or no for generateColors function (needed in the case of the pie chart),
     false // yes or no for scatter plot labels
   );
@@ -53,7 +64,7 @@ public void main (string[] args) {
   now = new GLib.DateTime.now_local();
   sec = now.to_unix();
   var msecEnd = (sec * 1000) + (now.get_microsecond () / 1000);
-  stdout.printf("Time Taken: %f\n",msecEnd - msecStart);
+  //stdout.printf("Time Taken: %f\n",msecEnd - msecStart);
 
   //Add the Caroline widget tp the grid
   mainGrid.attach(carolineWidget, 0, 0, 1, 1);
@@ -64,7 +75,7 @@ public void main (string[] args) {
   window.destroy.connect (Gtk.main_quit);
   window.show_all ();
 
-  Timeout.add (3000, () => {
+  /*Timeout.add (3000, () => {
 
     benchNumber = 20;
 
@@ -84,7 +95,7 @@ public void main (string[] args) {
     window.show_all ();
     return true; 
 
-  });
+  })*/
 
   Gtk.main ();
 

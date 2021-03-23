@@ -14,7 +14,7 @@ public class Line{
   * @param double baseline
   * @return void
   */
-  public void drawLineChart(Cairo.Context cr, ArrayList<Caroline.Point?> pointsArray, double baseline){
+  public void drawLineChart (Cairo.Context cr, ArrayList<Caroline.Point?> pointsArray, double baseline){
 
     //Setting thickness of the line using set_line_width which can take any double.
     cr.set_line_width(1);

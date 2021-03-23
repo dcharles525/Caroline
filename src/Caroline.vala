@@ -68,6 +68,7 @@ public class Caroline : Gtk.DrawingArea {
 
   public int width { get; set; }
   public int height { get; set; }
+  public Array<string> chartTypes { get; set; }
 
   public double gap { get; set; }
   public double max { get; set; }
@@ -83,7 +84,6 @@ public class Caroline : Gtk.DrawingArea {
 
   public string dataTypeY { get; set; }
   public string dataTypeX { get; set; }
-  public string chartType { get; set; }
 
   public ArrayList<double?> labelXList = new ArrayList<double?>();
 
@@ -98,10 +98,8 @@ public class Caroline : Gtk.DrawingArea {
 
   public ArrayList<ChartColor?> chartColorArray = new ArrayList<ChartColor?>();
 
-  public ArrayList<Point?> pointsArray = new ArrayList<Point?>();
-  public ArrayList<Point?> pointsCalculatedArray = new ArrayList<Point?>();
-
-  public ArrayList<string> chartTypes = new ArrayList<string>();
+  public ArrayList<ArrayList<Point?>> pointsArray = new ArrayList<ArrayList<Point?>>();
+  public ArrayList<ArrayList<Point?>> pointsCalculatedArray = new ArrayList<ArrayList<Point?>>();
 
   public bool scatterLabels {get; set;}
 
@@ -134,7 +132,6 @@ public class Caroline : Gtk.DrawingArea {
     this.gap = 0;
     this.minPoint = 0;
     this.maxPoint = 0;
-    this.chartType = "line";
 
     this.pieChartXStart = 175;
     this.pieChartYStart = 175;
@@ -156,12 +153,18 @@ public class Caroline : Gtk.DrawingArea {
   * generateColors - array for ChartColor structs
   * scatterPlotLabels - show labels on the scatter plot
   */
-  public Caroline(double[] dataX, double[] dataY, string chartType, bool generateColors, bool scatterPlotLabels){
+  public Caroline (
+    Array<GenericArray<double?>> dataX, 
+    Array<GenericArray<double?>> dataY, 
+    Array<string> chartTypes, 
+    bool generateColors, 
+    bool scatterPlotLabels
+  ) {
 
     /*Since our widget will already be "realized" we want to use add_events, this
     function allows us to set the window event bit flags, which I document directly below.
     For more info on this start here: https://valadoc.org/gtk+-3.0/Gtk.Widget.add_events.html*/
-    add_events(
+    add_events (
       /*Gdk.EventMast are a set of bit flags used to decide which events a window is to recieve.
       In our case we want to be able to track press, release, and motion. Eventually as this
       "library" grows we will take advantage of all of these.*/
@@ -173,15 +176,18 @@ public class Caroline : Gtk.DrawingArea {
     /*We want to allow the developer to set a minimum size of the widget so their parent
     application knows approx what the size will be.
     For more info on this start here: https://valadoc.org/gtk+-3.0/Gtk.Widget.set_size_request.html*/
-    set_size_request(
+    set_size_request (
       this.width,
       this.height
     );
 
     this.scatterLabels = scatterPlotLabels;
-    this.chartType = chartType;
+    this.chartTypes = chartTypes;
+    this.pointsArray.clear ();
+    this.pointsCalculatedArray.clear();
 
-    this.updateData (dataX, dataY, generateColors);
+    for (int i = 0; i < chartTypes.length; i++)
+      this.updateData (dataX.index (i), dataY.index (i), chartTypes.index (i), generateColors);
 
   }
 
@@ -197,87 +203,94 @@ public class Caroline : Gtk.DrawingArea {
   */
   public override bool draw (Cairo.Context cr) {
 
-    this.calculations();
+    this.calculations ();
 
     /*Here we are grabbing the width and height assocaited with 'this'.
     We then subtract a settable padding around the entirety of the widget. We can also
     observe that 'this' should have the width and height we requested in the set_size_request
     function.*/
-    this.width = get_allocated_width() - this.widthPadding;
-    this.height = get_allocated_height() - this.heightPadding;
+    this.width = get_allocated_width () - this.widthPadding;
+    this.height = get_allocated_height () - this.heightPadding;
 
-    if(this.chartType != "pie"){
+    for (int i = 0; i < this.chartTypes.length; i++) {
 
-      //As the function illudes too, this sets the width of the lines for the x & y ticks.
-      cr.set_line_width(this.lineThicknessTicks);
+      if (this.chartTypes.index (i) != "pie"){
 
-      //setting the color of the lines.
-      cr.set_source_rgba(255, 255, 255, 0.2);
+        //As the function illudes too, this sets the width of the lines for the x & y ticks.
+        cr.set_line_width (this.lineThicknessTicks);
 
-      this.drawOutline(cr);
-      this.drawYTicks(cr);
-      this.drawXTicks(cr);
+        //setting the color of the lines.
+        cr.set_source_rgba (255, 255, 255, 0.2);
 
-      /*Sets the drawing area and its attributes back to their defaults, which are set on
-      previous save() or the initial value*/
-      cr.restore();
+        this.drawOutline (cr);
+        this.drawYTicks (cr);
+        this.drawXTicks (cr);
 
-      //Saves the drawing area context and the attributes set before this save
-      cr.save();
+        /*Sets the drawing area and its attributes back to their defaults, which are set on
+        previous save() or the initial value*/
+        cr.restore ();
 
-    }
+        //Saves the drawing area context and the attributes set before this save
+        cr.save ();
 
-    //Setting thickness of the line using set_line_width which can take any double.
-    cr.set_line_width(1);
+      }
+      
+      //Setting thickness of the line using set_line_width which can take any double.
+      cr.set_line_width(1);
 
-    //Set the color of the line (this default color is blue)
-    cr.set_source_rgba(0, 174, 174,0.8);
+      //Set the color of the line (this default color is blue)
+      cr.set_source_rgba(0, 174, 174,0.8);
 
-    if (this.chartType != "bar")
-      this.pointCalculations(false);
-    else
-      this.pointCalculations(true);
+      string chartType = chartTypes.index (i);
 
-    /*This switch-case will execute the proper chart depending on what the
-    developer has choosen.*/
-    switch (this.chartType) {
-      case "line":
-        Line line = new Line();
-        line.drawLineChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
-        break;
-      case "smooth-line":
-        LineSmooth lineSmooth = new LineSmooth();
-        lineSmooth.drawLineSmoothChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
-        break;
-      case "bar":
-        Bar bar = new Bar();
-        bar.drawBarChart(cr,this.pointsCalculatedArray,this.height+this.chartPadding);
-        break;
-      case "pie":
-        Pie pie = new Pie();
-        pie.drawPieChart(
-          cr,
-          this.pointsArray,
-          this.chartColorArray,
-          this.pieChartXStart,
-          this.pieChartYStart,
-          this.pieChartRadius,
-          this.pieChartYLabelBStart,
-          this.pieChartYLabelBSpacing,
-          this.pieChartLabelOffsetX,
-          this.pieChartLabelOffsetY,
-          this.pieChartLabelBSize,
-          this.width
-        );
-        break;
-      case "scatter":
-        Scatter scatter = new Scatter();
-        scatter.drawScatterChart(cr,this.pointsCalculatedArray,this.pointsArray,this.scatterLabels);
-        break;
-      default:
-        LineSmooth lineSmooth = new LineSmooth();
-        lineSmooth.drawLineSmoothChart(cr,this.pointsCalculatedArray,this.chartPadding + (this.widthPadding / 3));
-        break;
+      if (chartType != "bar")
+        this.pointCalculations (false, i);
+      else
+        this.pointCalculations (true, i);
+
+      /*This switch-case will execute the proper chart depending on what the
+      developer has choosen.*/
+      switch (chartType) {
+        case "line":
+          Line line = new Line ();
+          line.drawLineChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
+          break;
+        case "smooth-line":
+          LineSmooth lineSmooth = new LineSmooth ();
+          lineSmooth.drawLineSmoothChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
+          break;
+        case "bar":
+          Bar bar = new Bar ();
+          bar.drawBarChart (cr, this.pointsCalculatedArray[i], this.height + this.chartPadding);
+          break;
+        case "pie":
+          Pie pie = new Pie ();
+          pie.drawPieChart (
+            cr,
+            this.pointsArray[i],
+            this.chartColorArray,
+            this.pieChartXStart,
+            this.pieChartYStart,
+            this.pieChartRadius,
+            this.pieChartYLabelBStart,
+            this.pieChartYLabelBSpacing,
+            this.pieChartLabelOffsetX,
+            this.pieChartLabelOffsetY,
+            this.pieChartLabelBSize,
+            this.width
+          );
+          break;
+        case "scatter":
+          Scatter scatter = new Scatter ();
+          scatter.drawScatterChart (cr, this.pointsCalculatedArray[i], this.pointsArray[i], this.scatterLabels);
+          break;
+        default:
+          LineSmooth lineSmooth = new LineSmooth ();
+          lineSmooth.drawLineSmoothChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
+          break;
+      }
+
+
     }
 
     return true;
@@ -295,41 +308,45 @@ public class Caroline : Gtk.DrawingArea {
   * @param none
   * @return void
   */
-  private void calculations(){
+  private void calculations () {
 
-    /*This next sector of arithmetic is to find the max value of the data array*/
-    this.maxPoint = this.pointsArray[0].y;
+    for (int i = 0; i < this.pointsArray.size; i++) {
 
-    //Loop and compare each value to our initial value to see if it becomes the max
-    for (int i = 0; i < this.pointsArray.size; i++)
-      if (this.pointsArray[i].y > this.maxPoint)
-        this.maxPoint = this.pointsArray[i].y;
+      /*This next sector of arithmetic is to find the max value of the data array*/
+      this.maxPoint = this.pointsArray[i][0].y;
 
-    /*This next sector of arithmetic is to find the min value of the data array*/
-    this.minPoint = 0;
+      //Loop and compare each value to our initial value to see if it becomes the max
+      for (int f = 0; f < this.pointsArray[i].size; f++)
+        if (this.pointsArray[i][f].y > this.maxPoint)
+          this.maxPoint = this.pointsArray[i][f].y;
 
-    //Loop and compare each scatterArray to our initial value to see if it becomes the min
-    for (int i = 0; i < this.pointsArray.size; i++)
-      if (this.pointsArray[i].y < this.minPoint)
-        this.minPoint = this.pointsArray[i].y;
+      /*This next sector of arithmetic is to find the min value of the data array*/
+      this.minPoint = 0;
 
-    /*Finds the gap between each y axis label to be displayed. spreadY is set on the
-    developers side, it is meant to tell Caroline how many y axis ticks needed.*/
-    this.gap = (this.maxPoint - this.minPoint) / this.spreadY;
+      //Loop and compare each scatterArray to our initial value to see if it becomes the min
+      for (int f = 0; f < this.pointsArray.size; f++)
+        if (this.pointsArray[i][f].y < this.minPoint)
+          this.minPoint = this.pointsArray[i][f].y;
 
-    //Initial y axis value
-    double yLabel = this.minPoint;
+      /*Finds the gap between each y axis label to be displayed. spreadY is set on the
+      developers side, it is meant to tell Caroline how many y axis ticks needed.*/
+      this.gap = (this.maxPoint - this.minPoint) / this.spreadY;
 
-    for (int i = 0; i < this.spreadY + 1; i++){
+      //Initial y axis value
+      double yLabel = this.minPoint;
 
-      if (i > 0)
-        yLabel = yLabel + gap;
+      for (int f = 0; f < this.spreadY + 1; f++){
 
-      //Depending on double length we clean it up a bit for display if its over 8 digits
-      if (yLabel.to_string().length >= 8)
-        this.labelYList.add(yLabel.to_string().slice (0, 8));
-      else
-        this.labelYList.add(yLabel.to_string());
+        if (f > 0)
+          yLabel = yLabel + gap;
+
+        //Depending on double length we clean it up a bit for display if its over 8 digits
+        if (yLabel.to_string ().length >= 8)
+          this.labelYList.add (yLabel.to_string ().slice (0, 8));
+        else
+          this.labelYList.add (yLabel.to_string ());
+
+      }
 
     }
 
@@ -344,27 +361,27 @@ public class Caroline : Gtk.DrawingArea {
   * @param bool barOrNot
   * @return void
   */
-  private void pointCalculations(bool barOrNot){
+  private void pointCalculations (bool barOrNot, int index) {
 
-    this.pointsCalculatedArray.clear();
     double maxX = 0;
     double divisor = 0;
     double y = 0;
+    ArrayList<Point?> points = new ArrayList<Point?> ();
 
-    for (int i = 0; i < this.pointsArray.size; i++)
-      if (this.pointsArray.get(i).x > maxX)
-        maxX = this.pointsArray.get(i).x;
+    for (int i = 0; i < this.pointsArray[index].size; i++)
+      if (this.pointsArray[index][i].x > maxX)
+        maxX = this.pointsArray[index][i].x;
 
-    for (int i = 0; i < this.pointsArray.size; i++) {
+    for (int i = 0; i < this.pointsArray[index].size; i++) {
 
-      double scaler = ((this.pointsArray[i].y - this.minPoint) / (this.maxPoint - this.minPoint)) * this.spreadY;
+      double scaler = ((this.pointsArray[index][i].y - this.minPoint) / (this.maxPoint - this.minPoint)) * this.spreadY;
 
       if (!barOrNot)
         divisor = 3;
       else
         divisor = 4.35;
 
-      double x = this.pointsArray[i].x * (this.width/maxX) + this.chartPadding + (this.widthPadding / divisor);
+      double x = this.pointsArray[index][i].x * (this.width/maxX) + this.chartPadding + (this.widthPadding / divisor);
 
       if (!barOrNot)
         y = (this.height + this.chartPadding) - ((this.spreadFinalY * scaler));
@@ -372,9 +389,11 @@ public class Caroline : Gtk.DrawingArea {
         y = -(this.spreadFinalY * scaler);
 
       Caroline.Point point = {x, y};
-      this.pointsCalculatedArray.add(point);
+      points.add (point);
 
     }
+      
+    this.pointsCalculatedArray.add (points);
 
   }
 
@@ -546,8 +565,10 @@ public class Caroline : Gtk.DrawingArea {
   }
 
   public override void realize() {
+    
     Gtk.Allocation alloc;
     this.get_allocation(out alloc);
+    
     var attr = Gdk.WindowAttr();
     attr.window_type = Gdk.WindowType.CHILD;
     attr.x = alloc.x;
@@ -556,17 +577,19 @@ public class Caroline : Gtk.DrawingArea {
     attr.height = alloc.height;
     attr.visual = this.get_visual();
     attr.event_mask = this.get_events()
-         & (~Gdk.EventMask.POINTER_MOTION_MASK)
-         & (~Gdk.EventMask.LEAVE_NOTIFY_MASK)
-         & (~Gdk.EventMask.BUTTON_PRESS_MASK)
-         & (~Gdk.EventMask.BUTTON_RELEASE_MASK);
+      & (~Gdk.EventMask.POINTER_MOTION_MASK)
+      & (~Gdk.EventMask.LEAVE_NOTIFY_MASK)
+      & (~Gdk.EventMask.BUTTON_PRESS_MASK)
+      & (~Gdk.EventMask.BUTTON_RELEASE_MASK);
     Gdk.WindowAttributesType mask = Gdk.WindowAttributesType.X
-         | Gdk.WindowAttributesType.X
-         | Gdk.WindowAttributesType.VISUAL;
+      | Gdk.WindowAttributesType.X
+      | Gdk.WindowAttributesType.VISUAL;
+
     var window = new Gdk.Window(this.get_parent_window(), attr, mask);
     this.set_window(window);
     this.register_window(window);
     this.set_realized(true);
+
   }
 
   /**
@@ -581,21 +604,25 @@ public class Caroline : Gtk.DrawingArea {
   *
   * @return void
   */
-  public void updateData (double[] dataX, double[] dataY, bool generateColors) {
+  public void updateData (GenericArray<double?> dataX, GenericArray<double?> dataY, string chartType, bool generateColors) {
   
-    this.pointsArray.clear ();
     this.labelXList.clear ();
     this.labelYList.clear ();
 
+    ArrayList<Point?> points = new ArrayList<Point?> ();
+    
     for (int i = 0; i < dataX.length; i++) {
 
       Caroline.Point point = {dataX[i], dataY[i]};
-      this.pointsArray.add(point);
+      points.add (point);
 
     }
-    this.labelXList.add(0);
 
-    if (dataX.length < 15){
+    pointsArray.add (points);
+
+    this.labelXList.add (0);
+
+    if (dataX.length < 15) {
 
       this.spreadX = dataX.length;
       this.spreadY = dataY.length;
@@ -603,18 +630,18 @@ public class Caroline : Gtk.DrawingArea {
     }
 
     if (chartType != "pie")
-      this.arrayListSort();
+      this.arrayListSort ();
 
     if (chartType == "pie" && generateColors)
-      this.generateColors();
+      this.generateColors ();
 
-    double tick = this.pointsArray[dataY.length-1].x / spreadX;
+    double tick = this.pointsArray[this.pointsArray.size-1][dataY.length-1].x / spreadX;
 
     for (double f = 0; f < this.spreadX; f++){
       if (f == 0)
-        this.labelXList.add(tick+(tick*f));
+        this.labelXList.add (tick+(tick*f));
       else
-        this.labelXList.add((tick+(tick*f)) + (tick));
+        this.labelXList.add ( (tick+(tick*f)) + (tick));
     }
 
   }
@@ -628,32 +655,34 @@ public class Caroline : Gtk.DrawingArea {
   *
   * @return void
   */
-  private void arrayListSort(){
+  private void arrayListSort () {
 
     bool swapped = true;
     int j = 0;
     double tmpX,tmpY;
     Caroline.Point point = {0,0};
+    int arrayListSize = this.pointsArray.size - 1;
+    stdout.printf ("%f", this.pointsArray[arrayListSize][0].x);
 
     while (swapped) {
 
       swapped = false;
       j++;
 
-      for (int i = 0; i < this.pointsArray.size - j; i++) {
+      for (int i = 0; i < this.pointsArray[arrayListSize].size - j; i++) {
 
         /*if current x is bigger than the next x, we move it a position forward, along with its y counter
         part (y coordinate).*/
-        if (this.pointsArray[i].x > this.pointsArray[i+1].x) {
+        if (this.pointsArray[arrayListSize][i].x > this.pointsArray[arrayListSize][i+1].x) {
 
-          tmpX = this.pointsArray[i].x;
-          tmpY = this.pointsArray[i].y;
+          tmpX = this.pointsArray[arrayListSize][i].x;
+          tmpY = this.pointsArray[arrayListSize][i].y;
 
-          point = {this.pointsArray[i+1].x, this.pointsArray[i+1].y};
-          this.pointsArray.set(i,point);
+          point = {this.pointsArray[arrayListSize][i+1].x, this.pointsArray[arrayListSize][i+1].y};
+          this.pointsArray[arrayListSize].set(i,point);
 
           point = {tmpX,tmpY};
-          this.pointsArray.set(i+1,point);
+          this.pointsArray[arrayListSize].set(i+1,point);
 
           swapped = true;
 
