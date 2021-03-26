@@ -184,7 +184,6 @@ public class Caroline : Gtk.DrawingArea {
     this.scatterLabels = scatterPlotLabels;
     this.chartTypes = chartTypes;
     this.pointsArray.clear ();
-    this.pointsCalculatedArray.clear();
 
     for (int i = 0; i < chartTypes.length; i++)
       this.updateData (dataX.index (i), dataY.index (i), chartTypes.index (i), generateColors);
@@ -211,6 +210,8 @@ public class Caroline : Gtk.DrawingArea {
     function.*/
     this.width = get_allocated_width () - this.widthPadding;
     this.height = get_allocated_height () - this.heightPadding;
+
+    this.pointsCalculatedArray.clear ();
 
     for (int i = 0; i < this.chartTypes.length; i++) {
 
@@ -409,7 +410,7 @@ public class Caroline : Gtk.DrawingArea {
   private void drawOutline(Cairo.Context cr){
 
     double widthPaddingDiv = this.chartPadding + (this.widthPadding / 3);
-
+    
     /*We want to move the pointer on the canvas to where we want the axis's to be, to
     learn more about move_to: https://valadoc.org/cairo/Cairo.Context.move_to.html*/
     cr.move_to(
