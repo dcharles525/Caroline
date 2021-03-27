@@ -170,7 +170,11 @@ public class Caroline : Gtk.DrawingArea {
       "library" grows we will take advantage of all of these.*/
       Gdk.EventMask.BUTTON_PRESS_MASK |
       Gdk.EventMask.BUTTON_RELEASE_MASK |
-      Gdk.EventMask.POINTER_MOTION_MASK
+      Gdk.EventMask.POINTER_MOTION_MASK |
+      Gdk.EventMask.POINTER_MOTION_MASK |
+      Gdk.EventMask.LEAVE_NOTIFY_MASK |
+      Gdk.EventMask.BUTTON_PRESS_MASK |
+      Gdk.EventMask.BUTTON_RELEASE_MASK
     );
 
     /*We want to allow the developer to set a minimum size of the widget so their parent
@@ -210,7 +214,6 @@ public class Caroline : Gtk.DrawingArea {
     function.*/
     this.width = get_allocated_width () - this.widthPadding;
     this.height = get_allocated_height () - this.heightPadding;
-
     this.pointsCalculatedArray.clear ();
 
     for (int i = 0; i < this.chartTypes.length; i++) {
@@ -314,7 +317,8 @@ public class Caroline : Gtk.DrawingArea {
     for (int i = 0; i < this.pointsArray.size; i++) {
 
       /*This next sector of arithmetic is to find the max value of the data array*/
-      this.maxPoint = this.pointsArray[i][0].y;
+      if (this.maxPoint == 0)
+        this.maxPoint = this.pointsArray[i][0].y;
 
       //Loop and compare each value to our initial value to see if it becomes the max
       for (int f = 0; f < this.pointsArray[i].size; f++)
@@ -350,6 +354,8 @@ public class Caroline : Gtk.DrawingArea {
       }
 
     }
+
+    stdout.printf ("%f \n", this.maxPoint);
 
   }
 
@@ -407,10 +413,10 @@ public class Caroline : Gtk.DrawingArea {
   * @param Cairo.Context cr
   * @return void
   */
-  private void drawOutline(Cairo.Context cr){
+  private void drawOutline (Cairo.Context cr){
 
-    double widthPaddingDiv = this.chartPadding + (this.widthPadding / 3);
-    
+    double widthPaddingDiv = this.chartPadding + (this.widthPadding / 3);    
+
     /*We want to move the pointer on the canvas to where we want the axis's to be, to
     learn more about move_to: https://valadoc.org/cairo/Cairo.Context.move_to.html*/
     cr.move_to(
@@ -423,7 +429,7 @@ public class Caroline : Gtk.DrawingArea {
       widthPaddingDiv,
       this.height + this.chartPadding
     );
-
+    
     //Now we draw the x axis using the same methodolgy as the y axis directly above.
     cr.move_to(
       this.width + widthPaddingDiv,
@@ -565,34 +571,6 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
-  public override void realize() {
-    
-    Gtk.Allocation alloc;
-    this.get_allocation(out alloc);
-    
-    var attr = Gdk.WindowAttr();
-    attr.window_type = Gdk.WindowType.CHILD;
-    attr.x = alloc.x;
-    attr.y = alloc.y;
-    attr.width = alloc.width;
-    attr.height = alloc.height;
-    attr.visual = this.get_visual();
-    attr.event_mask = this.get_events()
-      & (~Gdk.EventMask.POINTER_MOTION_MASK)
-      & (~Gdk.EventMask.LEAVE_NOTIFY_MASK)
-      & (~Gdk.EventMask.BUTTON_PRESS_MASK)
-      & (~Gdk.EventMask.BUTTON_RELEASE_MASK);
-    Gdk.WindowAttributesType mask = Gdk.WindowAttributesType.X
-      | Gdk.WindowAttributesType.X
-      | Gdk.WindowAttributesType.VISUAL;
-
-    var window = new Gdk.Window(this.get_parent_window(), attr, mask);
-    this.set_window(window);
-    this.register_window(window);
-    this.set_realized(true);
-
-  }
-
   /**
   * Takes update data and refreshes caroline
   *
@@ -663,7 +641,6 @@ public class Caroline : Gtk.DrawingArea {
     double tmpX,tmpY;
     Caroline.Point point = {0,0};
     int arrayListSize = this.pointsArray.size - 1;
-    stdout.printf ("%f", this.pointsArray[arrayListSize][0].x);
 
     while (swapped) {
 

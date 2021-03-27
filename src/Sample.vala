@@ -26,14 +26,19 @@ public void main (string[] args) {
 
   GenericArray<double?> y = new GenericArray<double?> ();
   GenericArray<double?> x = new GenericArray<double?> ();
+  GenericArray<double?> z = new GenericArray<double?> ();
 
   y.add (0);
+  z.add (0);
 
   for (int i = 0; i < 9; ++i)
     y.add (Random.int_range (0, 100));
 
   for (int i = 0; i < 10; ++i)
     x.add (i);
+  
+  for (int i = 0; i < 9; ++i)
+    z.add (Random.int_range (0, 100));
 
   Array<GenericArray<double?>> xArray = new Array<GenericArray<double?>> ();
   Array<GenericArray<double?>> yArray = new Array<GenericArray<double?>> ();
@@ -41,11 +46,11 @@ public void main (string[] args) {
 
   xArray.append_val (x);
   xArray.append_val (x);
-
+  
   yArray.append_val (y);
-  yArray.append_val (y);
-
-  sArray.append_val ("scatter");
+  yArray.append_val (z);
+  
+  sArray.append_val ("smooth-line");
   sArray.append_val ("smooth-line");
 
   //Simply set Caroline to a variable
