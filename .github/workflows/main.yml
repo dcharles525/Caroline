@@ -38,8 +38,3 @@ jobs:
         #       already tested by building the unittests. If you want to keep it, i'd recommend to
         #       create another meson executable section.
         # valac --pkg gtk+-3.0 --pkg gee-0.8 Caroline.vapi ../Sample.vala -X Caroline.so -X -I. -o demo
-    - name: Tests 
-      run: |
-        sudo apt-get install xvfb
-        cd build
-        xvfb-run ./caroline-vala
