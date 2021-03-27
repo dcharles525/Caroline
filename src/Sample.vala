@@ -25,8 +25,9 @@ public void main (string[] args) {
   mainGrid.orientation = Gtk.Orientation.VERTICAL;
 
   GenericArray<double?> y = new GenericArray<double?> ();
-  GenericArray<double?> x = new GenericArray<double?> ();
   GenericArray<double?> z = new GenericArray<double?> ();
+  
+  GenericArray<double?> x = new GenericArray<double?> ();
 
   y.add (0);
   z.add (0);
@@ -40,13 +41,9 @@ public void main (string[] args) {
   for (int i = 0; i < 9; ++i)
     z.add (Random.int_range (0, 100));
 
-  Array<GenericArray<double?>> xArray = new Array<GenericArray<double?>> ();
   Array<GenericArray<double?>> yArray = new Array<GenericArray<double?>> ();
   Array<string> sArray = new Array<string> ();
 
-  xArray.append_val (x);
-  xArray.append_val (x);
-  
   yArray.append_val (y);
   yArray.append_val (z);
   
@@ -55,7 +52,7 @@ public void main (string[] args) {
 
   //Simply set Caroline to a variable
   var carolineWidget = new Caroline (
-    xArray, //dataX
+    x, //dataX
     yArray, //dataY
     sArray, //chart type
     true, //yes or no for generateColors function (needed in the case of the pie chart),

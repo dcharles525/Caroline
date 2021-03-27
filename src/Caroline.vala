@@ -154,7 +154,7 @@ public class Caroline : Gtk.DrawingArea {
   * scatterPlotLabels - show labels on the scatter plot
   */
   public Caroline (
-    Array<GenericArray<double?>> dataX, 
+    GenericArray<double?> dataX, 
     Array<GenericArray<double?>> dataY, 
     Array<string> chartTypes, 
     bool generateColors, 
@@ -190,7 +190,7 @@ public class Caroline : Gtk.DrawingArea {
     this.pointsArray.clear ();
 
     for (int i = 0; i < chartTypes.length; i++)
-      this.updateData (dataX.index (i), dataY.index (i), chartTypes.index (i), generateColors);
+      this.updateData (dataX, dataY.index (i), chartTypes.index (i), generateColors);
 
   }
 
@@ -509,13 +509,7 @@ public class Caroline : Gtk.DrawingArea {
     each tick mark.*/
     for (int i = 0; i < this.spreadX; i++){
 
-      double rawXCalculation = 0;
-
-      //if ( this.chartType != "bar")
-        //rawXCalculation = this.labelXList.get(i) * (this.width/this.labelXList.get(this.labelXList.size-1));
-      //else
-        rawXCalculation = this.spreadFinalX * i;
-
+      double rawXCalculation = this.spreadFinalX * i;
       double x = this.chartPadding + rawXCalculation + (this.widthPadding / 3);
 
       //line drawing
@@ -554,7 +548,7 @@ public class Caroline : Gtk.DrawingArea {
   *
   * @return void
   */
-  private void generateColors(){
+  private void generateColors () {
 
     for (int i = 0; i < this.pointsArray.size; i++){
 
