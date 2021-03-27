@@ -22,10 +22,12 @@ some ramblings about the development process and inner-workings of Cairo and Car
 #### Compiling & Installing
 
 ```
-valac --pkg gtk+-3.0 --pkg gee-0.8 --library=Caroline -H Caroline.h Caroline.vala -X -fPIC -X -shared -o Caroline.so
-valac --pkg gtk+-3.0 --pkg gee-0.8 Caroline.vapi Sample.vala -X Caroline.so -X -I. -o demo
-sudo cp Caroline.so /usr/lib/
-./demo
+mkdir build
+cd build
+meson ..
+ninja
+
+You now have a linked library that can be accessed by your app!
 ```
 
 #### Simple Usage
@@ -34,7 +36,7 @@ A sample application called "Sample.vala" is included in this repo, it contains 
 ```
 var carolineWidget = new Caroline(
   x, //dataX
-  y, //dataY
+  yArray, //dataY
   "scatter", //chart type
   true, //yes or no for generateColors function (needed in the case of the pie chart),
   false // yes or no for scatter plot labels

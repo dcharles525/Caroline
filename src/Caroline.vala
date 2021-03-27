@@ -1,8 +1,8 @@
 //============================================================+
 // File name   : Caroline.vala
-// Last Update : 2020-6-20
+// Last Update : 2021-3-27
 //
-// Version: 0.2.0
+// Version: 0.3.0
 //
 // Description : This is an extension of a GTK Drawing Area. Its purpose is to make it easy for any level
 // of developer to use charts in their application. More in depth documentation is found in below and in the
@@ -148,7 +148,7 @@ public class Caroline : Gtk.DrawingArea {
 
   /**
   * dataX - x axis data for the charts
-  * dataY - y axis data for the charts
+  * dataY - y axis data for the charts - note we can have multiple sets of y data
   * chartType - this can either be line, bar, or pie
   * generateColors - array for ChartColor structs
   * scatterPlotLabels - show labels on the scatter plot
@@ -185,8 +185,11 @@ public class Caroline : Gtk.DrawingArea {
       this.height
     );
 
+    //Boolean for auto generated scatter labels
     this.scatterLabels = scatterPlotLabels;
     this.chartTypes = chartTypes;
+
+    //Clearing out points array for the next draw
     this.pointsArray.clear ();
 
     for (int i = 0; i < chartTypes.length; i++)
@@ -216,9 +219,12 @@ public class Caroline : Gtk.DrawingArea {
     this.height = get_allocated_height () - this.heightPadding;
     this.pointsCalculatedArray.clear ();
 
+    //Looping over our multiple data sets
     for (int i = 0; i < this.chartTypes.length; i++) {
 
-      if (this.chartTypes.index (i) != "pie"){
+      string chartType = chartTypes.index (i);
+
+      if (chartType != "pie"){
 
         //As the function illudes too, this sets the width of the lines for the x & y ticks.
         cr.set_line_width (this.lineThicknessTicks);
@@ -244,8 +250,6 @@ public class Caroline : Gtk.DrawingArea {
 
       //Set the color of the line (this default color is blue)
       cr.set_source_rgba(0, 174, 174,0.8);
-
-      string chartType = chartTypes.index (i);
 
       if (chartType != "bar")
         this.pointCalculations (false, i);
@@ -355,17 +359,17 @@ public class Caroline : Gtk.DrawingArea {
 
     }
 
-    stdout.printf ("%f \n", this.maxPoint);
-
   }
 
   /**
   * Calculate Absolute Points
   *
   * Takes a boolean to check which types of calculations to run (bar chart or any other) then stores the points within
-  * a point and then into an array of calculated points.
+  * a point and then into an array of calculated points. We also take the current index of the y data as this is called
+  * from a loop. 
   *
   * @param bool barOrNot
+  * @param int index
   * @return void
   */
   private void pointCalculations (bool barOrNot, int index) {
@@ -571,8 +575,9 @@ public class Caroline : Gtk.DrawingArea {
   * Takes x, y, and generate colors data and recalculates with the new data. Then the labels are reloaded since some of
   * the data ranges may change. 
   *
-  * @param double[] dataX
-  * @param double[] dataY
+  * @param GenericArray<double?> dataX
+  * @param GenericArray<double?>  dataY
+  * @param string chartType
   * @param bool generateColors
   *
   * @return void
@@ -584,6 +589,7 @@ public class Caroline : Gtk.DrawingArea {
 
     ArrayList<Point?> points = new ArrayList<Point?> ();
     
+    //Creating array of points structs 
     for (int i = 0; i < dataX.length; i++) {
 
       Caroline.Point point = {dataX[i], dataY[i]};
@@ -602,6 +608,7 @@ public class Caroline : Gtk.DrawingArea {
 
     }
 
+    //If we don't have a pie chart we sort, if we do we don't since we don't want to waste cpu cycles on it
     if (chartType != "pie")
       this.arrayListSort ();
 
@@ -612,9 +619,9 @@ public class Caroline : Gtk.DrawingArea {
 
     for (double f = 0; f < this.spreadX; f++){
       if (f == 0)
-        this.labelXList.add (tick+(tick*f));
+        this.labelXList.add (tick + (tick * f));
       else
-        this.labelXList.add ( (tick+(tick*f)) + (tick));
+        this.labelXList.add ( (tick + (tick * f)) + (tick));
     }
 
   }
