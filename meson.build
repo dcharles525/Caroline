@@ -9,7 +9,7 @@ deps = [
   dependency('gee-0.8')
 ]
 
-api='0.2'
+api='0.3'
 
 lib_sources = files(
   'src/Caroline.vala',
@@ -18,10 +18,6 @@ lib_sources = files(
   'src/types/Line.vala',
   'src/types/Pie.vala',
   'src/types/Scatter.vala'
-)
-
-test_sources = files(
-  'src/UnitTests.vala'
 )
 
 lib = shared_library('caroline-'+api, lib_sources,
@@ -41,17 +37,11 @@ install_data(sources: vapifilename,
 install_data(sources: [meson.current_source_dir() + '/caroline-' + api + '.deps'],
              install_dir: get_option('datadir') + '/vala/vapi')
 
-test_unit = 'caroline-vala'
-exe = executable(test_unit,test_sources,
-                        link_with: lib,
-                        dependencies: deps)
-
 pkgconfig.generate(libraries: [lib],
-                   subdirs: 'caroline-0.2',
+                   subdirs: 'caroline-0.3',
                    version: api,
                    name: 'caroline',
                    filebase: 'caroline-' + api,
                    requires: ['glib-2.0', 'gobject-2.0', 'gtk+-3.0', 'gee-0.8'],
                    description: 'A simple Cairo Chart Library for GTK and Vala')
 
-test(test_unit, exe)
