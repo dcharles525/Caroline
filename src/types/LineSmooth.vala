@@ -12,9 +12,15 @@ public class LineSmooth{
   * @param Cairo.Context cr
   * @param ArrayList<Caroline.Point?> pointsArray
   * @param double baseline
+  * @param ArrayList<ChartColor?> chartColorArray
   * @return void
   */
-  public void drawLineSmoothChart(Cairo.Context cr, ArrayList<Caroline.Point?> pointsArray, double baseline){
+  public void drawLineSmoothChart (
+    Cairo.Context cr, 
+    ArrayList<Caroline.Point?> pointsArray, 
+    double baseline,
+    ArrayList<Caroline.ChartColor?> chartColorArray
+  ) {
 
     //We want to move the pointer on the canvas to where we want the line graph to start.
     cr.move_to(
@@ -24,7 +30,14 @@ public class LineSmooth{
     );
 
     for (int i = 0; i < pointsArray.size - 1; i++){
-      
+     
+      //Uses the chart color arrya with the structs within it to set the color
+      cr.set_source_rgb(
+        chartColorArray[i].r,
+        chartColorArray[i].g,
+        chartColorArray[i].b
+      );
+
       //Calculating the "before values", with bezier curves you need to think of this as your starting point
       double beforeX = pointsArray[i].x;
       double beforeY = pointsArray[i].y;

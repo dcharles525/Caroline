@@ -335,7 +335,8 @@ GType line_smooth_get_type (void) G_GNUC_CONST;
 void line_smooth_drawLineSmoothChart (LineSmooth* self,
                                       cairo_t* cr,
                                       GeeArrayList* pointsArray,
-                                      gdouble baseline);
+                                      gdouble baseline,
+                                      GeeArrayList* chartColorArray);
 LineSmooth* line_smooth_new (void);
 LineSmooth* line_smooth_construct (GType object_type);
 gpointer pie_ref (gpointer instance);

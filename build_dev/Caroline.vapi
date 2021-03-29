@@ -60,7 +60,7 @@ public class Scatter {
 [CCode (cheader_filename = "Caroline.h")]
 public class LineSmooth {
 	public LineSmooth ();
-	public void drawLineSmoothChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline);
+	public void drawLineSmoothChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline, Gee.ArrayList<Caroline.ChartColor?> chartColorArray);
 }
 [CCode (cheader_filename = "Caroline.h")]
 public class Pie {

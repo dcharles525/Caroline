@@ -272,7 +272,12 @@ public class Caroline : Gtk.DrawingArea {
           } else {
           
             LineSmooth lineSmooth = new LineSmooth ();
-            lineSmooth.drawLineSmoothChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
+            lineSmooth.drawLineSmoothChart (
+              cr, 
+              this.pointsCalculatedArray[i], 
+              this.chartPadding + (this.widthPadding / 3),
+              this.chartColorArray
+            );
           
           }
           break;
@@ -303,7 +308,12 @@ public class Caroline : Gtk.DrawingArea {
           break;
         default:
           LineSmooth lineSmooth = new LineSmooth ();
-          lineSmooth.drawLineSmoothChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
+          lineSmooth.drawLineSmoothChart (
+            cr, 
+            this.pointsCalculatedArray[i], 
+            this.chartPadding + (this.widthPadding / 3),
+            this.chartColorArray
+          );
           break;
       }
 
@@ -569,16 +579,16 @@ public class Caroline : Gtk.DrawingArea {
   */
   private void generateColors () {
 
-    for (int i = 0; i < this.pointsArray.size; i++){
+    for (int i = 0; i < this.pointsArray[0].size; i++) {
 
       //Create color struct
       ChartColor chartColor = {
-        Random.double_range(0,1),
-        Random.double_range(0,1),
-        Random.double_range(0,1)
+        Random.double_range (0,1),
+        Random.double_range (0,1),
+        Random.double_range (0,1)
       };
 
-      this.chartColorArray.insert(i,chartColor);
+      this.chartColorArray.insert (i, chartColor);
 
     }
 
@@ -627,7 +637,7 @@ public class Caroline : Gtk.DrawingArea {
     if (chartType != "pie")
       this.arrayListSort ();
 
-    if (chartType == "pie" && generateColors)
+    if (generateColors)
       this.generateColors ();
 
     double tick = this.pointsArray[this.pointsArray.size-1][dataY.length-1].x / spreadX;
