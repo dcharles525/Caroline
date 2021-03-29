@@ -24,7 +24,7 @@ public class LineSmooth{
     );
 
     for (int i = 0; i < pointsArray.size - 1; i++){
-
+      
       //Calculating the "before values", with bezier curves you need to think of this as your starting point
       double beforeX = pointsArray[i].x;
       double beforeY = pointsArray[i].y;

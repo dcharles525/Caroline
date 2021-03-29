@@ -27,7 +27,7 @@ public class Scatter{
 
     //Looping through the points array
     for (int i = 0; i < pointsArrayCalculated.size; i++){
-
+      stdout.printf ("%f \n", pointsArrayCalculated[i].y);
       //Drawing point
       cr.arc(
         pointsArrayCalculated[i].x,

@@ -264,8 +264,17 @@ public class Caroline : Gtk.DrawingArea {
           line.drawLineChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
           break;
         case "smooth-line":
-          LineSmooth lineSmooth = new LineSmooth ();
-          lineSmooth.drawLineSmoothChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
+          if (this.pointsCalculatedArray[i].size == 1) {
+
+            Scatter scatter = new Scatter ();
+            scatter.drawScatterChart (cr, this.pointsCalculatedArray[i], this.pointsArray[i], this.scatterLabels);
+
+          } else {
+          
+            LineSmooth lineSmooth = new LineSmooth ();
+            lineSmooth.drawLineSmoothChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
+          
+          }
           break;
         case "bar":
           Bar bar = new Bar ();
@@ -323,6 +332,7 @@ public class Caroline : Gtk.DrawingArea {
       /*This next sector of arithmetic is to find the max value of the data array*/
       if (this.maxPoint == 0)
         this.maxPoint = this.pointsArray[i][0].y;
+      
 
       //Loop and compare each value to our initial value to see if it becomes the max
       for (int f = 0; f < this.pointsArray[i].size; f++)
@@ -333,7 +343,7 @@ public class Caroline : Gtk.DrawingArea {
       this.minPoint = 0;
 
       //Loop and compare each scatterArray to our initial value to see if it becomes the min
-      for (int f = 0; f < this.pointsArray.size; f++)
+      for (int f = 0; f < this.pointsArray[i].size; f++)
         if (this.pointsArray[i][f].y < this.minPoint)
           this.minPoint = this.pointsArray[i][f].y;
 
@@ -391,8 +401,13 @@ public class Caroline : Gtk.DrawingArea {
         divisor = 3;
       else
         divisor = 4.35;
+     
+      double x = 0;
 
-      double x = this.pointsArray[index][i].x * (this.width/maxX) + this.chartPadding + (this.widthPadding / divisor);
+      if (maxX > 0)
+        x = this.pointsArray[index][i].x * (this.width/maxX) + this.chartPadding + (this.widthPadding / divisor);
+      else 
+        x = this.chartPadding + (this.widthPadding / divisor);
 
       if (!barOrNot)
         y = (this.height + this.chartPadding) - ((this.spreadFinalY * scaler));
@@ -607,7 +622,7 @@ public class Caroline : Gtk.DrawingArea {
       this.spreadY = dataY.length;
 
     }
-
+    
     //If we don't have a pie chart we sort, if we do we don't since we don't want to waste cpu cycles on it
     if (chartType != "pie")
       this.arrayListSort ();

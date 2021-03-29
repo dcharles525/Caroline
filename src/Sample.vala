@@ -18,8 +18,8 @@ public void main (string[] args) {
   GenericArray<double?> y2 = new GenericArray<double?> ();
   GenericArray<double?> x = new GenericArray<double?> ();
 
-  y.add (0);
-  y2.add (0);
+  y.add (1);
+  y2.add (1);
 
   for (int i = 0; i < 9; ++i) {
 
@@ -35,10 +35,10 @@ public void main (string[] args) {
   Array<string> cArray = new Array<string> ();
 
   yArray.append_val (y);
-  yArray.append_val (z);
+  //yArray.append_val (y2);
   
-  cArray.append_val ("smooth-line");
-  cArray.append_val ("smooth-line");
+   cArray.append_val ("smooth-line");
+  //cArray.append_val ("smooth-line");
 
   //Simply set Caroline to a variable
   var carolineWidget = new Caroline (
