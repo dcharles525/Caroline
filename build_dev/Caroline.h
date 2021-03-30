@@ -316,7 +316,8 @@ void scatter_drawScatterChart (Scatter* self,
                                cairo_t* cr,
                                GeeArrayList* pointsArrayCalculated,
                                GeeArrayList* pointsArray,
-                               gboolean scatterLabels);
+                               gboolean scatterLabels,
+                               GeeArrayList* chartColorArray);
 Scatter* scatter_new (void);
 Scatter* scatter_construct (GType object_type);
 gpointer line_smooth_ref (gpointer instance);

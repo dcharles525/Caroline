@@ -96,10 +96,9 @@ public class Caroline : Gtk.DrawingArea {
   public int pieChartLabelOffsetX { get; set; }
   public int pieChartLabelOffsetY { get; set; }
 
-  public ArrayList<ChartColor?> chartColorArray = new ArrayList<ChartColor?>();
-
-  public ArrayList<ArrayList<Point?>> pointsArray = new ArrayList<ArrayList<Point?>>();
-  public ArrayList<ArrayList<Point?>> pointsCalculatedArray = new ArrayList<ArrayList<Point?>>();
+  public ArrayList<ArrayList<ChartColor?>> chartColorArray = new ArrayList<ArrayList<ChartColor?>> ();
+  public ArrayList<ArrayList<Point?>> pointsArray = new ArrayList<ArrayList<Point?>> ();
+  public ArrayList<ArrayList<Point?>> pointsCalculatedArray = new ArrayList<ArrayList<Point?>> ();
 
   public bool scatterLabels {get; set;}
 
@@ -218,32 +217,31 @@ public class Caroline : Gtk.DrawingArea {
     this.width = get_allocated_width () - this.widthPadding;
     this.height = get_allocated_height () - this.heightPadding;
     this.pointsCalculatedArray.clear ();
+    
+    if (this.chartTypes.index (0) != "pie"){
+
+      //As the function illudes too, this sets the width of the lines for the x & y ticks.
+      cr.set_line_width (this.lineThicknessTicks);
+
+      //setting the color of the lines.
+      cr.set_source_rgba (255, 255, 255, 0.2);
+      this.drawOutline (cr);
+      this.drawYTicks (cr);
+      this.drawXTicks (cr);
+
+      /*Sets the drawing area and its attributes back to their defaults, which are set on
+      previous save() or the initial value*/
+      cr.restore ();
+
+      //Saves the drawing area context and the attributes set before this save
+      cr.save ();
+
+    }
 
     //Looping over our multiple data sets
     for (int i = 0; i < this.chartTypes.length; i++) {
 
       string chartType = chartTypes.index (i);
-
-      if (chartType != "pie"){
-
-        //As the function illudes too, this sets the width of the lines for the x & y ticks.
-        cr.set_line_width (this.lineThicknessTicks);
-
-        //setting the color of the lines.
-        cr.set_source_rgba (255, 255, 255, 0.2);
-
-        this.drawOutline (cr);
-        this.drawYTicks (cr);
-        this.drawXTicks (cr);
-
-        /*Sets the drawing area and its attributes back to their defaults, which are set on
-        previous save() or the initial value*/
-        cr.restore ();
-
-        //Saves the drawing area context and the attributes set before this save
-        cr.save ();
-
-      }
       
       //Setting thickness of the line using set_line_width which can take any double.
       cr.set_line_width(1);
@@ -267,7 +265,13 @@ public class Caroline : Gtk.DrawingArea {
           if (this.pointsCalculatedArray[i].size == 1) {
 
             Scatter scatter = new Scatter ();
-            scatter.drawScatterChart (cr, this.pointsCalculatedArray[i], this.pointsArray[i], this.scatterLabels);
+            scatter.drawScatterChart (
+              cr, 
+              this.pointsCalculatedArray[i], 
+              this.pointsArray[i],
+              this.scatterLabels,
+              this.chartColorArray[i]
+            );
 
           } else {
           
@@ -276,21 +280,25 @@ public class Caroline : Gtk.DrawingArea {
               cr, 
               this.pointsCalculatedArray[i], 
               this.chartPadding + (this.widthPadding / 3),
-              this.chartColorArray
+              this.chartColorArray[i]
             );
           
           }
           break;
         case "bar":
           Bar bar = new Bar ();
-          bar.drawBarChart (cr, this.pointsCalculatedArray[i], this.height + this.chartPadding);
+          bar.drawBarChart (
+            cr, 
+            this.pointsCalculatedArray[i], 
+            this.height + this.chartPadding 
+          );
           break;
         case "pie":
           Pie pie = new Pie ();
           pie.drawPieChart (
             cr,
             this.pointsArray[i],
-            this.chartColorArray,
+            this.chartColorArray[i],
             this.pieChartXStart,
             this.pieChartYStart,
             this.pieChartRadius,
@@ -304,7 +312,13 @@ public class Caroline : Gtk.DrawingArea {
           break;
         case "scatter":
           Scatter scatter = new Scatter ();
-          scatter.drawScatterChart (cr, this.pointsCalculatedArray[i], this.pointsArray[i], this.scatterLabels);
+          scatter.drawScatterChart (
+            cr, 
+            this.pointsCalculatedArray[i], 
+            this.pointsArray[i], 
+            this.scatterLabels,
+            this.chartColorArray[i]
+          );
           break;
         default:
           LineSmooth lineSmooth = new LineSmooth ();
@@ -312,7 +326,7 @@ public class Caroline : Gtk.DrawingArea {
             cr, 
             this.pointsCalculatedArray[i], 
             this.chartPadding + (this.widthPadding / 3),
-            this.chartColorArray
+            this.chartColorArray[i]
           );
           break;
       }
@@ -579,16 +593,24 @@ public class Caroline : Gtk.DrawingArea {
   */
   private void generateColors () {
 
-    for (int i = 0; i < this.pointsArray[0].size; i++) {
+    for (int i = 0; i < this.chartTypes.length; i++) {
+      
+      ArrayList<ChartColor?> colors = new ArrayList<ChartColor?> ();
 
-      //Create color struct
-      ChartColor chartColor = {
-        Random.double_range (0,1),
-        Random.double_range (0,1),
-        Random.double_range (0,1)
-      };
+      for (int f = 0; f < this.pointsArray[0].size; f++) {
 
-      this.chartColorArray.insert (i, chartColor);
+        //Create color struct
+        ChartColor chartColor = {
+          Random.double_range (0,1),
+          Random.double_range (0,1),
+          Random.double_range (0,1)
+        };
+
+        colors.insert (f, chartColor);
+
+      }
+
+      this.chartColorArray.add (colors);
 
     }
 

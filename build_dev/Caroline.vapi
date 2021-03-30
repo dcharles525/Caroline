@@ -11,7 +11,7 @@ public class Caroline : Gtk.DrawingArea {
 		public double x;
 		public double y;
 	}
-	public Gee.ArrayList<Caroline.ChartColor?> chartColorArray;
+	public Gee.ArrayList<Gee.ArrayList<Caroline.ChartColor?>> chartColorArray;
 	public Gee.ArrayList<double?> labelXList;
 	public Gee.ArrayList<Gee.ArrayList<Caroline.Point?>> pointsArray;
 	public Gee.ArrayList<Gee.ArrayList<Caroline.Point?>> pointsCalculatedArray;
@@ -55,7 +55,7 @@ public class Line {
 [CCode (cheader_filename = "Caroline.h")]
 public class Scatter {
 	public Scatter ();
-	public void drawScatterChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArrayCalculated, Gee.ArrayList<Caroline.Point?> pointsArray, bool scatterLabels);
+	public void drawScatterChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArrayCalculated, Gee.ArrayList<Caroline.Point?> pointsArray, bool scatterLabels, Gee.ArrayList<Caroline.ChartColor?> chartColorArray);
 }
 [CCode (cheader_filename = "Caroline.h")]
 public class LineSmooth {
