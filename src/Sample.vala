@@ -49,9 +49,9 @@ public void main (string[] args) {
   yArray.append_val (y4);
   yArray.append_val (y5);
   
-  cArray.append_val ("smooth-line");
-  cArray.append_val ("smooth-line");
-  cArray.append_val ("smooth-line");
+  cArray.append_val ("bar");
+  cArray.append_val ("line");
+  cArray.append_val ("scatter");
   cArray.append_val ("smooth-line");
   cArray.append_val ("smooth-line");
 

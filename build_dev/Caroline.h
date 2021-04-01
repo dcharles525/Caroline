@@ -277,7 +277,8 @@ GType bar_get_type (void) G_GNUC_CONST;
 void bar_drawBarChart (Bar* self,
                        cairo_t* cr,
                        GeeArrayList* pointsArray,
-                       gdouble baseline);
+                       gdouble baseline,
+                       GeeArrayList* chartColorArray);
 Bar* bar_new (void);
 Bar* bar_construct (GType object_type);
 gpointer line_ref (gpointer instance);
@@ -296,7 +297,8 @@ GType line_get_type (void) G_GNUC_CONST;
 void line_drawLineChart (Line* self,
                          cairo_t* cr,
                          GeeArrayList* pointsArray,
-                         gdouble baseline);
+                         gdouble baseline,
+                         GeeArrayList* chartColorArray);
 Line* line_new (void);
 Line* line_construct (GType object_type);
 gpointer scatter_ref (gpointer instance);

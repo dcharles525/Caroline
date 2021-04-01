@@ -259,7 +259,12 @@ public class Caroline : Gtk.DrawingArea {
       switch (chartType) {
         case "line":
           Line line = new Line ();
-          line.drawLineChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
+          line.drawLineChart (
+            cr, 
+            this.pointsCalculatedArray[i], 
+            this.chartPadding + (this.widthPadding / 3),
+            this.chartColorArray[i]
+          );
           break;
         case "smooth-line":
           if (this.pointsCalculatedArray[i].size == 1) {
@@ -290,7 +295,8 @@ public class Caroline : Gtk.DrawingArea {
           bar.drawBarChart (
             cr, 
             this.pointsCalculatedArray[i], 
-            this.height + this.chartPadding 
+            this.height + this.chartPadding,
+            this.chartColorArray[i]
           );
           break;
         case "pie":

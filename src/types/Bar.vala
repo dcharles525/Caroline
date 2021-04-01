@@ -16,21 +16,29 @@ public class Bar{
   * @param double baseline
   * @return void
   */
-  public void drawBarChart(Cairo.Context cr, ArrayList<Caroline.Point?> pointsArray, double baseline){
+  public void drawBarChart (
+    Cairo.Context cr, 
+    ArrayList<Caroline.Point?> pointsArray, 
+    double baseline,
+    ArrayList<Caroline.ChartColor?> chartColorArray
+  ) {
 
     this.rectangleXOffset = 10;
+    
+    cr.set_source_rgb(
+      chartColorArray[0].r,
+      chartColorArray[0].g,
+      chartColorArray[0].b
+    );
 
     for (int i = 0; i < pointsArray.size; i++){
-
+     
       cr.rectangle(
         pointsArray[i].x,
         baseline,
         this.rectangleXOffset,
         pointsArray[i].y
       );
-
-      //Fills the rectangle with the current color
-      cr.set_source_rgba(0, 174, 174, 0.2);
 
       cr.fill();
 

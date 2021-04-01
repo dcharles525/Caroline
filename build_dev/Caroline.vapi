@@ -45,12 +45,12 @@ public class Caroline : Gtk.DrawingArea {
 [CCode (cheader_filename = "Caroline.h")]
 public class Bar {
 	public Bar ();
-	public void drawBarChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline);
+	public void drawBarChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline, Gee.ArrayList<Caroline.ChartColor?> chartColorArray);
 }
 [CCode (cheader_filename = "Caroline.h")]
 public class Line {
 	public Line ();
-	public void drawLineChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline);
+	public void drawLineChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline, Gee.ArrayList<Caroline.ChartColor?> chartColorArray);
 }
 [CCode (cheader_filename = "Caroline.h")]
 public class Scatter {
