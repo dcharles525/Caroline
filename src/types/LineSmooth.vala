@@ -19,7 +19,7 @@ public class LineSmooth{
     Cairo.Context cr, 
     ArrayList<Caroline.Point?> pointsArray, 
     double baseline,
-    ArrayList<Caroline.ChartColor?> chartColorArray
+    Caroline.ChartColor color
   ) {
 
     //We want to move the pointer on the canvas to where we want the line graph to start.
@@ -33,9 +33,9 @@ public class LineSmooth{
      
       //Uses the chart color arrya with the structs within it to set the color
       cr.set_source_rgb(
-        chartColorArray[i].r,
-        chartColorArray[i].g,
-        chartColorArray[i].b
+        color.r,
+        color.g,
+        color.b
       );
 
       //Calculating the "before values", with bezier curves you need to think of this as your starting point

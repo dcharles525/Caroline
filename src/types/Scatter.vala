@@ -23,19 +23,18 @@ public class Scatter{
     ArrayList<Caroline.Point?> pointsArrayCalculated,
     ArrayList<Caroline.Point?> pointsArray,
     bool scatterLabels,
-    ArrayList<Caroline.ChartColor?> chartColorArray
+    Caroline.ChartColor color
   ){
+
+    cr.set_source_rgb(
+      color.r,
+      color.g,
+      color.b
+    );
 
     //Looping through the points array
     for (int i = 0; i < pointsArrayCalculated.size; i++){
       
-      //Uses the chart color arrya with the structs within it to set the color
-      cr.set_source_rgb(
-        chartColorArray[i].r,
-        chartColorArray[i].g,
-        chartColorArray[i].b
-      );
-
       //Drawing point
       cr.arc(
         pointsArrayCalculated[i].x,

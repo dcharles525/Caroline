@@ -30,7 +30,7 @@ public class Pie{
   public void drawPieChart(
     Cairo.Context cr,
     ArrayList<Caroline.Point?> pointsArray,
-    ArrayList<Caroline.ChartColor?> chartColorArray,
+    Caroline.ChartColor chartColorArray,
     int pieChartXStart,
     int pieChartYStart,
     int pieChartRadius ,
@@ -42,11 +42,12 @@ public class Pie{
     double width
   ){
 
+    /*
     double total = 0;
     double startAngle = 0;
 
-    /*This for loop gets the total of all the data so we can scale the pie
-    chart later on.*/
+    This for loop gets the total of all the data so we can scale the pie
+    chart later on.
     for (int i = 0; i < pointsArray.size; i++)
       total += pointsArray[i].x;
 
@@ -68,9 +69,9 @@ public class Pie{
         startAngle + (pointsArray[i].x / total) * this.PIX
       );
 
-      /*Adds angle to startAngle to keep track of where to draw the next arc and then the code
+      Adds angle to startAngle to keep track of where to draw the next arc and then the code
       draws the straight lines to the middle of the circle, then fills the colors in, using
-      cr.fill()*/
+      cr.fill()
       startAngle += (pointsArray[i].x / total) * this.PIX;
       cr.line_to(pieChartXStart, pieChartYStart);
       cr.fill();
@@ -94,10 +95,10 @@ public class Pie{
       cr.show_text("%0.1f".printf(pointsArray[i].x));
 
       /*Drawing operator that strokes the current path using the current settings that were
-      implemented eariler in this file.*/
-      cr.stroke();
+      implemented eariler in this file.
+      cr.stroke();*/
 
-    }
+    //}
 
   }
 

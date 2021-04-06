@@ -179,19 +179,24 @@ void caroline_point_free (CarolinePoint* self);
 Caroline* caroline_new (GPtrArray* dataX,
                         GArray* dataY,
                         GArray* chartTypes,
-                        gboolean generateColors,
+                        GeeArrayList* chartColorArray,
+                        gboolean generateColorsRandom,
+                        gboolean generateColorsHue,
                         gboolean scatterPlotLabels);
 Caroline* caroline_construct (GType object_type,
                               GPtrArray* dataX,
                               GArray* dataY,
                               GArray* chartTypes,
-                              gboolean generateColors,
+                              GeeArrayList* chartColorArray,
+                              gboolean generateColorsRandom,
+                              gboolean generateColorsHue,
                               gboolean scatterPlotLabels);
 void caroline_updateData (Caroline* self,
                           GPtrArray* dataX,
                           GPtrArray* dataY,
                           const gchar* chartType,
-                          gboolean generateColors);
+                          gboolean generateColorsRandom,
+                          gboolean generateColorsHue);
 gint caroline_get_width (Caroline* self);
 void caroline_set_width (Caroline* self,
                          gint value);
@@ -278,7 +283,7 @@ void bar_drawBarChart (Bar* self,
                        cairo_t* cr,
                        GeeArrayList* pointsArray,
                        gdouble baseline,
-                       GeeArrayList* chartColorArray);
+                       CarolineChartColor* color);
 Bar* bar_new (void);
 Bar* bar_construct (GType object_type);
 gpointer line_ref (gpointer instance);
@@ -298,7 +303,7 @@ void line_drawLineChart (Line* self,
                          cairo_t* cr,
                          GeeArrayList* pointsArray,
                          gdouble baseline,
-                         GeeArrayList* chartColorArray);
+                         CarolineChartColor* color);
 Line* line_new (void);
 Line* line_construct (GType object_type);
 gpointer scatter_ref (gpointer instance);
@@ -319,7 +324,7 @@ void scatter_drawScatterChart (Scatter* self,
                                GeeArrayList* pointsArrayCalculated,
                                GeeArrayList* pointsArray,
                                gboolean scatterLabels,
-                               GeeArrayList* chartColorArray);
+                               CarolineChartColor* color);
 Scatter* scatter_new (void);
 Scatter* scatter_construct (GType object_type);
 gpointer line_smooth_ref (gpointer instance);
@@ -339,7 +344,7 @@ void line_smooth_drawLineSmoothChart (LineSmooth* self,
                                       cairo_t* cr,
                                       GeeArrayList* pointsArray,
                                       gdouble baseline,
-                                      GeeArrayList* chartColorArray);
+                                      CarolineChartColor* color);
 LineSmooth* line_smooth_new (void);
 LineSmooth* line_smooth_construct (GType object_type);
 gpointer pie_ref (gpointer instance);
@@ -358,7 +363,7 @@ GType pie_get_type (void) G_GNUC_CONST;
 void pie_drawPieChart (Pie* self,
                        cairo_t* cr,
                        GeeArrayList* pointsArray,
-                       GeeArrayList* chartColorArray,
+                       CarolineChartColor* chartColorArray,
                        gint pieChartXStart,
                        gint pieChartYStart,
                        gint pieChartRadius,

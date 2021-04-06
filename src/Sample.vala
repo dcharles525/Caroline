@@ -20,6 +20,7 @@ public void main (string[] args) {
   GenericArray<double?> y4 = new GenericArray<double?> ();
   GenericArray<double?> y5 = new GenericArray<double?> ();
   GenericArray<double?> x = new GenericArray<double?> ();
+  ArrayList<Caroline.ChartColor?> chartColorArray = new ArrayList<Caroline.ChartColor?> ();
 
   y.add (1);
   y2.add (1);
@@ -53,14 +54,27 @@ public void main (string[] args) {
   cArray.append_val ("line");
   cArray.append_val ("scatter");
   cArray.append_val ("smooth-line");
-  cArray.append_val ("smooth-line");
 
+  for (int i = 0; i < cArray.length; i++){
+
+    //Create color struct
+    Caroline.ChartColor chartColor = {
+      Random.double_range(0,1),
+      Random.double_range(0,1),
+      Random.double_range(0,1)
+    };
+
+    chartColorArray.insert (i, chartColor);
+
+  }
   //Simply set Caroline to a variable
   var carolineWidget = new Caroline (
     x, //dataX
     yArray, //dataY
-    cArray, //chart type
-    true, //yes or no for generateColors function (needed in the case of the pie chart),
+    cArray, //chart type,
+    chartColorArray,
+    false, //yes or no for generateColors function (needed in the case of the pie chart),
+    true,
     false // yes or no for scatter plot labels
   );
 
@@ -76,3 +90,9 @@ public void main (string[] args) {
   Gtk.main ();
 
 }
+  
+private void generateColorsRandom () {
+ 
+
+
+  }

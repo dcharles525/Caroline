@@ -20,15 +20,15 @@ public class Bar{
     Cairo.Context cr, 
     ArrayList<Caroline.Point?> pointsArray, 
     double baseline,
-    ArrayList<Caroline.ChartColor?> chartColorArray
+    Caroline.ChartColor color
   ) {
 
     this.rectangleXOffset = 10;
     
     cr.set_source_rgb(
-      chartColorArray[0].r,
-      chartColorArray[0].g,
-      chartColorArray[0].b
+      color.r,
+      color.g,
+      color.b
     );
 
     for (int i = 0; i < pointsArray.size; i++){
