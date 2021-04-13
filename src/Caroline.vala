@@ -199,6 +199,41 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
+  public Caroline.with_colors (
+    GenericArray<double?> dataX, 
+    Array<GenericArray<double?>> dataY, 
+    Array<string> chartTypes, 
+    ArrayList<ChartColor?> chartColorArray,
+    bool generateColorsRandom,
+    bool generateColorsHue,
+    bool scatterPlotLabels
+  ) {
+
+    this (dataX, dataY, chartTypes, chartColorArray, generateColorsRandom, generateColorsHue, scatterPlotLabels);
+
+  }
+  
+  public Caroline.without_colors (
+    GenericArray<double?> dataX, 
+    Array<GenericArray<double?>> dataY, 
+    Array<string> chartTypes, 
+    bool generateColorsRandom,
+    bool generateColorsHue,
+    bool scatterPlotLabels
+  ) {
+
+    this (
+      dataX, 
+      dataY, 
+      chartTypes, 
+      new ArrayList<ChartColor?> (), 
+      generateColorsRandom, 
+      generateColorsHue, 
+      scatterPlotLabels
+    );
+
+  }
+
   /**
   * Draws the tick marks and calls sub chart type functions
   *
@@ -592,6 +627,15 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
+  /**
+  * Generates colors based off of hue
+  *
+  * If we want to ensure that the colors will be different enough to see close to each other we will just shift the hue
+  * slightly each interation for each type of chart. This function shouldn't be used for more than ~30 chart types since
+  * the hues will become to close together.
+  *
+  * @return void
+  */
   private void generateColorsHue () {
 
     double oneThird = 1f / 3f;;
@@ -603,6 +647,8 @@ public class Caroline : Gtk.DrawingArea {
       double saturation = Random.double_range (0.5, 1);
       double lightness = Random.double_range (0, 0.40);
 
+      /*converting hsl to rgb, most of this isn't original, checkout this gist for some smart cookie who figured
+      this out. https://gist.github.com/matzipan/d0199db1706426a8f4436d707b3288fd */
       var q = lightness < 0.5 ? lightness * (1 + saturation) : lightness + saturation - lightness * saturation;
       var p = 2 * lightness - q;
     
@@ -618,6 +664,17 @@ public class Caroline : Gtk.DrawingArea {
 
   }
 
+  /**
+  * Convert from hls to rgb
+  *
+  * This function is a utility for generateColorsHue which converts hsl to rgb by using some division logic.
+  *
+  * @param double p
+  * @param double q
+  * @param double t
+  *
+  * @return double
+  */
   private double hueRgb (double p, double q, double t) {
     
     if (t < 0) t += 1;
@@ -630,6 +687,13 @@ public class Caroline : Gtk.DrawingArea {
   
   }
 
+  /**
+  * Generates truly random numbers
+  *
+  * Simply loops over the length of the chartTypes array and generates a number from 0 to 1.
+  *
+  * @return void
+  */
   private void generateColorsRandom () {
  
     for (int i = 0; i < this.chartTypes.length; i++){
@@ -695,7 +759,6 @@ public class Caroline : Gtk.DrawingArea {
     //If we don't have a pie chart we sort, if we do we don't since we don't want to waste cpu cycles on it
     if (chartType != "pie")
       this.arrayListSort ();
-
 
     if (this.chartColorArray.size < 1) {
 

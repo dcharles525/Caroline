@@ -67,13 +67,13 @@ public void main (string[] args) {
     chartColorArray.insert (i, chartColor);
 
   }
+
   //Simply set Caroline to a variable
-  var carolineWidget = new Caroline (
+  var carolineWidget = new Caroline.without_colors (
     x, //dataX
     yArray, //dataY
     cArray, //chart type,
-    chartColorArray,
-    false, //yes or no for generateColors function (needed in the case of the pie chart),
+    true, //yes or no for generateColors function (needed in the case of the pie chart),
     true,
     false // yes or no for scatter plot labels
   );
@@ -90,9 +90,3 @@ public void main (string[] args) {
   Gtk.main ();
 
 }
-  
-private void generateColorsRandom () {
- 
-
-
-  }
