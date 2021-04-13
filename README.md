@@ -39,6 +39,7 @@ var carolineWidget = new Caroline (
   yArray, //dataY
   "scatter", //chart type
   true, //yes or no for generateColors function (needed in the case of the pie chart),
+  true, //true for generating hue based colors, and false for random colors
   false // yes or no for scatter plot labels
 );
 
@@ -64,8 +65,8 @@ var carolineWidget = new Caroline (
   yArray, //dataY
   "scatter", //chart type
   chartColorArray,
-  true, //yes or no for generateColors function (needed in the case of the pie chart),
-  true, //true for generating hue based colors, and false for random colors
+  false, //yes or no for generateColors function (needed in the case of the pie chart),
+  false, //true for generating hue based colors, and false for random colors
   false // yes or no for scatter plot labels
 );
 ```
