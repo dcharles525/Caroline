@@ -15,9 +15,11 @@ public class Caroline : Gtk.DrawingArea {
 	public Gee.ArrayList<double?> labelXList;
 	public Gee.ArrayList<Gee.ArrayList<Caroline.Point?>> pointsArray;
 	public Gee.ArrayList<Gee.ArrayList<Caroline.Point?>> pointsCalculatedArray;
-	public Caroline (GLib.GenericArray<double?> dataX, GLib.Array<GLib.GenericArray<double?>> dataY, GLib.Array<string> chartTypes, bool generateColors, bool scatterPlotLabels);
+	public Caroline (GLib.GenericArray<double?> dataX, GLib.Array<GLib.GenericArray<double?>> dataY, GLib.Array<string> chartTypes, Gee.ArrayList<Caroline.ChartColor?> chartColorArray, bool generateColorsRandom, bool generateColorsHue, bool scatterPlotLabels);
 	public override bool draw (Cairo.Context cr);
-	public void updateData (GLib.GenericArray<double?> dataX, GLib.GenericArray<double?> dataY, string chartType, bool generateColors);
+	public void updateData (GLib.GenericArray<double?> dataX, GLib.GenericArray<double?> dataY, string chartType, bool generateColorsRandom, bool generateColorsHue);
+	public Caroline.with_colors (GLib.GenericArray<double?> dataX, GLib.Array<GLib.GenericArray<double?>> dataY, GLib.Array<string> chartTypes, Gee.ArrayList<Caroline.ChartColor?> chartColorArray, bool generateColorsRandom, bool generateColorsHue, bool scatterPlotLabels);
+	public Caroline.without_colors (GLib.GenericArray<double?> dataX, GLib.Array<GLib.GenericArray<double?>> dataY, GLib.Array<string> chartTypes, bool generateColorsRandom, bool generateColorsHue, bool scatterPlotLabels);
 	public int chartPadding { get; set; }
 	public GLib.Array<string> chartTypes { get; set; }
 	public string dataTypeX { get; set; }
@@ -45,25 +47,25 @@ public class Caroline : Gtk.DrawingArea {
 [CCode (cheader_filename = "Caroline.h")]
 public class Bar {
 	public Bar ();
-	public void drawBarChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline);
+	public void drawBarChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline, Caroline.ChartColor color);
 }
 [CCode (cheader_filename = "Caroline.h")]
 public class Line {
 	public Line ();
-	public void drawLineChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline);
+	public void drawLineChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline, Caroline.ChartColor color);
 }
 [CCode (cheader_filename = "Caroline.h")]
 public class Scatter {
 	public Scatter ();
-	public void drawScatterChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArrayCalculated, Gee.ArrayList<Caroline.Point?> pointsArray, bool scatterLabels);
+	public void drawScatterChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArrayCalculated, Gee.ArrayList<Caroline.Point?> pointsArray, bool scatterLabels, Caroline.ChartColor color);
 }
 [CCode (cheader_filename = "Caroline.h")]
 public class LineSmooth {
 	public LineSmooth ();
-	public void drawLineSmoothChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline);
+	public void drawLineSmoothChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, double baseline, Caroline.ChartColor color);
 }
 [CCode (cheader_filename = "Caroline.h")]
 public class Pie {
 	public Pie ();
-	public void drawPieChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, Gee.ArrayList<Caroline.ChartColor?> chartColorArray, int pieChartXStart, int pieChartYStart, int pieChartRadius, int pieChartYLabelBStart, int pieChartYLabelBSpacing, int pieChartLabelOffsetX, int pieChartLabelOffsetY, int pieChartLabelBSize, double width);
+	public void drawPieChart (Cairo.Context cr, Gee.ArrayList<Caroline.Point?> pointsArray, Caroline.ChartColor chartColorArray, int pieChartXStart, int pieChartYStart, int pieChartRadius, int pieChartYLabelBStart, int pieChartYLabelBSpacing, int pieChartLabelOffsetX, int pieChartLabelOffsetY, int pieChartLabelBSize, double width);
 }

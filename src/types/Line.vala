@@ -14,19 +14,27 @@ public class Line{
   * @param double baseline
   * @return void
   */
-  public void drawLineChart (Cairo.Context cr, ArrayList<Caroline.Point?> pointsArray, double baseline){
+  public void drawLineChart (
+    Cairo.Context cr, 
+    ArrayList<Caroline.Point?> pointsArray, 
+    double baseline,
+    Caroline.ChartColor color
+  ) {
 
     //Setting thickness of the line using set_line_width which can take any double.
     cr.set_line_width(1);
-
-    //Set the color of the line (this default color is blue)
-    cr.set_source_rgba(0, 174, 174,0.8);
 
     //We want to move the pointer on the canvas to where we want the line graph to start.
     cr.move_to(
       //x axis set to "0", as 15 is the buffer in the widget
       baseline,
       pointsArray[0].y
+    );
+    
+    cr.set_source_rgb(
+      color.r,
+      color.g,
+      color.b
     );
 
     for (int i = 0; i < pointsArray.size; i++){

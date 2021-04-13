@@ -22,12 +22,19 @@ public class Scatter{
     Cairo.Context cr,
     ArrayList<Caroline.Point?> pointsArrayCalculated,
     ArrayList<Caroline.Point?> pointsArray,
-    bool scatterLabels
+    bool scatterLabels,
+    Caroline.ChartColor color
   ){
+
+    cr.set_source_rgb(
+      color.r,
+      color.g,
+      color.b
+    );
 
     //Looping through the points array
     for (int i = 0; i < pointsArrayCalculated.size; i++){
-      stdout.printf ("%f \n", pointsArrayCalculated[i].y);
+      
       //Drawing point
       cr.arc(
         pointsArrayCalculated[i].x,

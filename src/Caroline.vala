@@ -96,10 +96,9 @@ public class Caroline : Gtk.DrawingArea {
   public int pieChartLabelOffsetX { get; set; }
   public int pieChartLabelOffsetY { get; set; }
 
-  public ArrayList<ChartColor?> chartColorArray = new ArrayList<ChartColor?>();
-
-  public ArrayList<ArrayList<Point?>> pointsArray = new ArrayList<ArrayList<Point?>>();
-  public ArrayList<ArrayList<Point?>> pointsCalculatedArray = new ArrayList<ArrayList<Point?>>();
+  public ArrayList<ChartColor?> chartColorArray = new ArrayList<ChartColor?> ();
+  public ArrayList<ArrayList<Point?>> pointsArray = new ArrayList<ArrayList<Point?>> ();
+  public ArrayList<ArrayList<Point?>> pointsCalculatedArray = new ArrayList<ArrayList<Point?>> ();
 
   public bool scatterLabels {get; set;}
 
@@ -157,7 +156,9 @@ public class Caroline : Gtk.DrawingArea {
     GenericArray<double?> dataX, 
     Array<GenericArray<double?>> dataY, 
     Array<string> chartTypes, 
-    bool generateColors, 
+    ArrayList<ChartColor?> chartColorArray,
+    bool generateColorsRandom,
+    bool generateColorsHue,
     bool scatterPlotLabels
   ) {
 
@@ -188,12 +189,48 @@ public class Caroline : Gtk.DrawingArea {
     //Boolean for auto generated scatter labels
     this.scatterLabels = scatterPlotLabels;
     this.chartTypes = chartTypes;
+    this.chartColorArray = chartColorArray;
 
     //Clearing out points array for the next draw
     this.pointsArray.clear ();
 
     for (int i = 0; i < chartTypes.length; i++)
-      this.updateData (dataX, dataY.index (i), chartTypes.index (i), generateColors);
+      this.updateData (dataX, dataY.index (i), chartTypes.index (i), generateColorsRandom, generateColorsHue);
+
+  }
+
+  public Caroline.with_colors (
+    GenericArray<double?> dataX, 
+    Array<GenericArray<double?>> dataY, 
+    Array<string> chartTypes, 
+    ArrayList<ChartColor?> chartColorArray,
+    bool generateColorsRandom,
+    bool generateColorsHue,
+    bool scatterPlotLabels
+  ) {
+
+    this (dataX, dataY, chartTypes, chartColorArray, generateColorsRandom, generateColorsHue, scatterPlotLabels);
+
+  }
+  
+  public Caroline.without_colors (
+    GenericArray<double?> dataX, 
+    Array<GenericArray<double?>> dataY, 
+    Array<string> chartTypes, 
+    bool generateColorsRandom,
+    bool generateColorsHue,
+    bool scatterPlotLabels
+  ) {
+
+    this (
+      dataX, 
+      dataY, 
+      chartTypes, 
+      new ArrayList<ChartColor?> (), 
+      generateColorsRandom, 
+      generateColorsHue, 
+      scatterPlotLabels
+    );
 
   }
 
@@ -218,32 +255,31 @@ public class Caroline : Gtk.DrawingArea {
     this.width = get_allocated_width () - this.widthPadding;
     this.height = get_allocated_height () - this.heightPadding;
     this.pointsCalculatedArray.clear ();
+    
+    if (this.chartTypes.index (0) != "pie"){
+
+      //As the function illudes too, this sets the width of the lines for the x & y ticks.
+      cr.set_line_width (this.lineThicknessTicks);
+
+      //setting the color of the lines.
+      cr.set_source_rgba (255, 255, 255, 0.2);
+      this.drawOutline (cr);
+      this.drawYTicks (cr);
+      this.drawXTicks (cr);
+
+      /*Sets the drawing area and its attributes back to their defaults, which are set on
+      previous save() or the initial value*/
+      cr.restore ();
+
+      //Saves the drawing area context and the attributes set before this save
+      cr.save ();
+
+    }
 
     //Looping over our multiple data sets
     for (int i = 0; i < this.chartTypes.length; i++) {
 
       string chartType = chartTypes.index (i);
-
-      if (chartType != "pie"){
-
-        //As the function illudes too, this sets the width of the lines for the x & y ticks.
-        cr.set_line_width (this.lineThicknessTicks);
-
-        //setting the color of the lines.
-        cr.set_source_rgba (255, 255, 255, 0.2);
-
-        this.drawOutline (cr);
-        this.drawYTicks (cr);
-        this.drawXTicks (cr);
-
-        /*Sets the drawing area and its attributes back to their defaults, which are set on
-        previous save() or the initial value*/
-        cr.restore ();
-
-        //Saves the drawing area context and the attributes set before this save
-        cr.save ();
-
-      }
       
       //Setting thickness of the line using set_line_width which can take any double.
       cr.set_line_width(1);
@@ -261,31 +297,52 @@ public class Caroline : Gtk.DrawingArea {
       switch (chartType) {
         case "line":
           Line line = new Line ();
-          line.drawLineChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
+          line.drawLineChart (
+            cr, 
+            this.pointsCalculatedArray[i], 
+            this.chartPadding + (this.widthPadding / 3),
+            this.chartColorArray[i]
+          );
           break;
         case "smooth-line":
           if (this.pointsCalculatedArray[i].size == 1) {
 
             Scatter scatter = new Scatter ();
-            scatter.drawScatterChart (cr, this.pointsCalculatedArray[i], this.pointsArray[i], this.scatterLabels);
+            scatter.drawScatterChart (
+              cr, 
+              this.pointsCalculatedArray[i], 
+              this.pointsArray[i],
+              this.scatterLabels,
+              this.chartColorArray[i]
+            );
 
           } else {
           
             LineSmooth lineSmooth = new LineSmooth ();
-            lineSmooth.drawLineSmoothChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
+            lineSmooth.drawLineSmoothChart (
+              cr, 
+              this.pointsCalculatedArray[i], 
+              this.chartPadding + (this.widthPadding / 3),
+              this.chartColorArray[i]
+            );
           
           }
           break;
         case "bar":
           Bar bar = new Bar ();
-          bar.drawBarChart (cr, this.pointsCalculatedArray[i], this.height + this.chartPadding);
+          bar.drawBarChart (
+            cr, 
+            this.pointsCalculatedArray[i], 
+            this.height + this.chartPadding,
+            this.chartColorArray[i]
+          );
           break;
         case "pie":
           Pie pie = new Pie ();
           pie.drawPieChart (
             cr,
             this.pointsArray[i],
-            this.chartColorArray,
+            this.chartColorArray[i],
             this.pieChartXStart,
             this.pieChartYStart,
             this.pieChartRadius,
@@ -299,11 +356,22 @@ public class Caroline : Gtk.DrawingArea {
           break;
         case "scatter":
           Scatter scatter = new Scatter ();
-          scatter.drawScatterChart (cr, this.pointsCalculatedArray[i], this.pointsArray[i], this.scatterLabels);
+          scatter.drawScatterChart (
+            cr, 
+            this.pointsCalculatedArray[i], 
+            this.pointsArray[i], 
+            this.scatterLabels,
+            this.chartColorArray[i]
+          );
           break;
         default:
           LineSmooth lineSmooth = new LineSmooth ();
-          lineSmooth.drawLineSmoothChart (cr, this.pointsCalculatedArray[i], this.chartPadding + (this.widthPadding / 3));
+          lineSmooth.drawLineSmoothChart (
+            cr, 
+            this.pointsCalculatedArray[i], 
+            this.chartPadding + (this.widthPadding / 3),
+            this.chartColorArray[i]
+          );
           break;
       }
 
@@ -560,16 +628,75 @@ public class Caroline : Gtk.DrawingArea {
   }
 
   /**
-  * Generates random colors for any of the charts
+  * Generates colors based off of hue
   *
-  * In this function function we use the ChartColor struct to add a random double form 0-1 for a simple
-  * rgb color.then it is added to an array to be access else where.
+  * If we want to ensure that the colors will be different enough to see close to each other we will just shift the hue
+  * slightly each interation for each type of chart. This function shouldn't be used for more than ~30 chart types since
+  * the hues will become to close together.
   *
   * @return void
   */
-  private void generateColors () {
+  private void generateColorsHue () {
 
-    for (int i = 0; i < this.pointsArray.size; i++){
+    double oneThird = 1f / 3f;;
+    double hueSpacing = 1000 / this.chartTypes.length;
+
+    for (int i = 0; i < this.chartTypes.length; i++) {
+      
+      double hue = ((i + 1) * hueSpacing) / 1000;
+      double saturation = Random.double_range (0.5, 1);
+      double lightness = Random.double_range (0, 0.40);
+
+      /*converting hsl to rgb, most of this isn't original, checkout this gist for some smart cookie who figured
+      this out. https://gist.github.com/matzipan/d0199db1706426a8f4436d707b3288fd */
+      var q = lightness < 0.5 ? lightness * (1 + saturation) : lightness + saturation - lightness * saturation;
+      var p = 2 * lightness - q;
+    
+      ChartColor chartColor = {
+        (this.hueRgb (p, q, hue + (oneThird)) * 255f) / 100f,
+        (this.hueRgb (p, q, hue) * 255f) / 100f,
+        (this.hueRgb (p, q, hue - (oneThird)) * 255f) / 100f
+      };
+     
+      this.chartColorArray.insert (i, chartColor);
+
+    }
+
+  }
+
+  /**
+  * Convert from hls to rgb
+  *
+  * This function is a utility for generateColorsHue which converts hsl to rgb by using some division logic.
+  *
+  * @param double p
+  * @param double q
+  * @param double t
+  *
+  * @return double
+  */
+  private double hueRgb (double p, double q, double t) {
+    
+    if (t < 0) t += 1;
+    if (t > 1) t -= 1;
+    if (t < 1f / 6f) return p + (q - p) * 6f * t;
+    if (t < 1f / 2f) return q;
+    if (t < 2f / 3f) return p + (q - p) * (2f / 3f - t) * 6f;
+
+    return p;
+  
+  }
+
+  /**
+  * Generates truly random numbers
+  *
+  * Simply loops over the length of the chartTypes array and generates a number from 0 to 1.
+  *
+  * @return void
+  */
+  private void generateColorsRandom () {
+ 
+    for (int i = 0; i < this.chartTypes.length; i++){
 
       //Create color struct
       ChartColor chartColor = {
@@ -578,7 +705,7 @@ public class Caroline : Gtk.DrawingArea {
         Random.double_range(0,1)
       };
 
-      this.chartColorArray.insert(i,chartColor);
+      this.chartColorArray.insert (i, chartColor);
 
     }
 
@@ -597,7 +724,13 @@ public class Caroline : Gtk.DrawingArea {
   *
   * @return void
   */
-  public void updateData (GenericArray<double?> dataX, GenericArray<double?> dataY, string chartType, bool generateColors) {
+  public void updateData (
+    GenericArray<double?> dataX, 
+    GenericArray<double?> dataY, 
+    string chartType, 
+    bool generateColorsRandom,
+    bool generateColorsHue
+  ) {
   
     this.labelXList.clear ();
     this.labelYList.clear ();
@@ -627,8 +760,15 @@ public class Caroline : Gtk.DrawingArea {
     if (chartType != "pie")
       this.arrayListSort ();
 
-    if (chartType == "pie" && generateColors)
-      this.generateColors ();
+    if (this.chartColorArray.size < 1) {
+
+      if (generateColorsRandom)
+        this.generateColorsRandom ();
+
+      if (generateColorsHue && !generateColorsRandom)
+        this.generateColorsHue ();
+
+    }
 
     double tick = this.pointsArray[this.pointsArray.size-1][dataY.length-1].x / spreadX;
 
