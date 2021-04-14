@@ -34,10 +34,10 @@ You now have a linked library that can be accessed by your app!
 
 A sample application called "Sample.vala" is included in this repo, it contains a simple application to show off how Caroline works. Below is a bare-bones example of how to interface with Caroline.
 ```
-var carolineWidget = new Caroline (
+var carolineWidget = new Caroline.without_colors (
   x, //dataX
   yArray, //dataY
-  "scatter", //chart type
+  chartTypes, //chart types
   true, //yes or no for generateColors function (needed in the case of the pie chart),
   true, //true for generating hue based colors, and false for random colors
   false // yes or no for scatter plot labels
@@ -60,10 +60,9 @@ for (int i = 0; i < cArray.length; i++){
 
 }
 
-var carolineWidget = new Caroline (
+var carolineWidget = new Caroline.with_colors (
   x, //dataX
   yArray, //dataY
-  "scatter", //chart type
   chartColorArray,
   false, //yes or no for generateColors function (needed in the case of the pie chart),
   false, //true for generating hue based colors, and false for random colors
