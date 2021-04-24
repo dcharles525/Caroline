@@ -26,6 +26,7 @@ mkdir build
 cd build
 meson ..
 ninja
+sudo ninja install
 
 You now have a linked library that can be accessed by your app!
 ```

@@ -224,7 +224,8 @@ void caroline_updateData (Caroline* self,
                           GPtrArray* dataY,
                           const gchar* chartType,
                           gboolean generateColorsRandom,
-                          gboolean generateColorsHue);
+                          gboolean generateColorsHue,
+                          gint replaceIndex);
 gint caroline_get_width (Caroline* self);
 void caroline_set_width (Caroline* self,
                          gint value);

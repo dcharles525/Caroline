@@ -50,10 +50,10 @@ public void main (string[] args) {
   yArray.append_val (y4);
   yArray.append_val (y5);
   
-  cArray.append_val ("bar");
+  cArray.append_val ("smooth-line");
   cArray.append_val ("line");
   cArray.append_val ("scatter");
-  cArray.append_val ("smooth-line");
+  cArray.append_val ("bar");
 
   for (int i = 0; i < cArray.length; i++){
 
@@ -86,6 +86,33 @@ public void main (string[] args) {
   window.add (mainGrid);
   window.destroy.connect (Gtk.main_quit);
   window.show_all ();
+  
+  //This is how you'd update data!
+  Timeout.add (5000, () => {
+
+    GenericArray<double?> yy = new GenericArray<double?> ();
+    
+    for (int i = 0; i < 9; ++i) {
+
+      yy.add (Random.int_range (0, 100));
+
+    }
+
+    carolineWidget.updateData (
+      x, //keep x the same
+      yy, //updated y data
+      "bar", //chart type
+      true, //random color gen?
+      true, //hue based color gen?
+      0 //which index is the data in, this should be 1 if its the 2nd data set, 2 if its the 3rd, etc.
+    );
+
+    carolineWidget.queue_draw ();
+    window.show_all ();
+
+    return true;
+
+  });
 
   Gtk.main ();
 

@@ -17,7 +17,7 @@ public class Caroline : Gtk.DrawingArea {
 	public Gee.ArrayList<Gee.ArrayList<Caroline.Point?>> pointsCalculatedArray;
 	public Caroline (GLib.GenericArray<double?> dataX, GLib.Array<GLib.GenericArray<double?>> dataY, GLib.Array<string> chartTypes, Gee.ArrayList<Caroline.ChartColor?> chartColorArray, bool generateColorsRandom, bool generateColorsHue, bool scatterPlotLabels);
 	public override bool draw (Cairo.Context cr);
-	public void updateData (GLib.GenericArray<double?> dataX, GLib.GenericArray<double?> dataY, string chartType, bool generateColorsRandom, bool generateColorsHue);
+	public void updateData (GLib.GenericArray<double?> dataX, GLib.GenericArray<double?> dataY, string chartType, bool generateColorsRandom, bool generateColorsHue, int replaceIndex);
 	public Caroline.with_colors (GLib.GenericArray<double?> dataX, GLib.Array<GLib.GenericArray<double?>> dataY, GLib.Array<string> chartTypes, Gee.ArrayList<Caroline.ChartColor?> chartColorArray, bool generateColorsRandom, bool generateColorsHue, bool scatterPlotLabels);
 	public Caroline.without_colors (GLib.GenericArray<double?> dataX, GLib.Array<GLib.GenericArray<double?>> dataY, GLib.Array<string> chartTypes, bool generateColorsRandom, bool generateColorsHue, bool scatterPlotLabels);
 	public int chartPadding { get; set; }

@@ -1,6 +1,6 @@
 //============================================================+
 // File name   : Caroline.vala
-// Last Update : 2021-3-27
+// Last Update : 2021-4-16
 //
 // Version: 0.3.0
 //
@@ -47,6 +47,7 @@ public class Caroline : Gtk.DrawingArea {
   private ArrayList<string> labelYList = new ArrayList<string>();
 
   private double PIX { get; set; }
+  private int replaceIndex { get; set; }
 
   /*
   *
@@ -195,7 +196,7 @@ public class Caroline : Gtk.DrawingArea {
     this.pointsArray.clear ();
 
     for (int i = 0; i < chartTypes.length; i++)
-      this.updateData (dataX, dataY.index (i), chartTypes.index (i), generateColorsRandom, generateColorsHue);
+      this.updateData (dataX, dataY.index (i), chartTypes.index (i), generateColorsRandom, generateColorsHue, -1);
 
   }
 
@@ -254,7 +255,9 @@ public class Caroline : Gtk.DrawingArea {
     function.*/
     this.width = get_allocated_width () - this.widthPadding;
     this.height = get_allocated_height () - this.heightPadding;
-    this.pointsCalculatedArray.clear ();
+
+    if (this.replaceIndex == -1)
+      this.pointsCalculatedArray.clear ();
     
     if (this.chartTypes.index (0) != "pie"){
 
@@ -486,8 +489,12 @@ public class Caroline : Gtk.DrawingArea {
       points.add (point);
 
     }
-      
-    this.pointsCalculatedArray.add (points);
+  
+
+    if (this.replaceIndex == -1)
+      this.pointsCalculatedArray.add (points);
+    else 
+      this.pointsCalculatedArray[this.replaceIndex] = points;
 
   }
 
@@ -729,9 +736,11 @@ public class Caroline : Gtk.DrawingArea {
     GenericArray<double?> dataY, 
     string chartType, 
     bool generateColorsRandom,
-    bool generateColorsHue
+    bool generateColorsHue,
+    int replaceIndex
   ) {
   
+    this.replaceIndex = replaceIndex;
     this.labelXList.clear ();
     this.labelYList.clear ();
 
@@ -745,7 +754,10 @@ public class Caroline : Gtk.DrawingArea {
 
     }
 
-    pointsArray.add (points);
+    if (replaceIndex == -1)
+      this.pointsArray.add (points);
+    else
+      this.pointsArray[replaceIndex] = points;
 
     this.labelXList.add (0);
 
