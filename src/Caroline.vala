@@ -46,7 +46,6 @@ public class Caroline : Gtk.DrawingArea {
 
   private ArrayList<string> labelYList = new ArrayList<string>();
 
-  private double PIX { get; set; }
   private int replaceIndex { get; set; }
 
   /*
@@ -290,10 +289,12 @@ public class Caroline : Gtk.DrawingArea {
       //Set the color of the line (this default color is blue)
       cr.set_source_rgba(0, 174, 174,0.8);
 
-      if (chartType != "bar")
-        this.pointCalculations (false, i);
-      else
-        this.pointCalculations (true, i);
+      if (this.replaceIndex == -1) {
+
+        bool barOrNot = (chartType != "bar") ? false : true;
+        this.pointCalculations (barOrNot, replaceIndex, replaceIndex);
+
+      }
 
       /*This switch-case will execute the proper chart depending on what the
       developer has choosen.*/
@@ -358,6 +359,7 @@ public class Caroline : Gtk.DrawingArea {
           );
           break;
         case "scatter":
+          stdout.printf ("%f\n", this.pointsCalculatedArray[i][0].y);
           Scatter scatter = new Scatter ();
           scatter.drawScatterChart (
             cr, 
@@ -453,7 +455,7 @@ public class Caroline : Gtk.DrawingArea {
   * @param int index
   * @return void
   */
-  private void pointCalculations (bool barOrNot, int index) {
+  private void pointCalculations (bool barOrNot, int index, int replaceIndex) {
 
     double maxX = 0;
     double divisor = 0;
@@ -489,11 +491,11 @@ public class Caroline : Gtk.DrawingArea {
       points.add (point);
 
     }
-
+    
     if (this.replaceIndex == -1)
       this.pointsCalculatedArray.add (points);
     else 
-      this.pointsCalculatedArray[this.replaceIndex] = points;
+      this.pointsCalculatedArray[replaceIndex] = points;
 
   }
 
@@ -548,7 +550,7 @@ public class Caroline : Gtk.DrawingArea {
   * @param Cairo.Context cr
   * @return void
   */
-  private void drawYTicks(Cairo.Context cr){
+  private void drawYTicks (Cairo.Context cr){
 
     //Reset the path so when we execute move_to again we are starting from 0,0 on the cario canvas
     cr.new_path();
@@ -757,6 +759,13 @@ public class Caroline : Gtk.DrawingArea {
       this.pointsArray.add (points);
     else
       this.pointsArray[replaceIndex] = points;
+    
+    if (replaceIndex != -1) {
+
+      bool barOrNot = (chartType != "bar") ? false : true;
+      this.pointCalculations (barOrNot, replaceIndex, replaceIndex);
+
+    }
 
     this.labelXList.add (0);
 
