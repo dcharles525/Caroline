@@ -489,7 +489,6 @@ public class Caroline : Gtk.DrawingArea {
       points.add (point);
 
     }
-  
 
     if (this.replaceIndex == -1)
       this.pointsCalculatedArray.add (points);
