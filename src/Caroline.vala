@@ -292,7 +292,7 @@ public class Caroline : Gtk.DrawingArea {
       if (this.replaceIndex == -1) {
 
         bool barOrNot = (chartType != "bar") ? false : true;
-        this.pointCalculations (barOrNot, replaceIndex, replaceIndex);
+        this.pointCalculations (barOrNot, i, this.replaceIndex);
 
       }
 
@@ -359,7 +359,6 @@ public class Caroline : Gtk.DrawingArea {
           );
           break;
         case "scatter":
-          stdout.printf ("%f\n", this.pointsCalculatedArray[i][0].y);
           Scatter scatter = new Scatter ();
           scatter.drawScatterChart (
             cr, 
