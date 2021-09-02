@@ -65,6 +65,8 @@ public class LineSmooth{
     implemented eariler in this file.*/
     cr.stroke();
 
+
+
   }
 
 }

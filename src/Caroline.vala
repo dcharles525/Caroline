@@ -40,10 +40,6 @@ public class Caroline : Gtk.DrawingArea {
   private int widthPadding { get; set; }
   private int heightPadding { get; set; }
 
-  private double gapPoint { get; set; }
-  private double maxPoint { get; set; }
-  private double minPoint { get; set; }
-
   private ArrayList<string> labelYList = new ArrayList<string>();
 
   private int replaceIndex { get; set; }
@@ -73,6 +69,10 @@ public class Caroline : Gtk.DrawingArea {
   public double gap { get; set; }
   public double max { get; set; }
   public double min { get; set; }
+  
+  public double gapPoint { get; set; }
+  public double maxPoint { get; set; }
+  public double minPoint { get; set; }
 
   public int chartPadding { get; set; }
 
@@ -411,9 +411,6 @@ public class Caroline : Gtk.DrawingArea {
         if (this.pointsArray[i][f].y > this.maxPoint)
           this.maxPoint = this.pointsArray[i][f].y;
 
-      /*This next sector of arithmetic is to find the min value of the data array*/
-      this.minPoint = 0;
-
       //Loop and compare each scatterArray to our initial value to see if it becomes the min
       for (int f = 0; f < this.pointsArray[i].size; f++)
         if (this.pointsArray[i][f].y < this.minPoint)
@@ -739,7 +736,7 @@ public class Caroline : Gtk.DrawingArea {
     bool generateColorsHue,
     int replaceIndex
   ) {
-  
+
     this.replaceIndex = replaceIndex;
     this.labelXList.clear ();
     this.labelYList.clear ();

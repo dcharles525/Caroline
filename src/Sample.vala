@@ -86,13 +86,13 @@ public void main (string[] args) {
   window.add (mainGrid);
   window.destroy.connect (Gtk.main_quit);
   window.show_all ();
-  
+ 
   //This is how you'd update data!
   Timeout.add (5000, () => {
 
     GenericArray<double?> yy = new GenericArray<double?> ();
     
-    for (int i = 0; i < 9; ++i) {
+    for (int i = 0; i < 10; ++i) {
 
       yy.add (Random.int_range (0, 100));
 
@@ -101,7 +101,7 @@ public void main (string[] args) {
     carolineWidget.updateData (
       x, //keep x the same
       yy, //updated y data
-      "bar", //chart type
+      "smooth-line", //chart type
       true, //random color gen?
       true, //hue based color gen?
       0 //which index is the data in, this should be 1 if its the 2nd data set, 2 if its the 3rd, etc.

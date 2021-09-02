@@ -56,6 +56,7 @@ public class Line{
     implemented eariler in this file.*/
     cr.stroke();
 
+
   }
 
 }
